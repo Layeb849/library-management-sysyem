@@ -1,0 +1,55 @@
+
+{% load static %}
+
+<div class="floating-logo-container">
+    <img src="{% static 'image/logo/logo.jpeg' %}" alt="Logo" class="rotating-logo">
+</div>
+
+<style>
+    .floating-logo-container {
+        position: fixed; /* এটি স্ক্রিনের এক জায়গায় ফিক্সড থাকবে */
+        right: 20px;     /* ডান দিক থেকে দূরত্ব */
+        top: 20%;        /* স্ক্রিনের মাঝখানে রাখার জন্য */
+        transform: translateY(-50%); /* নিখুঁতভাবে সেন্টারে আনার জন্য */
+        z-index: 9999;   /* যাতে সব কন্টেন্টের উপরে থাকে */
+        pointer-events: none; /* যাতে পেছনের বাটনে ক্লিক করতে সমস্যা না হয় */
+    }
+
+    .rotating-logo {
+        width: 80px;      /* লোগোর সাইজ (আপনার ইচ্ছা মতো ছোট-বড় করতে পারেন) */
+        height: 80px;
+        border-radius: 50%; /* গোল করার জন্য */
+        border: 2px solid #ffc107; /* লোগোর চারপাশে বর্ডার */
+        box-shadow: 0 0 15px rgba(255, 193, 7, 0.5); /* গ্লো ইফেক্ট */
+        pointer-events: auto; /* যাতে লোগোর ওপর মাউস কাজ করে */
+        
+        /* Animation */
+        animation: logo-spin 5s linear infinite;
+        transition: 0.3s;
+    }
+
+    /* মাউস লোগোর ওপর নিলে ঘোরা বন্ধ হবে এবং একটু বড় হবে */
+    .rotating-logo:hover {
+        animation-play-state: paused;
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    /* ঘোরার নিয়ম */
+    @keyframes logo-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /* মোবাইলের জন্য লোগো ছোট করা */
+    @media (max-width: 768px) {
+        .rotating-logo {
+            width: 50px;
+            height: 50px;
+        }
+        .floating-logo-container {
+            right: 10px;
+            top: 30%;
+        }
+    }
+</style>

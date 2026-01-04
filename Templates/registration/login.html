@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | Library{% endblock %}
+
+{% block content %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+/* ===== Background ===== */
+.login-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(120deg, #667eea, #764ba2, #667eea);
+    background-size: 300% 300%;
+    animation: bgMove 10s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== Glass Card ===== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(18px);
+    border-radius: 22px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    width: 100%;
+    max-width: 420px;
+    padding: 42px 38px;
+    animation: fadeUp 0.8s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Icon ===== */
+.icon-box {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin: 0 auto 20px;
+    font-size: 28px;
+    box-shadow: 0 10px 25px rgba(102,126,234,0.5);
+}
+
+/* ===== Inputs ===== */
+.custom-input {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 13px 16px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102,126,234,0.15);
+    background: #fff;
+}
+
+/* ===== Button ===== */
+.btn-premium {
+    position: relative;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(102,126,234,0.45);
+}
+
+/* Button shine */
+.btn-premium::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.6),
+        transparent
+    );
+    transition: 0.6s;
+}
+
+.btn-premium:hover::after {
+    left: 120%;
+}
+
+/* ===== Links ===== */
+.forgot-link {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    opacity: 0.85;
+    text-decoration: underline;
+}
+</style>
+
+<div class="login-wrapper">
+    <div class="glass-card">
+
+        <div class="text-center">
+            <div class="icon-box">
+                <i class="fas fa-book-reader"></i>
+            </div>
+            <h2 class="fw-bold mb-1 text-dark">Welcome Back</h2>
+            <p class="text-muted small mb-4">
+                Login to continue your learning journey
+            </p>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger small border-0 rounded-3 py-2 mb-3">
+                    <i class="fas fa-exclamation-circle me-2"></i>{{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label small fw-semibold text-muted">Username</label>
+                <input type="text" name="username" class="form-control custom-input" placeholder="Enter your username" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label small fw-semibold text-muted">Password</label>
+                <input type="password" name="password" class="form-control custom-input" placeholder="••••••••" required>
+            </div>
+
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-premium">
+                    Login <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </form>
+
+        <div class="text-center">
+            <a href="{% url 'password_reset' %}" class="forgot-link">
+                Forgot your password?
+            </a>
+        </div>
+
+        <div class="mt-4 pt-3 border-top text-center">
+            <p class="small text-muted mb-1">New to Pathagar?</p>
+            <a href="{% url 'register' %}" class="fw-bold text-decoration-none text-primary small">
+                Create an account
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

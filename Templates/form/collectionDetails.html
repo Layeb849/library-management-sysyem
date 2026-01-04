@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}বইয়ের বিস্তারিত তথ্য{% endblock %}
+{% load static %}
+{% block content %}
+    <style>
+        .collection-page {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Book Detail Section */
+        .book-detail-wrapper {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 40px;
+            margin-top: 50px;
+        }
+
+        .book-cover-large {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .book-cover-large:hover {
+            transform: scale(1.02);
+        }
+
+        .book-title-main {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .book-author-main {
+            font-size: 1.2rem;
+            color: #007bff;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        /* Rating Stars */
+        .rating {
+            color: #ff9f43;
+            margin-bottom: 20px;
+        }
+
+        /* Specification Table */
+        .spec-table {
+            background: #fdfdfd;
+            border-radius: 12px;
+            border: 1px solid #f0f0f0;
+        }
+        .spec-table td {
+            padding: 12px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .spec-label {
+            font-weight: 600;
+            color: #7f8c8d;
+            width: 150px;
+        }
+
+        /* Summary Area */
+        .book-summary {
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Action Buttons */
+        .btn-reserve {
+            background: #2ed573;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-reserve:hover {
+            background: #28b463;
+            box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3);
+        }
+        @media (max-width: 768px) {
+            .text {
+                font-size: 20px;
+            }
+            .book-summary h5 {
+                font-size: 16px;
+            }
+            .spec-label td {
+                font-size: 14px;
+            }
+    </style>
+
+<div class="collection-page">
+<div class="container py-5">
+    <a href="javascript:history.back()" class="text-decoration-none text-muted mb-4 d-inline-block">
+        <i class="fas fa-arrow-left me-1"></i> সংগ্রহের তালিকায় ফিরে যান
+    </a>
+
+    <div class="book-detail-wrapper">
+        <div class="row g-5">
+            <div class="col-lg-5 text-center">
+                <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Book Cover" class="book-cover-large img-fluid">
+                
+                <div class="mt-4 d-flex justify-content-center gap-2">
+                    <button class="btn btn-reserve"><i class="fas fa-bookmark me-2"></i>বুকিং করুন</button>
+                    <button class="btn btn-outline-secondary rounded-pill px-4"><i class="fas fa-share-alt"></i>hello</button>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">নতুন সংগ্রহ</span>
+                <h1 class="text book-title-main">হিমুর হাতে কয়েকটি নীলপদ্ম</h1>
+                <p class="book-author-main">হুমায়ূন আহমেদ</p>
+
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-muted ms-2">(৪.৫/৫ রিভিউ)</span>
+                </div>
+
+                <div class="book-summary mb-4">
+                    <h5 class="fw-bold text-dark mb-3">বইয়ের সংক্ষিপ্ত পরিচিতি:</h5>
+                    <p>
+                        হুমায়ূন আহমেদের জনপ্রিয় চরিত্র 'হিমু' সিরিজের অন্যতম সেরা একটি উপন্যাস। হিমু তার হলুদ পাঞ্জাবি পরে নীলপদ্ম খোঁজার নেশায় সারা শহর ঘুরে বেড়ায়। তার অদ্ভুত সব যুক্তি আর চারপাশের মানুষের সাথে তার সম্পর্কের এক দারুণ সংমিশ্রণ এই বইটি। পাঠকদের জন্য এটি একটি অন্যরকম অভিজ্ঞতার গল্প।
+                    </p>
+                </div>
+
+                <h5 class="fw-bold text-dark mb-3">বইয়ের তথ্য:</h5>
+                <div class="spec-table shadow-sm mb-4">
+                    <table class="table mb-0">
+                        <tr>
+                            <td class="spec-label">বিভাগ</td>
+                            <td>কাল্পনিক উপন্যাস</td>
+                        </tr>
+                        <tr>
+                            <td class="spec-label">ভাষা</td>
+                            <td>বাংলা</td>
+                        </tr>
+                        <tr>
+                            <td class="spec-label">পৃষ্ঠা সংখ্যা</td>
+                            <td>১৬০ পৃষ্ঠা</td>
+                        </tr>
+                        <tr>
+                            <td class="spec-label">প্রকাশনী</td>
+                            <td>অন্যপ্রকাশ</td>
+                        </tr>
+                        <tr>
+                            <td class="spec-label">আইএসবিএন (ISBN)</td>
+                            <td>978-984-000-000</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="p-3 bg-light rounded-3 border">
+                    <span class="text-success fw-bold"><i class="fas fa-check-circle me-2"></i>লাইব্রেরিতে বর্তমানে পাওয়া যাচ্ছে</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

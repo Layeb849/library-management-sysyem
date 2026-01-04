@@ -1,0 +1,63 @@
+# ==============================
+# ENV & SECRETS
+# ==============================
+.env
+.env.*
+venv/
+env/
+.venv/
+
+# ==============================
+# PYTHON CACHE
+# ==============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# ==============================
+# DJANGO FILES
+# ==============================
+db.sqlite3
+media/
+staticfiles/
+*.log
+
+# ==============================
+# MIGRATIONS
+# ==============================
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# ==============================
+# IDE / EDITOR
+# ==============================
+.vscode/
+.idea/
+*.swp
+
+# ==============================
+# OS FILES
+# ==============================
+.DS_Store
+Thumbs.db
+
+# ==============================
+# TEST & COVERAGE
+# ==============================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ==============================
+# NODE / REACT (IF USED)
+# ==============================
+node_modules/
+npm-debug.log*
+yarn-error.log*
+dist/
+build/
+
+/static/image
+static/image
+

@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% block title %}শিক্ষার্থীর বিস্তারিত তথ্য{% endblock %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .student-details-page {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        /* Profile Header Card */
+        .profile-header {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .student-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Detail Card */
+        .detail-card {
+            background: #fff;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .card-header-custom {
+            background: transparent;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 20px;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header-custom i {
+            margin-right: 10px;
+            color: #007bff;
+        }
+
+        /* Info List */
+        .info-label {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        /* Academic Badge */
+        .gpa-badge {
+            background: #e7f1ff;
+            color: #007bff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+<div class="student-details-page">
+
+<div class="container py-5">
+    
+    <div class="profile-header shadow-lg">
+        <div class="row align-items-center">
+            <div class="col-md-auto text-center mb-3 mb-md-0">
+                <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Student Photo" class="student-img">
+            </div>
+            <div class="col-md">
+                <h2 class="fw-bold mb-1">আরিফ আহমেদ</h2>
+                <p class="mb-2 opacity-75">আইডি: STD-2024-0512</p>
+                <span class="status-active"><i class="fas fa-circle me-1" style="font-size: 8px;"></i> নিয়মিত শিক্ষার্থী</span>
+                
+                <div class="mt-4">
+                    <button class="btn btn-light btn-sm me-2 rounded-pill px-3"><i class="fas fa-edit me-1"></i> এডিট প্রোফাইল</button>
+                    <button class="btn btn-outline-light btn-sm rounded-pill px-3"><i class="fas fa-download me-1"></i> আইডি কার্ড ডাউনলোড</button>
+                </div>
+            </div>
+            <div class="col-md-auto text-md-end mt-4 mt-md-0">
+                <div class="text-white opacity-75 small">কারেন্ট সিজিপিএ (CGPA)</div>
+                <div class="gpa-badge mt-1 text-white" style="background: rgba(255,255,255,0.2);">৩.৮৫</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card detail-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-user"></i> ব্যক্তিগত তথ্য
+                </div>
+                <div class="card-body">
+                    <div class="info-label">বাবার নাম</div>
+                    <div class="info-value">মোঃ আব্দুর রহমান</div>
+
+                    <div class="info-label">মায়ের নাম</div>
+                    <div class="info-value">মোসাঃ ফাতেমা বেগম</div>
+
+                    <div class="info-label">জন্ম তারিখ</div>
+                    <div class="info-value">১৫ মে, ২০০৫</div>
+
+                    <div class="info-label">রক্তের গ্রুপ</div>
+                    <div class="info-value text-danger">B+ (পজিটিভ)</div>
+
+                    <div class="info-label">বর্তমান ঠিকানা</div>
+                    <div class="info-value">বাড়ি নং ১২, রোড ০৫, ধানমন্ডি, ঢাকা।</div>
+                </div>
+            </div>
+
+            <div class="card detail-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-phone"></i> যোগাযোগ
+                </div>
+                <div class="card-body">
+                    <div class="info-label">ফোন নম্বর</div>
+                    <div class="info-value">০১৭০০-০০০০০০</div>
+
+                    <div class="info-label">ইমেইল এড্রেস</div>
+                    <div class="info-value text-lowercase">arif.student@gmail.com</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card detail-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-graduation-cap"></i> অ্যাকাডেমিক তথ্য
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-label">বিভাগ/শ্রেণী</div>
+                            <div class="info-value">বিজ্ঞান বিভাগ (একাদশ শ্রেণী)</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-label">রোল নম্বর</div>
+                            <div class="info-value">১০৫</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-label">সেশন</div>
+                            <div class="info-value">২০২৩-২০২৪</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-label">গ্রুপ</div>
+                            <div class="info-value">গ্রুপ - এ (পদ্মা)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card detail-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-award"></i> এক্সট্রা কারিকুলাম ও দক্ষতা
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">বিতর্ক প্রতিযোগিতা</span>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">ফুটবলার</span>
+                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">গ্রাফিক্স ডিজাইন</span>
+                        <span class="badge bg-info-subtle text-info border border-info-subtle px-3 py-2">ভলান্টিয়ারিং</span>
+                    </div>
+                    <p class="mt-4 text-muted small">
+                        * এই শিক্ষার্থী আমাদের সংগঠনের বার্ষিক ক্রীড়া প্রতিযোগিতায় ১ম স্থান অর্জন করেছে।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="javascript:history.back()" class="text-decoration-none text-muted">
+            <i class="fas fa-arrow-left me-1"></i> স্টুডেন্ট লিস্টে ফিরে যান
+        </a>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

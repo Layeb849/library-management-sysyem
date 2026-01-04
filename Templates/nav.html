@@ -1,0 +1,217 @@
+<nav class="navbar navbar-expand-lg navbar-dark position-sticky fixed-top pathagar-navbar">
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+            <div class="logo-circle me-2">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <span class="brand-text">
+                PATHA<span class="highlight">GAR</span>
+            </span>
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler shadow-none border-0" type="button"
+                data-bs-toggle="collapse" data-bs-target="#pathagarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse justify-content-end" id="pathagarNav">
+            <ul class="navbar-nav align-items-lg-center gap-lg-3">
+
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom" href="{% url 'home' %}">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom" href="{% url 'service' %}">Services</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom" href="{% url 'about' %}">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom" href="{% url 'contact' %}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom" href="{% url 'community' %}">Community</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-apply-glow ms-lg-2" href="{% url 'admission' %}">
+                        Apply Now <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </li>
+
+                <!-- Account Dropdown -->
+                <li class="nav-item dropdown ms-lg-2">
+                    <a class="nav-link dropdown-toggle nav-link-custom"
+                       href="#" role="button" data-bs-toggle="dropdown">
+                        {% if user.is_authenticated %}
+                            <i class="fas fa-user-circle me-1"></i> {{ user.username }}
+                        {% else %}
+                            <i class="fas fa-lock me-1"></i> Account
+                        {% endif %}
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                        {% if user.is_authenticated %}
+                            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="{% url 'logout' %}">
+                                    Logout
+                                </a>
+                            </li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+.pathagar-navbar {
+    background: linear-gradient(90deg, #1e3c72, #2a5298);
+    font-family: 'Inter', sans-serif;
+    padding: 14px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    z-index: 1050;
+}
+
+.logo-circle {
+    width: 42px;
+    height: 42px;
+    background: #fff;
+    color: #2a5298;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-text {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.highlight {
+    color: #ffd43b;
+}
+
+.btn-apply-glow {
+    position: relative;
+    background: linear-gradient(135deg, #ffb703, #ff7b00);
+    color: #1e3c72;
+    font-weight: 800;
+    padding: 10px 26px;
+    border-radius: 40px;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 rgba(255, 183, 3, 0.6),
+        0 8px 25px rgba(255, 123, 0, 0.45);
+    animation: pulseGlow 2.2s infinite;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.btn-apply-glow:hover {
+    transform: translateY(-3px) scale(1.05);
+    color: #1e3c72;
+    box-shadow:
+        0 0 20px rgba(255, 183, 3, 0.9),
+        0 12px 35px rgba(255, 123, 0, 0.6);
+}
+
+/* Shimmer wave */
+.btn-apply-glow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.6),
+        transparent
+    );
+    transition: all 0.6s ease;
+}
+
+.btn-apply-glow:hover::before {
+    left: 120%;
+}
+
+/* Pulse animation */
+@keyframes pulseGlow {
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(255, 183, 3, 0.7),
+            0 8px 25px rgba(255, 123, 0, 0.4);
+    }
+    70% {
+        box-shadow:
+            0 0 0 12px rgba(255, 183, 3, 0),
+            0 12px 35px rgba(255, 123, 0, 0.6);
+    }
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(255, 183, 3, 0),
+            0 8px 25px rgba(255, 123, 0, 0.4);
+    }
+}
+
+
+.nav-link-custom {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 600;
+    position: relative;
+}
+
+.nav-link-custom:hover {
+    color: #ffd43b !important;
+}
+
+.btn-apply {
+    background: #ffd43b;
+    color: #1e3c72;
+    font-weight: 700;
+    border-radius: 30px;
+    padding: 8px 20px;
+}
+
+.btn-apply:hover {
+    background: #ffca2c;
+    color: #1e3c72;
+}
+
+.dropdown-menu {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: #1e3c72;
+        border-radius: 16px;
+        padding: 20px;
+        margin-top: 10px;
+    }
+}
+</style>

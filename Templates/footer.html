@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Library Footer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .container-page{
+            background-color: #0f172a !important; /* Dark blue background */
+            color: #cbd5e1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+
+        .main-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .top-link {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .top-link a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        .brand-section {
+            border-top: 2px solid;
+            border-image: linear-gradient(to right, #38bdf8, #818cf8, transparent) 1;
+            padding-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .brand-section h2 {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Card Styling */
+        .footer-card {
+            background: linear-gradient(145deg, #1e293b, #111827);
+            border-radius: 8px;
+            padding: 25px;
+            height: 100%;
+            border-left: 3px solid #38bdf8;
+        }
+
+        .card-title {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #38bdf8;
+        }
+
+        .list-unstyled li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .list-unstyled li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .list-unstyled li a:hover {
+            color: #38bdf8;
+            padding-left: 5px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #375b8fff;
+            color: #fff;
+            border-radius: 4px;
+            margin-right: 8px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .social-links li a:hover {
+            color: #ffffff;
+            background-color: #2563eb; /* elegant blue */
+            transform: translateY(-3px);
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .text-cyan { color: #38bdf8; }
+        .text-red { color: #ef4444; }
+
+        /* Bottom Footer */
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.85rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+        }
+
+        .footer-bottom-gradient {
+            height: 2px;
+            background: linear-gradient(to right, #38bdf8, #ec4899, transparent);
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-page">
+    <div class="container container-fluid">
+    
+    <div class="brand-section">
+        <h2>Central Library</h2>
+        <p class="text-secondary">Providing a Gateway to Knowledge. Join us <br> in a vast world of physical and digital resources.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="footer-card">
+                <h5 class="card-title">Hello Library</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-map-marker-alt text-cyan me-2"></i> Dhaka, Bangladesh</li>
+                    <li><i class="fas fa-phone-alt text-cyan me-2"></i> +880 123456789</li>
+                    <li><i class="fas fa-envelope text-cyan me-2"></i> info@library.com</li>
+                </ul>
+                <div class="mt-4">
+                    <h6>Social-links</h6>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="footer-card">
+                <h5 class="card-title">Quick Explore</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Library</a></li>
+                    <li><a href="#">Digital Archive</a></li>
+                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Latest News</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="footer-card">
+                <h5 class="card-title">Ulist Unsourced</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Book Catalog</a></li>
+                    <li><a href="#">Research Papers</a></li>
+                    <li><a href="#">E-Journals</a></li>
+                    <li><a href="#">Study Rooms</a></li>
+                    <li><a href="#">Ask a Librarian</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="footer-card">
+                <h5 class="card-title">Library Hours</h5>
+                <div class="hours-row">
+                    <span class="text-cyan">Sun - Thu:</span>
+                    <span>09:00 - 20:00</span>
+                </div>
+                <div class="hours-row">
+                    <span class="text-cyan">Saturday:</span>
+                    <span>10:00 - 18:00</span>
+                </div>
+                <div class="hours-row">
+                    <span class="text-red">Friday:</span>
+                    <span>Closed</span>
+                </div>
+                <p class="small mt-3 text-secondary">* Closed on public holidays.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-bottom-gradient"></div>
+        <div class="row align-items-center">
+            <div class="col-md-6 text-md-start">
+                <p class="mb-0">© 2025 Central Library. Design and Developed by Layeb.</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <p class="mb-1">Privacy Policy</p>
+            </div>
+            <div class="col-md-3 text-end">
+                <p class="mb-1">Terms of Service</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

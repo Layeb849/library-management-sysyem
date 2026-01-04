@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% block title %}আমাদের সাফল্য ও অর্জন{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <style>
+        .achievement-page {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #e3f2fd);
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{% static "image/achievement-bg.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+        }
+
+        /* Achievement Card Styling */
+        .achievement-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: #fff;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+        }
+
+        .achievement-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .achievement-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .achievement-card:hover .achievement-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .date-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .achievement-content {
+            padding: 25px;
+        }
+
+        .achievement-title {
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .achievement-text {
+            color: #636e72;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .btn-details {
+            border-radius: 30px;
+            padding: 8px 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        /* Section Decoration */
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: #007bff;
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+    </style>
+
+    <div class="achievement-page">
+    <div class="hero-section mb-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">আমাদের সাফল্য ও অর্জন</h1>
+            <p class="lead">এক নজরে আমাদের উল্লেখযোগ্য প্রোগ্রাম এবং অর্জনসমূহ</p>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+        <div class="row g-4">
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card achievement-card shadow-sm h-100">
+                    <div class="achievement-img-wrapper">
+                        <img src="{% static 'image/program1.jpg' %}" alt="Achievement 1">
+                        <div class="date-badge">২০ ডিসেম্বর ২০২৪</div>
+                    </div>
+                    <div class="achievement-content">
+                        <h5 class="achievement-title">বার্ষিক শীতবস্ত্র বিতরণ কর্মসূচি</h5>
+                        <p class="achievement-text">
+                            এই বছর আমরা ৫০০-এরও বেশি অসহায় পরিবারের মাঝে উন্নত মানের শীতবস্ত্র বিতরণ করেছি। সকলের সহযোগিতায় এই প্রোগ্রামটি সফলভাবে সম্পন্ন হয়েছে।
+                        </p>
+                        <hr class="my-3 opacity-25">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary small fw-bold"><i class="fas fa-map-marker-alt me-1"></i> ঢাকা, বাংলাদেশ</span>
+                            <a href="#" class="btn btn-outline-primary btn-sm btn-details">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card achievement-card shadow-sm h-100">
+                    <div class="achievement-img-wrapper">
+                        <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Achievement 2">
+                        <div class="date-badge">১৫ নভেম্বর ২০২৪</div>
+                    </div>
+                    <div class="achievement-content">
+                        <h5 class="achievement-title">শ্রেষ্ঠ সামাজিক সংগঠন পদক ২০২৪</h5>
+                        <p class="achievement-text">
+                            সমাজসেবায় বিশেষ অবদানের জন্য আমাদের সংগঠনটি জেলা পর্যায়ে শ্রেষ্ঠ সংগঠনের স্বীকৃতি লাভ করেছে। এটি আমাদের টিমের কঠোর পরিশ্রমের ফসল।
+                        </p>
+                        <hr class="my-3 opacity-25">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary small fw-bold"><i class="fas fa-trophy me-1"></i> জেলা মিলনায়তন</span>
+                            <a href="#" class="btn btn-outline-primary btn-sm btn-details">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card achievement-card shadow-sm h-100">
+                    <div class="achievement-img-wrapper">
+                        <img src="{% static 'image/program3.jpg' %}" alt="Achievement 3">
+                        <div class="date-badge">০৫ অক্টোবর ২০২৪</div>
+                    </div>
+                    <div class="achievement-content">
+                        <h5 class="achievement-title">বিনামূল্যে চক্ষু চিকিৎসা ক্যাম্প</h5>
+                        <p class="achievement-text">
+                            বিশেষজ্ঞ ডাক্তারদের মাধ্যমে প্রায় ২০০ জন মানুষের বিনামূল্যে চক্ষু পরীক্ষা এবং ঔষধ বিতরণ করা হয়েছে।
+                        </p>
+                        <hr class="my-3 opacity-25">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary small fw-bold"><i class="fas fa-hospital me-1"></i> ইউনিয়ন স্বাস্থ্য কেন্দ্র</span>
+                            <a href="#" class="btn btn-outline-primary btn-sm btn-details">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
