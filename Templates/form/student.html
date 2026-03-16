@@ -1,204 +1,160 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Student List{% endblock %}
+{% block title %}Student List | Library Community{% endblock %}
 {% block content %}
-<style>
-.community-page{
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg,#eef2f3,#e3f2fd);
-}
 
-/* Hero */
-.hero{
-    background:linear-gradient(135deg,#007bff,#00c6ff);
-    color:#fff;
-    padding:50px 20px;
-    border-radius:25px;
-    box-shadow:0 20px 40px rgba(0,123,255,.3);
-}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-/* Info Card */
-.info-card{
-    background:#fff;
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-}
+<div class="bg-light min-vh-100 py-5">
+    <div class="container">
 
-/* Table Card */
-.table-card{
-    background:#fff;
-    border-radius:20px;
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-    overflow:hidden;
-}
-
-/* Table */
-.custom-table thead{
-    background:linear-gradient(90deg,#007bff,#00c6ff);
-    color:#fff;
-}
-.custom-table th,
-.custom-table td{
-    padding:16px;
-    vertical-align:middle;
-}
-.custom-table tbody tr{
-    transition:.3s;
-}
-.custom-table tbody tr:hover{
-    background:#f4f9ff;
-}
-
-/* Image */
-.user-img{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid #e5e7eb;
-}
-
-/* Button */
-.view-btn{
-    background:linear-gradient(90deg,#007bff,#00c6ff);
-    color:#fff;
-    border:none;
-    padding:7px 20px;
-    border-radius:25px;
-    font-size:14px;
-    transition:.3s;
-}
-.view-btn:hover{
-    transform:scale(1.08);
-    box-shadow:0 10px 25px rgba(0,123,255,.4);
-}
-
-/* =======================
-   MOBILE RESPONSIVE (320px)
-==========================*/
-@media (max-width: 576px){
-
-    .custom-table thead{
-        display:none;
-    }
-
-    .custom-table,
-    .custom-table tbody,
-    .custom-table tr,
-    .custom-table td{
-        display:block;
-        width:100%;
-    }
-
-    .custom-table tr{
-        background:#fff;
-        margin-bottom:15px;
-        border-radius:15px;
-        box-shadow:0 10px 25px rgba(0,0,0,.08);
-        padding:15px;
-    }
-
-    .custom-table td{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:8px 0;
-        border:none;
-    }
-
-    .custom-table td::before{
-        content:attr(data-label);
-        font-weight:600;
-        color:#007bff;
-    }
-
-    .custom-table td:last-child{
-        justify-content:space-between;
-    }
-}
-</style>
-
-
-<div class="community-page">
-    <div class="container-fluid py-5">
-
-    <!-- Hero -->
-    <div class="hero text-center mb-5">
-        <h2 class="fw-bold">আমাদের ডিজিটাল লাইব্রেরি</h2>
-        <p class="mt-3">
-            জ্ঞানচর্চার জন্য একটি আধুনিক ও নির্ভরযোগ্য প্ল্যাটফর্ম
-        </p>
-    </div>
-
-    <!-- Library Info -->
-    <div class="info-card mb-5">
-        <h4 class="fw-bold text-black mb-3">📚 লাইব্রেরি সম্পর্কে</h4>
-        <p class="text-muted mb-0">
-            আমাদের লাইব্রেরিতে রয়েছে বিভিন্ন শিক্ষামূলক বই, রেফারেন্স ও ডিজিটাল রিসোর্স।
-            পাঠকদের জ্ঞান অর্জন সহজ ও আনন্দদায়ক করাই আমাদের মূল লক্ষ্য।
-        </p>
-    </div>
-
-    <!-- Readers Table -->
-    <div class="table-card p-3">
-        <div class="text-center mb-4">
-            <h3 class="fw-bold text-info">পাঠকদের তালিকা</h3>
-            <p class="text-muted">সম্মানিত পাঠকদের তথ্য</p>
+        <div class="card border-0 rounded-4 shadow-sm mb-5 overflow-hidden">
+            <div class="card-body p-0">
+                <div class="row g-0">
+                    <div class="col-lg-8 p-5 bg-white">
+                        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3 fw-bold text-uppercase ls-1">Library Community</span>
+                        <h1 class="display-5 fw-bold text-dark mb-3">Our Digital Library</h1>
+                        <p class="lead text-muted mb-4">
+                            A modern and reliable platform for knowledge seekers. Join our community and explore a world of digital resources and educational books.
+                        </p>
+                        <div class="d-flex gap-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <span class="fw-semibold">5000+ Books</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-success text-white rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <span class="fw-semibold">1200+ Members</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 bg-primary d-none d-lg-flex align-items-center justify-content-center text-white p-5 bg-gradient">
+                        <div class="text-center">
+                            <i class="fas fa-university fa-5x mb-3 opacity-50"></i>
+                            <h3 class="fw-bold">Central Library</h3>
+                            <p class="mb-0 opacity-75">Knowledge is Power</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="table-responsive">
-            <table class="table custom-table mb-0">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>নাম</th>
-                        <th>ছবি</th>
-                        <th class="text-center">Details</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-white border-0 p-4">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                    <div>
+                        <h4 class="fw-bold text-dark mb-1">Registered Readers</h4>
+                        <p class="text-muted small mb-0">List of active members in our library community</p>
+                    </div>
+                    <div class="mt-3 mt-md-0">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-search text-muted"></i></span>
+                            <input type="text" class="form-control bg-light border-0 px-3" placeholder="Search readers...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light text-muted small text-uppercase fw-bold">
+                            <tr>
+                                <th class="ps-4 py-3">#</th>
+                                <th class="py-3">Reader Information</th>
+                                <th class="py-3">Status</th>
+                                <th class="py-3 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="ps-4 fw-bold text-muted">01</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.pravatar.cc/150?img=12" 
+                                             class="rounded-circle border border-2 border-white shadow-sm me-3" 
+                                             style="width: 48px; height: 48px; object-fit: cover;">
+                                        <div>
+                                            <h6 class="mb-0 fw-bold">Md. Hasan</h6>
+                                            <small class="text-muted">hasan.std@example.com</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">Active Member</span></td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-sm px-4 rounded-pill fw-semibold shadow-sm">
+                                        View Profile
+                                    </button>
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td data-label="#">01</td>
-                        <td data-label="নাম">Md. Hasan</td>
-                        <td data-label="ছবি">
-                            <img src="https://i.pravatar.cc/150?img=12" class="user-img">
-                        </td>
-                        <td data-label="Details">
-                            <button class="view-btn">View</button>
-                        </td>
-                    </tr>
+                            <tr>
+                                <td class="ps-4 fw-bold text-muted">02</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.pravatar.cc/150?img=22" 
+                                             class="rounded-circle border border-2 border-white shadow-sm me-3" 
+                                             style="width: 48px; height: 48px; object-fit: cover;">
+                                        <div>
+                                            <h6 class="mb-0 fw-bold">Md. Alam</h6>
+                                            <small class="text-muted">alam.lib@example.com</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">Active Member</span></td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-sm px-4 rounded-pill fw-semibold shadow-sm">
+                                        View Profile
+                                    </button>
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td data-label="#">02</td>
-                        <td data-label="নাম">Md. Alam</td>
-                        <td data-label="ছবি">
-                            <img src="https://i.pravatar.cc/150?img=22" class="user-img">
-                        </td>
-                        <td data-label="Details">
-                            <button class="view-btn">View</button>
-                        </td>
-                    </tr>
+                            <tr>
+                                <td class="ps-4 fw-bold text-muted">03</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.pravatar.cc/150?img=32" 
+                                             class="rounded-circle border border-2 border-white shadow-sm me-3" 
+                                             style="width: 48px; height: 48px; object-fit: cover;">
+                                        <div>
+                                            <h6 class="mb-0 fw-bold">Md. Rafi</h6>
+                                            <small class="text-muted">rafi.rafi@example.com</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-warning-subtle text-warning px-3 py-2 rounded-pill">On Break</span></td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-sm px-4 rounded-pill fw-semibold shadow-sm">
+                                        View Profile
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card-footer bg-white border-0 p-4">
+                <nav class="d-flex justify-content-between align-items-center">
+                    <span class="small text-muted">Showing 3 of 150 readers</span>
+                    <ul class="pagination pagination-sm mb-0 shadow-sm">
+                        <li class="page-item disabled"><a class="page-link border-0 px-3" href="#">Previous</a></li>
+                        <li class="page-item active"><a class="page-link border-0 px-3" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link border-0 px-3" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link border-0 px-3" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
 
-                    <tr>
-                        <td data-label="#">03</td>
-                        <td data-label="নাম">Md. Rafi</td>
-                        <td data-label="ছবি">
-                            <img src="https://i.pravatar.cc/150?img=32" class="user-img">
-                        </td>
-                        <td data-label="Details">
-                            <button class="view-btn">View</button>
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
+        <div class="text-center mt-4">
+            <p class="small text-muted italic">Looking for someone specific? Contact support for assistance.</p>
         </div>
     </div>
-
 </div>
-</div>
-
 
 {% endblock %}

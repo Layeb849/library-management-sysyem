@@ -1,167 +1,230 @@
 {% extends "base.html" %}
-{% block title %}অ্যাচিভমেন্ট বিস্তারিত{% endblock %}
+{% block title %}Achievement Details{% endblock %}
 {% load static %}
 
 {% block content %}
-    <style>
-        .achievement-page {
-            font-family: 'Poppins', sans-serif;
-            background-color: #fcfcfc;
-            color: #444;
-        }
+<style>
+    /* Premium Typography & Variables */
+    :root {
+        --primary-gradient: linear-gradient(135deg, #0d6efd 0%, #003da5 100%);
+        --glass-bg: rgba(255, 255, 255, 0.95);
+    }
 
-        /* Hero Detail Image */
-        .detail-header-img {
-            width: 70%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+    .achievement-page {
+        font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+        background: #f8fafc;
+        color: #334155;
+    }
 
-        /* Sidebar Info Box */
-        .info-card {
-            background: #ffffff;
-            border: none;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 20px;
-        }
+    /* Hero Section with Overlay */
+    .hero-container {
+        position: relative;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    }
 
-        .info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .info-item i {
-            width: 40px;
-            height: 40px;
-            background: #e7f1ff;
-            color: #007bff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-        }
+    .detail-header-img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+    }
 
-        /* Content Area */
-        .achievement-content h2 {
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 20px;
-        }
-        .achievement-content p {
-            line-height: 1.8;
-            font-size: 1.05rem;
-            color: #555;
-            text-align: justify;
-        }
+    .hero-container:hover .detail-header-img {
+        transform: scale(1.03);
+    }
 
-        /* Photo Gallery Section */
-        .gallery-img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .gallery-img:hover {
-            opacity: 0.8;
-            transform: scale(1.03);
-        }
+    /* Floating Stats Bar */
+    .stats-bar {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 20px;
+        margin-top: -50px;
+        position: relative;
+        z-index: 10;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
 
-        .breadcrumb-item a {
-            text-decoration: none;
-            color: #007bff;
-        }
-    </style>
+    /* Modern Sidebar */
+    .sticky-sidebar {
+        position: sticky;
+        top: 100px;
+    }
 
-    <div class="achievement-page">
+    .info-card {
+        border: none;
+        border-radius: 24px;
+        background: #ffffff;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        overflow: hidden;
+    }
 
-<div class="container py-5">
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">হোম</a></li>
-            <li class="breadcrumb-item"><a href="#">অ্যাচিভমেন্ট</a></li>
-            <li class="breadcrumb-item active" aria-current="page">বিস্তারিত</li>
-        </ol>
-    </nav>
+    .info-header {
+        background: var(--primary-gradient);
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
 
-    <div class="row g-5">
-        <div class="col-lg-8">
-            <img src="{% static 'image/aboutImage/11.jpg' %}" class="detail-header-img mb-4" alt="Main Program Image">
-            
-            <div class="achievement-content">
-                <h2>বার্ষিক শীতবস্ত্র বিতরণ কর্মসূচি ২০২৪</h2>
-                <hr class="mb-4">
+    /* Gallery Hover Effect */
+    .gallery-wrapper {
+        position: relative;
+        border-radius: 18px;
+        overflow: hidden;
+    }
+
+    .gallery-img {
+        height: 220px;
+        width: 100%;
+        object-fit: cover;
+        transition: 0.5s all;
+    }
+
+    .gallery-wrapper:hover .gallery-img {
+        filter: brightness(0.7) scale(1.1);
+    }
+
+    /* Breadcrumb styling */
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "→";
+        color: #cbd5e1;
+    }
+</style>
+
+<div class="achievement-page pb-5">
+    <div class="container pt-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-2">
+                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">Home</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-muted">Achievements</a></li>
+                <li class="breadcrumb-item active fw-bold text-primary">Winter Distribution</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 fw-800 text-dark mb-4">Annual Winter Clothing Distribution 2024</h1>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <div class="hero-container mb-0">
+                    <img src="{% static 'image/aboutImage/11.jpg' %}" class="detail-header-img" alt="Main Image">
+                </div>
+
+                <div class="stats-bar p-4 mb-5">
+                    <div class="row text-center g-3">
+                        <div class="col-4 border-end">
+                            <h4 class="fw-bold text-primary mb-0">500+</h4>
+                            <small class="text-muted text-uppercase fw-bold" style="font-size: 10px;">Families Served</small>
+                        </div>
+                        <div class="col-4 border-end">
+                            <h4 class="fw-bold text-primary mb-0">12</h4>
+                            <small class="text-muted text-uppercase fw-bold" style="font-size: 10px;">Districts</small>
+                        </div>
+                        <div class="col-4">
+                            <h4 class="fw-bold text-primary mb-0">150</h4>
+                            <small class="text-muted text-uppercase fw-bold" style="font-size: 10px;">Volunteers</small>
+                        </div>
+                    </div>
+                </div>
                 
-                <p>
-                    আমাদের সংগঠনের পক্ষ থেকে প্রতি বছরের ন্যায় এই বছরেও বিশাল পরিসরে শীতবস্ত্র বিতরণ কর্মসূচী পালন করা হয়েছে। দেশের উত্তরাঞ্চলের প্রচণ্ড শীতে অসহায় মানুষ যখন মানবেতর জীবন যাপন করছিল, ঠিক তখনই আমাদের স্বেচ্ছাসেবক দল সেখানে পৌঁছে যায়।
-                </p>
-                <p>
-                    আমরা কেবল কম্বল বিতরণ করিনি, বরং ছোট বাচ্চাদের জন্য সোয়েটার, টুপি এবং বয়স্কদের জন্য গরম চাদরের ব্যবস্থা করেছিলাম। পুরো অনুষ্ঠানটি অত্যন্ত সুশৃঙ্খলভাবে স্থানীয় প্রশাসনের সহায়তায় সম্পন্ন হয়েছে। এই অর্জনে আমাদের সকল ডোনার এবং স্বেচ্ছাসেবকদের অবদান অপরিসীম।
-                </p>
+                <div class="achievement-content pe-lg-4">
+                    <h3 class="fw-bold mb-4 border-start border-primary border-4 ps-3">Project Overview</h3>
+                    <p class="lead text-secondary mb-4">
+                        Our organization successfully conducted its large-scale winter clothing distribution program this year, continuing our annual tradition of serving the community.
+                    </p>
+                    <p>
+                        When the severe cold waves hit the northern regions of the country, leaving many vulnerable families in distress, our dedicated volunteer teams were on the ground to provide immediate relief. The initiative went beyond just distributing blankets. We provided sweaters, caps, and socks for children, along with warm shawls and heavy coats for the elderly.
+                    </p>
 
-                <h4 class="fw-bold mt-5 mb-3">কর্মসূচির কিছু স্থিরচিত্র</h4>
-                <div class="row g-3">
-                    <div class="col-4"><img src="{% static 'image/aboutImage/11.jpg' %}" class="gallery-img" alt="Gallery"></div>
-                    <div class="col-4"><img src="{% static 'image/aboutImage/11.jpg' %}" class="gallery-img" alt="Gallery"></div>
-                    <div class="col-4"><img src="{% static 'image/aboutImage/11.jpg' %}" class="gallery-img" alt="Gallery"></div>
+                    <div class="p-4 my-5 bg-light border-start border-primary border-4 rounded-3 italic">
+                        <i class="fas fa-quote-left text-primary opacity-25 fa-2x mb-2"></i>
+                        <p class="fst-italic h5 text-dark">"The warmth we shared this winter wasn't just from the clothes, but from the collective kindness of our donors."</p>
+                        <footer class="blockquote-footer mt-2">Program Coordinator</footer>
+                    </div>
+
+                    <h4 class="fw-bold mb-4">Event Gallery</h4>
+                    <div class="row g-3 mb-5">
+                        <div class="col-md-4">
+                            <div class="gallery-wrapper">
+                                <img src="{% static 'image/aboutImage/11.jpg' %}" class="gallery-img" alt="Gallery">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="gallery-wrapper">
+                                <img src="{% static 'image/aboutImage/11.jpg' %}" class="gallery-img" alt="Gallery">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="gallery-wrapper">
+                                <img src="{% static 'image/aboutImage/11.jpg' %}" class="gallery-img" alt="Gallery">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-4">
-            <div class="info-card">
-                <h5 class="fw-bold mb-4">প্রোগ্রাম ইনফরমেশন</h5>
-                
-                <div class="info-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <div>
-                        <small class="text-muted d-block">তারিখ</small>
-                        <span class="fw-semibold">২০ ডিসেম্বর, ২০২৪</span>
+            <div class="col-lg-4">
+                <div class="sticky-sidebar">
+                    <div class="info-card shadow-lg">
+                        <div class="info-header">
+                            <h5 class="mb-0 fw-bold">Project Details</h5>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="flex-shrink-0 bg-primary-subtle p-3 rounded-4 me-3">
+                                    <i class="fas fa-calendar-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block text-uppercase small fw-bold">Completion Date</small>
+                                    <span class="fw-bold">Dec 20, 2024</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="flex-shrink-0 bg-success-subtle p-3 rounded-4 me-3">
+                                    <i class="fas fa-map-marker-alt text-success"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block text-uppercase small fw-bold">Location</small>
+                                    <span class="fw-bold">Kurigram, Bangladesh</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="flex-shrink-0 bg-warning-subtle p-3 rounded-4 me-3">
+                                    <i class="fas fa-tag text-warning"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block text-uppercase small fw-bold">Category</small>
+                                    <span class="badge bg-warning text-dark rounded-pill">Social Welfare</span>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <button class="btn btn-primary w-100 py-3 rounded-3 fw-bold mb-3 shadow-sm">
+                                <i class="fas fa-share-nodes me-2"></i> Share This Story
+                            </button>
+                            
+                            <a href="javascript:history.back()" class="btn btn-outline-dark w-100 py-3 rounded-3 fw-bold border-2">
+                                <i class="fas fa-arrow-left-long me-2"></i> Back to Archive
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                        <small class="text-muted d-block">স্থান</small>
-                        <span class="fw-semibold">কুড়িগ্রাম, বাংলাদেশ</span>
+                    <div class="card mt-4 bg-dark text-white rounded-4 border-0">
+                        <div class="card-body p-4 text-center">
+                            <h6>Want to Support?</h6>
+                            <p class="small opacity-75">Your small contribution can make a huge difference in someone's life.</p>
+                            <a href="#" class="btn btn-light btn-sm rounded-pill px-4 fw-bold">Donate Now</a>
+                        </div>
                     </div>
-                </div>
-
-                <div class="info-item">
-                    <i class="fas fa-users"></i>
-                    <div>
-                        <small class="text-muted d-block">উপকারভোগী সংখ্যা</small>
-                        <span class="fw-semibold">৫০০+ পরিবার</span>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <i class="fas fa-user-tie"></i>
-                    <div>
-                        <small class="text-muted d-block">আয়োজনে</small>
-                        <span class="fw-semibold">এক্সিকিউটিভ কমিটি</span>
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <button class="btn btn-primary w-100 py-2 rounded-pill shadow-sm">
-                        <i class="fas fa-share-alt me-2"></i> শেয়ার করুন
-                    </button>
-                    <a href="javascript:history.back()" class="btn btn-outline-secondary w-100 mt-2 py-2 rounded-pill">
-                        পিছনে ফিরে যান
-                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
 {% endblock %}

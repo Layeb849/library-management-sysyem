@@ -1,204 +1,191 @@
 {% extends "base.html" %}
-{% block title %}আমাদের নতুন সংগ্রহসমূহ{% endblock %}
+{% block title %}Premium Library | New Arrivals{% endblock %}
 {% load static %}
 {% block content %}
-    <style>
-        .collection-page {
-            font-family: 'Poppins', sans-serif;
-            background-color: #fdfdfd;
-        }
 
-        /* Section Title Decoration */
-        .new-collection-header {
-            margin-bottom: 50px;
-        }
-        .badge-new-arrival {
-            background: #ff4757;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* Book Card Style */
-        .new-book-card {
-            border: none;
-            background: transparent;
-            position: relative;
-            transition: 0.4s ease;
-        }
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --glass-bg: rgba(255, 255, 255, 0.9);
+    }
 
-        .book-cover-container {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            background: #fff;
-            aspect-ratio: 2/3; /* বইয়ের আদর্শ অনুপাত */
-        }
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #f0f2f5;
+    }
 
-        .book-cover-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+    /* Section Header Styling */
+    .section-title {
+        font-size: 3rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
+    }
 
-        /* Hover Overlay */
-        .book-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: 0.3s;
-        }
+    /* Premium Card Design */
+    .book-card {
+        border: none;
+        border-radius: 24px;
+        background: var(--glass-bg);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        position: relative;
+        overflow: hidden;
+    }
 
-        .new-book-card:hover .book-overlay {
+    .book-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+    }
+
+    /* Image Container & Effects */
+    .image-wrapper {
+        position: relative;
+        margin: 12px;
+        border-radius: 20px;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .image-wrapper img {
+        transition: transform 0.6s ease;
+        aspect-ratio: 2/3;
+        object-fit: cover;
+    }
+
+    .book-card:hover .image-wrapper img {
+        transform: scale(1.1);
+    }
+
+    /* Smart Overlay - Desktop & Mobile Friendly */
+    .quick-action-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    /* Desktop: Hover logic */
+    @media (min-width: 992px) {
+        .book-card:hover .quick-action-overlay {
             opacity: 1;
         }
-        .new-book-card:hover .book-cover-container img {
-            transform: scale(1.1);
-        }
+    }
 
-        /* Ribbon Badge */
-        .ribbon {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 5;
-            background: #2ed573;
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    /* Mobile: Always visible but subtle */
+    @media (max-width: 991px) {
+        .quick-action-overlay {
+            opacity: 1;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%);
+            justify-content: flex-end;
+            padding-bottom: 20px;
         }
+        .section-title { font-size: 2rem; }
+    }
 
-        .book-meta {
-            margin-top: 15px;
-            text-align: left;
-        }
-        .book-meta h6 {
-            font-weight: 700;
-            margin-bottom: 2px;
-            color: #2c3e50;
-        }
-        .book-meta p {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-        }
+    /* Category Badge */
+    .cat-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 5;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px);
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #333;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
 
-        /* Quick View Button */
-        .btn-quick-view {
-            background: white;
-            color: #333;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transform: translateY(20px);
-            transition: 0.4s;
-        }
-        .new-book-card:hover .btn-quick-view {
-            transform: translateY(0);
-        }
-    </style>
+    /* Glass Button */
+    .btn-glass {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: 0.3s;
+        text-decoration: none;
+    }
 
-<div class="collection-page">
+    .btn-glass:hover {
+        background: white;
+        color: #764ba2;
+    }
+</style>
 
-<section class="container py-5">
-    
-    <div class="new-collection-header text-center">
-        <span class="badge-new-arrival mb-2 d-inline-block">New Arrival</span>
-        <h2 class="fw-bold text-dark">আমাদের নতুন সংগ্রহসমূহ</h2>
-        <p class="text-muted">এই সপ্তাহের নতুন যুক্ত হওয়া বইগুলো এক নজরে দেখে নিন</p>
-    </div>
-
-    <div class="row g-4">
+<div class="py-5">
+    <div class="container">
         
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="new-book-card">
-                <div class="book-cover-container">
-                    <div class="ribbon">NEW</div>
-                    <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Book Cover">
-                    <div class="book-overlay">
-                        <button class="btn-quick-view shadow-sm">এক নজরে দেখুন</button>
-                    </div>
-                </div>
-                <div class="book-meta">
-                    <h6 class="text-truncate">হিমুর হাতে কয়েকটি নীলপদ্ম</h6>
-                    <p>হুমায়ূন আহমেদ</p>
-                </div>
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-8">
+                <span class="text-primary fw-bold text-uppercase mb-2 d-block" style="letter-spacing: 3px;">The 2026 Collection</span>
+                <h1 class="section-title mb-3">Our New Arrivals</h1>
+                <p class="text-muted fs-5">Dive into the world of literature with our handpicked latest additions.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="#" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-bold">Explore All <i class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="new-book-card">
-                <div class="book-cover-container">
-                    <div class="ribbon">NEW</div>
-                    <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Book Cover">
-                    <div class="book-overlay">
-                        <button class="btn-quick-view shadow-sm">এক নজরে দেখুন</button>
+        <div class="row g-4">
+            
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="book-card shadow-sm h-100">
+                    <div class="image-wrapper">
+                        <span class="cat-badge">Fiction</span>
+                        <img src="{% static 'image/aboutImage/11.jpg' %}" class="w-100" alt="Book">
+                        
+                        <div class="quick-action-overlay">
+                            <a href="#" class="btn-glass shadow-sm">
+                                <i class="fas fa-eye me-2"></i>Details
+                            </a>
+                            <button class="btn-glass d-none d-lg-block">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body px-4 pb-4 pt-2">
+                        <h5 class="fw-bold text-dark mb-1 text-truncate" title="Himur Hate Nilpodmo">Himur Hate Nilpodmo</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted small">Humayun Ahmed</span>
+                            <div class="text-warning small">
+                                <i class="fas fa-star"></i> 4.5
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3 d-flex gap-2">
+                            <div class="w-100 bg-light rounded-3 p-2 text-center">
+                                <small class="d-block text-muted" style="font-size: 0.6rem;">PAGES</small>
+                                <span class="fw-bold small">160</span>
+                            </div>
+                            <div class="w-100 bg-light rounded-3 p-2 text-center">
+                                <small class="d-block text-muted" style="font-size: 0.6rem;">STATUS</small>
+                                <span class="text-success fw-bold small">Stock</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="book-meta">
-                    <h6 class="text-truncate">প্যারাডক্সিক্যাল সাজিদ ২</h6>
-                    <p>আরিফ আজাদ</p>
-                </div>
             </div>
-        </div>
 
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="new-book-card">
-                <div class="book-cover-container">
-                    <div class="ribbon">NEW</div>
-                    <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Book Cover">
-                    <div class="book-overlay">
-                        <button class="btn-quick-view shadow-sm">এক নজরে দেখুন</button>
-                    </div>
-                </div>
-                <div class="book-meta">
-                    <h6 class="text-truncate">চাঁদের পাহাড়</h6>
-                    <p>বিভূতিভূষণ বন্দ্যোপাধ্যায়</p>
-                </div>
             </div>
-        </div>
-
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="new-book-card">
-                <div class="book-cover-container">
-                    <div class="ribbon">NEW</div>
-                    <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Book Cover">
-                    <div class="book-overlay">
-                        <button class="btn-quick-view shadow-sm">এক নজরে দেখুন</button>
-                    </div>
-                </div>
-                <div class="book-meta">
-                    <h6 class="text-truncate">ফেলুদা সমগ্র</h6>
-                    <p>সত্যজিৎ রায়</p>
-                </div>
-            </div>
-        </div>
-
     </div>
-
-    <div class="text-center mt-5">
-        <a href="#" class="btn btn-dark px-4 py-2 rounded-pill fw-bold" style="letter-spacing: 1px;">VIEW ALL COLLECTIONS</a>
-    </div>
-
-</section>
-
 </div>
 
 {% endblock %}
