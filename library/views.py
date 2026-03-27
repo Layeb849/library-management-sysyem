@@ -1,10 +1,12 @@
-from django.shortcuts import render
 
-# Create your views here.
+from django.shortcuts import render, redirect
+from .models import Review
+from django.contrib import messages
 
 
-def home(request):
-    return render(request, 'heroSection.html')
+
+# def home(request):
+#     return render(request, 'heroSection.html')
 
 def contact(request):
     return render(request, 'contact.html')
@@ -43,4 +45,33 @@ def newcollection(request):
 def collectionDetails(request):
     return render(request, 'form/collectionDetails.html')
 
+def write_review(request):
+    return render(request, 'form/review.html')
+
     
+
+
+
+def review_create(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        comment = request.POST.get('comment')
+        image = request.FILES.get('image') 
+
+        if name and comment:
+            Review.objects.create(
+                name=name,
+                comment=comment,
+                image=image
+            )
+            messages.success(request, "Thank you for your feedback!")
+            return redirect('home') 
+        else:
+            messages.error(request, "Please fill in all required fields.")
+            
+    return redirect('review_create')
+
+def home(request):
+
+    content = Review.objects.all().order_by('-created_at')[:6]
+    return render(request, 'heroSection.html', {'content': content})

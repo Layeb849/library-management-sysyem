@@ -16,4 +16,7 @@ urlpatterns = [
     path('studentDetails/', views.studentDetails, name='studentDetails'),
     path('newcollection/', views.newcollection, name='newcollection'),
     path('collectionDetails/', views.collectionDetails, name='collectionDetails'),
+
+    path('write_review/', views.write_review, name='write_review'),
+    path('review/create/', views.review_create, name='review_create'),
 ]

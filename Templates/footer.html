@@ -140,7 +140,7 @@
     <div class="container container-fluid">
     
     <div class="brand-section">
-        <h2>Central Library</h2>
+        <h2>Pathakbondhu Pathagar</h2>
         <p class="text-secondary">Providing a Gateway to Knowledge. Join us <br> in a vast world of physical and digital resources.</p>
     </div>
 
@@ -149,15 +149,15 @@
             <div class="footer-card">
                 <h5 class="card-title">Hello Library</h5>
                 <ul class="list-unstyled">
-                    <li><i class="fas fa-map-marker-alt text-cyan me-2"></i> Dhaka, Bangladesh</li>
-                    <li><i class="fas fa-phone-alt text-cyan me-2"></i> +880 123456789</li>
-                    <li><i class="fas fa-envelope text-cyan me-2"></i> info@library.com</li>
+                    <li><i class="fas fa-map-marker-alt text-cyan me-2"></i> Mousha, Mohammadpur, Magura</li>
+                    <li><i class="fas fa-phone-alt text-cyan me-2"></i> +880 1795509561</li>
+                    <li><i class="fas fa-envelope text-cyan me-2"></i> pattokbondu2023@gmail.com</li>
                 </ul>
                 <div class="mt-4">
                     <h6>Social-links</h6>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=100089847265268" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/PattokBondu2023" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
@@ -170,10 +170,10 @@
                 <h5 class="card-title">Quick Explore</h5>
                 <ul class="list-unstyled">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">About Library</a></li>
-                    <li><a href="#">Digital Archive</a></li>
-                    <li><a href="#">Membership</a></li>
-                    <li><a href="#">Latest News</a></li>
+                    <li><a href="{% url 'about' %}">About Library</a></li>
+                    <li><a href="{% url 'home' %}">Digital Archive</a></li>
+                    <li><a href="{% url 'community' %}">Membership</a></li>
+                    <li><a href="{% url 'newcollection' %}">Latest Collections</a></li>
                 </ul>
             </div>
         </div>
@@ -182,7 +182,7 @@
             <div class="footer-card">
                 <h5 class="card-title">Ulist Unsourced</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#">Book Catalog</a></li>
+                    <li><a href="{% url 'newcollection' %}">Book Catalog</a></li>
                     <li><a href="#">Research Papers</a></li>
                     <li><a href="#">E-Journals</a></li>
                     <li><a href="#">Study Rooms</a></li>

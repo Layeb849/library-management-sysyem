@@ -1,1158 +1,603 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* Hero Slider */
-        .hero-slider {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .slide.active {
-            opacity: 1;
-        }
-
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(26, 35, 50, 0.85) 0%, rgba(45, 62, 80, 0.75) 100%);
-        }
-
-        .slide-1 {
-            background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920');
-        }
-
-        .slide-2 {
-            background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920');
-        }
-
-        .slide-3 {
-            background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920');
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 25px;
-            line-height: 1.2;
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: #e0e0e0;
-            margin-bottom: 40px;
-            line-height: 1.6;
-            animation: fadeInUp 1.2s ease;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            animation: fadeInUp 1.4s ease;
-        }
-
-        .hero-btn {
-            padding: 18px 45px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .btn-primary-hero {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary-hero:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-            color: white;
-        }
-
-        .btn-secondary-hero {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: 2px solid white;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary-hero:hover {
-            background: white;
-            color: #1a2332;
-            transform: translateY(-3px);
-        }
-
-        /* Slider Controls */
-        .slider-controls {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            display: flex;
-            gap: 15px;
-        }
-
-        .slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            border: 2px solid white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .slider-dot.active {
-            background: white;
-            width: 40px;
-            border-radius: 6px;
-        }
-
-        .slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 3;
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .slider-arrow:hover {
-            background: white;
-            color: #1a2332;
-        }
-
-        .slider-arrow.prev {
-            left: 30px;
-        }
-
-        .slider-arrow.next {
-            right: 30px;
-        }
-
-        /* Stats Section */
-        .stats-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(26, 35, 50, 0.9);
-            backdrop-filter: blur(20px);
-            padding: 40px 0;
-            z-index: 2;
-        }
-
-        .stat-item {
-            text-align: center;
-            color: white;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            color: #d1d5db;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 100px 0;
-            background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
-        }
-
-        .feature-card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
-            text-align: center;
-            height: 100%;
-            border: 2px solid transparent;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
-        }
-
-        .feature-icon {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 2.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .feature-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1a2332;
-            margin-bottom: 15px;
-        }
-
-        .feature-description {
-            color: #6c757d;
-            line-height: 1.8;
-        }
-
-        /* Call to Action Banner */
-        .cta-banner {
-            background: linear-gradient(135deg, #1a2332 0%, #2d3e50 100%);
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-        }
-
-        .cta-content h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .cta-content p {
-            font-size: 1.3rem;
-            color: #d1d5db;
-            margin-bottom: 40px;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 3rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .cta-content h2 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-slider {
-                min-height: 600px;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .hero-btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .slider-controls{
-                bottom:450px;
-            }
-
-            .slider-arrow {
-                width: 50px;
-                height: 50px;
-                top:30%;
-            }
-
-            .slider-arrow.prev {
-                left: 15px;
-            }
-
-            .slider-arrow.next {
-                right: 15px;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .stat-label {
-                font-size: 0.85rem;
-            }
-
-            .stats-overlay {
-                padding: 30px 0;
-            }
-
-            .cta-content h2 {
-                font-size: 1.75rem;
-            }
-
-            .cta-content p {
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2rem;
-                margin-bottom: 150px;
-                font-weight: 500;
-
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .hero-btn {
-                padding: 15px 35px;
-                font-size: 1rem;
-            }
-
-            .feature-card {
-                padding: 30px 20px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Hero Slider Section -->
-    <section class="hero-slider">
-        <!-- Slide 1 -->
-        <div class="slide slide-1 active">
-            <div class="hero-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <h1 class="hero-title">Welcome to Central Library</h1>
-                            <p class="hero-subtitle">
-                                Your gateway to endless knowledge. Explore our vast collection of over 50,000 books, 
-                                digital resources, and learning spaces designed to inspire and educate.
-                            </p>
-                            <div class="hero-buttons">
-                                <a href="#" class="hero-btn btn-primary-hero">
-                                    <span>Explore Library</span>
-                                    <span>→</span>
-                                </a>
-                                <a href="#" class="hero-btn btn-secondary-hero">
-                                    <span>Become a Member</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="slide slide-2">
-            <div class="hero-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <h1 class="hero-title">Digital Library Access</h1>
-                            <p class="hero-subtitle">
-                                Access thousands of e-books, academic journals, and online resources 
-                                from anywhere, anytime. Your knowledge journey never stops.
-                            </p>
-                            <div class="hero-buttons">
-                                <a href="#" class="hero-btn btn-primary-hero">
-                                    <span>Access Digital Library</span>
-                                    <span>→</span>
-                                </a>
-                                <a href="#" class="hero-btn btn-secondary-hero">
-                                    <span>Learn More</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="slide slide-3">
-            <div class="hero-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <h1 class="hero-title">Study & Research Support</h1>
-                            <p class="hero-subtitle">
-                                Perfect environment for focused study with silent reading rooms, 
-                                research assistance, and modern facilities to boost your productivity.
-                            </p>
-                            <div class="hero-buttons">
-                                <a href="#" class="hero-btn btn-primary-hero">
-                                    <span>Book a Study Room</span>
-                                    <span>→</span>
-                                </a>
-                                <a href="#" class="hero-btn btn-secondary-hero">
-                                    <span>View Services</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slider Controls -->
-        <div class="slider-arrow prev" onclick="changeSlide(-1)">
-            <span style="font-size: 1.5rem;">‹</span>
-        </div>
-        <div class="slider-arrow next" onclick="changeSlide(1)">
-            <span style="font-size: 1.5rem;">›</span>
-        </div>
-
-        <div class="slider-controls">
-            <span class="slider-dot active" onclick="currentSlide(0)"></span>
-            <span class="slider-dot" onclick="currentSlide(1)"></span>
-            <span class="slider-dot" onclick="currentSlide(2)"></span>
-        </div>
-
-        <!-- Stats Overlay -->
-        <div class="stats-overlay mt-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <div class="stat-item">
-                            <span class="stat-number">50K+</span>
-                            <span class="stat-label">Books</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <div class="stat-item">
-                            <span class="stat-number">2K+</span>
-                            <span class="stat-label">Members</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <div class="stat-item">
-                            <span class="stat-number">10K+</span>
-                            <span class="stat-label">E-Books</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stat-item">
-                            <span class="stat-number">40+</span>
-                            <span class="stat-label">Years Serving</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 style="font-size: 2.5rem; font-weight: 700; color: #1a2332; margin-bottom: 20px;">
-                    Why Choose Central Library?
-                </h2>
-                <p style="font-size: 1.2rem; color: #6c757d;">
-                    Experience excellence in every aspect of your learning journey
-                </p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon">📚</div>
-                        <h3 class="feature-title">Vast Collection</h3>
-                        <p class="feature-description">
-                            Access over 50,000 books covering fiction, non-fiction, academic texts, 
-                            and reference materials across all major subjects and languages.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon">💻</div>
-                        <h3 class="feature-title">Digital Access</h3>
-                        <p class="feature-description">
-                            Browse 10,000+ e-books and online journals with 24/7 access from 
-                            any device, anywhere in the world.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon">🏢</div>
-                        <h3 class="feature-title">Modern Facilities</h3>
-                        <p class="feature-description">
-                            Air-conditioned reading rooms, free Wi-Fi, computer labs, 
-                            and comfortable study spaces for all your needs.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon floating">🎓</div>
-                        <h3 class="feature-title">Expert Support</h3>
-                        <p class="feature-description">
-                            Professional librarians ready to assist with research, 
-                            reference queries, and finding the perfect resources.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon floating">⏰</div>
-                        <h3 class="feature-title">Flexible Hours</h3>
-                        <p class="feature-description">
-                            Open 6 days a week with extended hours to fit your schedule. 
-                            Weekend access available for your convenience.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon floating">👥</div>
-                        <h3 class="feature-title">Community Events</h3>
-                        <p class="feature-description">
-                            Regular workshops, book clubs, author talks, and educational 
-                            programs for all age groups and interests.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Testimonial Section -->
-
-    <section class="testimonials-section py-2" style="background-color: #ffffff;">
-    <div class="container py-2">
-        
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-8 text-center">
-                <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-3 py-2 mb-3">Community Voices</span>
-                <h2 class="display-4 fw-bold text-dark mb-3">Stories from Our <span style="color: #3b82f6;">Members</span></h2>
-                <p class="lead text-muted">Join over 2,500+ students, researchers, and book lovers who have transformed their learning experience with our library services.</p>
-                <div class="mx-auto mt-4" style="width: 80px; height: 5px; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border-radius: 10px;"></div>
-            </div>
-        </div>
-
-        <div class="row g-4">
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 border-0 shadow-sm p-3" style="border-radius: 25px; background: #fdfdfd; border: 1px solid #eee !important;">
-                    <div class="card-body">
-                        <div class="mb-3 text-warning">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <h5 class="fw-bold text-dark">"Unmatched Digital Resource"</h5>
-                        <p class="card-text text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.8;">
-                            "The transition to digital learning was made seamless by the library's vast e-book collection. Being able to access high-end research journals from my dorm room saved me countless hours during my final thesis year. Truly a world-class facility."
-                        </p>
-                        <hr class="opacity-10">
-                        <div class="d-flex align-items-center mt-4">
-                            <img src="{% static 'image/aboutImage/11.jpg' %}" class="rounded-circle shadow-sm me-3" width="65" height="65" alt="User">
-                            <div>
-                                <h6 class="text-dark mb-0 fw-bold">Alex Johnson</h6>
-                                <small class="text-muted d-block">PhD Researcher</small>
-                                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 mt-1" style="font-size: 0.7rem;">Verified Member</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 border-0 shadow-sm p-3" style="border-radius: 25px; background: #fdfdfd; border: 1px solid #eee !important;">
-                    <div class="card-body">
-                        <div class="mb-3 text-warning">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <h5 class="fw-bold text-dark">"A Sanctuary for Study"</h5>
-                        <p class="card-text text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.8;">
-                            "The silent study zones and the high-speed fiber internet make this my second home. It's rare to find a place that balances modern technology with a massive archive of physical rare books so perfectly. The staff is incredibly knowledgeable too!"
-                        </p>
-                        <hr class="opacity-10">
-                        <div class="d-flex align-items-center mt-4">
-                            <img src="{% static 'image/aboutImage/11.jpg' %}" class="rounded-circle shadow-sm me-3" width="65" height="65" alt="User">
-                            <div>
-                                <h6 class="text-dark mb-0 fw-bold">Sarah Miller</h6>
-                                <small class="text-muted d-block">Senior Software Engineer</small>
-                                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 mt-1" style="font-size: 0.7rem;">Verified Member</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 border-0 shadow-sm p-3" style="border-radius: 25px; background: #fdfdfd; border: 1px solid #eee !important;">
-                    <div class="card-body">
-                        <div class="mb-3 text-warning">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <h5 class="fw-bold text-dark">"Great Community & Events"</h5>
-                        <p class="card-text text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.8;">
-                            "I joined the weekend Book Club and it has been a fantastic way to meet like-minded people. The library isn't just about books anymore; it’s a vibrant community hub for personal growth and networking. Highly recommend for all ages."
-                        </p>
-                        <hr class="opacity-10">
-                        <div class="d-flex align-items-center mt-4">
-                            <img src="{% static 'image/aboutImage/11.jpg' %}" class="rounded-circle shadow-sm me-3" width="65" height="65" alt="User">
-                            <div>
-                                <h6 class="text-dark mb-0 fw-bold">David Chen</h6>
-                                <small class="text-muted d-block">Creative Artist</small>
-                                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 mt-1" style="font-size: 0.7rem;">Verified Member</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="text-center mt-5 py-4">
-            <p class="text-muted">Want to share your experience? <a href="#" class="text-primary fw-bold text-decoration-none">Write a Review</a></p>
-        </div>
-    </div>
-</section>
-
 <style>
-    /* Adding a subtle hover lift to cards */
-    .testimonials-section .card {
-        transition: all 0.3s ease;
+  /* 1. Base Hero Slider & Slides */
+  .hero-slider {
+    position: relative;
+    height: 100vh;
+    min-height: 600px; /* Reduced for mobile stability */
+    overflow: hidden;
+    background: #1a2332; /* Fallback color */
+  }
+
+  .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .slide.active { opacity: 1; }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(26,35,50,0.85) 0%, rgba(45,62,80,0.75) 100%);
+  }
+
+  .slide-1 { background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920'); }
+  .slide-2 { background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920'); }
+  .slide-3 { background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920'); }
+
+  /* 2. Typography & Gradients */
+  .stat-number {
+    font-size: clamp(2rem, 8vw, 3rem); /* Adaptive size: Min 2rem, Max 3rem */
+    font-weight: 800;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .hero-title { 
+    font-size: clamp(1.8rem, 10vw, 4rem); 
+    font-weight: 800;
+    line-height: 1.2;
+    animation: fadeInUp 1s ease forwards; 
+  }
+
+  /* 3. Interactive Elements (Dots, Arrows, Cards) */
+  .slider-dot { 
+    width: 12px; height: 12px; border-radius: 50%; 
+    background: rgba(255,255,255,0.5); border: 2px solid white; 
+    cursor: pointer; transition: all 0.3s ease; display: inline-block; margin: 0 5px;
+  }
+  .slider-dot.active { background: white; width: 35px; border-radius: 6px; }
+
+  .slider-arrow { 
+    transition: all 0.3s ease; 
+    z-index: 10;
+  }
+  .slider-arrow:hover { background: white !important; color: #1a2332 !important; }
+
+  .feature-card { 
+    transition: all 0.4s ease; 
+    border: 2px solid transparent !important; 
+    height: 100%;
+  }
+  .feature-card:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 60px rgba(59,130,246,0.2) !important; 
+    border-color: #3b82f6 !important; 
+  }
+  .feature-icon { transition: all 0.3s ease; }
+  .feature-card:hover .feature-icon { transform: scale(1.1) rotate(5deg); }
+
+  .testimonials-section .card { transition: all 0.3s ease; height: 100%; }
+  .testimonials-section .card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important; 
+    border-color: #3b82f6 !important; 
+  }
+
+  .transition-hover { transition: all 0.3s ease; }
+  .transition-hover:hover { transform: translateY(-5px); box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important; }
+
+  /* 4. Animations & Specials */
+  .cta-banner::before { 
+    content: ''; position: absolute; top: 0; left: 0; right: 0; 
+    height: 4px; background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899); 
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  .floating { animation: float 3s ease-in-out infinite; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-subtitle { animation: fadeInUp 1.2s ease forwards; }
+  .hero-buttons { animation: fadeInUp 1.4s ease forwards; }
+
+  /* =============================================
+     RESPONSIVE BREAKPOINTS (320px to Desktop)
+     ============================================= */
+
+  /* Small Phones (320px to 575px) */
+  @media (max-width: 575px) {
+    .hero-slider { height: auto; min-height: 550px; padding: 100px 0 60px; }
+    .hero-buttons { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 12px; 
+      align-items: center; 
     }
-    .testimonials-section .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
-        border-color: #3b82f6 !important;
-    }
-    /* For Mobile Center Alignment */
-    @media (max-width: 767px) {
-        .testimonials-section .card-body {
-            text-align: center !important;
-        }
-        .testimonials-section .d-flex {
-            flex-direction: column !important;
-            text-align: center !important;
-        }
-        .testimonials-section .me-3 {
-            margin-right: 0 !important;
-            margin-bottom: 15px !important;
-        }
-    }
-</style>
-
-
-<!-- Gallery Section -->
-
-    <section class="py-5" style="background-color: #f8fafc;">
-    <div class="container">
-        <div class="row align-items-center mb-5">
-            <div class="col-md-6 text-center text-md-start">
-                <h2 class="fw-bold display-5">New <span class="text-primary">Arrivals</span></h2>
-                <p class="text-muted">Explore the latest additions to our physical and digital shelves.</p>
-            </div>
-            <div class="col-md-6 text-md-end text-center">
-                <a href="{% url 'newcollection' %}" class="btn btn-outline-primary rounded-pill px-4">View All Catalog</a>
-            </div>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-6 col-md-3 col-sm-12">
-                <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius: 15px;">
-                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400" class="card-img-top rounded" alt="Book" style="height: 250px; object-fit: cover;">
-                    <div class="card-body">
-                        <h6 class="fw-bold mb-1">Modern Psychology</h6>
-                        <p class="small text-muted mb-2">by Dr. Sarah Jane</p>
-                        <span class="badge bg-info bg-opacity-10 text-info">Available</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius: 15px;">
-                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400" class="card-img-top rounded" alt="Book" style="height: 250px; object-fit: cover;">
-                    <div class="card-body">
-                        <h6 class="fw-bold mb-1">Data Science 101</h6>
-                        <p class="small text-muted mb-2">by Kevin Owens</p>
-                        <span class="badge bg-danger bg-opacity-10 text-danger">Borrowed</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius: 15px;">
-                    <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=400" class="card-img-top rounded" alt="Book" style="height: 250px; object-fit: cover;">
-                    <div class="card-body">
-                        <h6 class="fw-bold mb-1">The Great Gatsby</h6>
-                        <p class="small text-muted mb-2">by F. Scott Fitzgerald</p>
-                        <span class="badge bg-info bg-opacity-10 text-info">Available</span>
-                    </div>
-                </div>
-            </div>
-             <div class="col-6 col-md-3">
-                <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius: 15px;">
-                    <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=400" class="card-img-top rounded" alt="Book" style="height: 250px; object-fit: cover;">
-                    <div class="card-body">
-                        <h6 class="fw-bold mb-1">Digital Marketing</h6>
-                        <p class="small text-muted mb-2">by Neil Patel</p>
-                        <span class="badge bg-info bg-opacity-10 text-info">Available</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-5 bg-white">
-    <div class="container text-center">
-        <h2 class="fw-bold mb-5">Flexible <span class="text-primary">Membership</span></h2>
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-4">
-                <div class="p-5 border rounded-4 h-100 transition-hover shadow-sm">
-                    <h4 class="fw-bold">Student</h4>
-                    <h2 class="my-4 fw-bold text-primary">$5<span class="fs-6 text-muted fw-normal">/month</span></h2>
-                    <ul class="list-unstyled text-start mb-5">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Borrow 2 books/week</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Access to Study Hall</li>
-                        <li class="mb-2 text-muted"><i class="fas fa-times-circle me-2"></i> Digital Library Access</li>
-                    </ul>
-                    <button class="btn btn-outline-dark w-100 rounded-pill">Choose Plan</button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-5 border border-primary border-2 rounded-4 h-100 shadow position-relative">
-                    <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary">MOST POPULAR</span>
-                    <h4 class="fw-bold">Professional</h4>
-                    <h2 class="my-4 fw-bold text-primary">$15<span class="fs-6 text-muted fw-normal">/month</span></h2>
-                    <ul class="list-unstyled text-start mb-5">
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Borrow 10 books/week</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Private Research Room</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Digital Library Access</li>
-                    </ul>
-                    <button class="btn btn-primary w-100 rounded-pill shadow">Choose Plan</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<style>
-    .transition-hover:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
-        transition: 0.3s;
-    }
-</style>
-
-<!--endsection-->
-
-
-
-<!--far and competetion section-->
-
-{% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-<section class="events-fair-wrapper py-5" style="background-color: #ffffff; overflow: hidden;">
-    <div class="container py-lg-4">
-        
-        <div class="row mb-5 text-center text-lg-start align-items-end">
-            <div class="col-lg-7">
-                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 mb-3 rounded-pill fw-bold">OUR EVENTS</span>
-                <h2 class="display-4 fw-bold text-dark mb-0">Book Fair & <span class="text-primary">Competitions</span></h2>
-            </div>
-            <div class="col-lg-5 text-lg-end d-none d-lg-block">
-                <p class="text-muted mb-0">Join our upcoming community events and exhibitions.</p>
-            </div>
-        </div>
-
-        <div class="swiper bookFairSwiper mb-5 pb-5">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="event-card-large shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200" alt="Book Fair">
-                        <div class="event-overlay p-4 p-md-5">
-                            <h3 class="fw-bold text-white display-6">Annual Grand Book Fair</h3>
-                            <p class="text-white-50 fs-5 mb-4">Discover over 10,000+ new titles from global publishers.</p>
-                            <div class="d-flex gap-3 flex-wrap">
-                                <span class="text-white small"><i class="fas fa-calendar-alt me-2 text-primary"></i> Jan 20 - Feb 05</span>
-                                <span class="text-white small"><i class="fas fa-map-marker-alt me-2 text-primary"></i> Main Plaza</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="event-card-large shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200" alt="Exhibition">
-                        <div class="event-overlay p-4 p-md-5">
-                            <h3 class="fw-bold text-white display-6">Digital Archives Expo</h3>
-                            <p class="text-white-50 fs-5 mb-4">Exploring the future of reading in the digital era.</p>
-                            <button class="btn btn-primary rounded-pill px-4">Learn More</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-
-        <div class="row g-4 mt-5">
-            <div class="col-12 mb-2">
-                <h4 class="fw-bold d-flex align-items-center">
-                    <span class="bg-primary me-2" style="width: 10px; height: 30px; border-radius: 5px; display: inline-block;"></span>
-                    Active Competitions
-                </h4>
-            </div>
-
-            <div class="col-xl-4 col-md-6">
-                <div class="competition-box bg-white border h-100 p-3 rounded-4 transition-all">
-                    <div class="ratio ratio-16x9 mb-3 overflow-hidden rounded-4">
-                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500" class="object-fit-cover hover-zoom" alt="">
-                    </div>
-                    <div class="px-2">
-                        <span class="text-uppercase text-primary fw-bold x-small" style="font-size: 12px;">Essay Writing</span>
-                        <h5 class="fw-bold mt-1">Creative Writers Battle</h5>
-                        <p class="text-muted small">Showcase your writing skills and win cash prizes up to $500.</p>
-                        <hr class="my-3 opacity-50">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-success bg-opacity-10 text-success">Registration Open</span>
-                            <a href="#" class="text-dark fw-bold text-decoration-none small">Register <i class="fas fa-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-md-6">
-                <div class="competition-box bg-white border h-100 p-3 rounded-4 transition-all">
-                    <div class="ratio ratio-16x9 mb-3 overflow-hidden rounded-4">
-                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=500" class="object-fit-cover hover-zoom" alt="">
-                    </div>
-                    <div class="px-2">
-                        <span class="text-uppercase text-primary fw-bold x-small" style="font-size: 12px;">Design</span>
-                        <h5 class="fw-bold mt-1">Book Cover Challenge</h5>
-                        <p class="text-muted small">Design the cover for our next monthly magazine issue.</p>
-                        <hr class="my-3 opacity-50">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-primary bg-opacity-10 text-primary">Starts in 2 Days</span>
-                            <a href="#" class="text-dark fw-bold text-decoration-none small">Register <i class="fas fa-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<style>
-    /* Premium Slide CSS */
-    .event-card-large {
-        position: relative;
-        height: 450px;
-        border-radius: 30px;
-        overflow: hidden;
-    }
-    .event-card-large img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .event-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, transparent 100%);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-    /* Competition Box Styling */
-    .competition-box {
-        transition: all 0.3s ease;
-    }
-    .competition-box:hover {
-        border-color: #3b82f6 !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-        transform: translateY(-5px);
-    }
-    .hover-zoom {
-        transition: transform 0.5s ease;
-    }
-    .competition-box:hover .hover-zoom {
-        transform: scale(1.1);
-    }
-
-    /* Swiper Pagination Style */
-    .swiper-pagination-bullet-active {
-        background: #3b82f6 !important;
-        width: 25px !important;
-        border-radius: 5px !important;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-        .event-card-large { height: 350px; border-radius: 20px; }
-        .event-overlay h3 { font-size: 1.5rem !important; }
-        .event-overlay p { font-size: 0.9rem !important; }
-        .display-4 { font-size: 2rem !important; }
-    }
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-    var swiper = new Swiper(".bookFairSwiper", {
-        loop: true,
-        autoplay: { delay: 4000 },
-        pagination: { el: ".swiper-pagination", clickable: true },
-        spaceBetween: 20,
-    });
-</script> {% endcomment %}
-<!--far and competetion section end-->
-
-
-
-<!--mission and vision section -->
-<section class="mission-vision-section py-5" style="background-color: #ffffff;">
-    <div class="container py-2">
-        
-        <div class="text-center mb-5 pb-lg-4">
-            <h6 class="text-primary fw-bold text-uppercase mb-3" style="letter-spacing: 3px;">Our Purpose</h6>
-            <h2 class="display-4 fw-bold text-dark">Empowering Through <span class="text-primary">Knowledge</span></h2>
-        </div>
-
-        <div class="row g-5 align-items-stretch">
-            
-            <div class="col-lg-6">
-                <div class="h-100 p-4 p-md-5 border-0 shadow-sm transition-hover" style="border-radius: 30px; background: #f8fafc; border: 1px solid #e2e8f0 !important;">
-                    <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-4 mb-4" style="width: 70px; height: 70px;">
-                        <i class="fas fa-bullseye text-white fs-2"></i>
-                    </div>
-                    <h3 class="fw-bold text-dark mb-3">Our Mission</h3>
-                    <p class="text-secondary fs-5" style="line-height: 1.8;">
-                        Our mission is to provide equitable access to a vast world of information, fostering a culture of lifelong learning and research. We strive to create a modern, inclusive environment where technology meets tradition, ensuring every individual has the tools to succeed in their intellectual journey.
-                    </p>
-                    <ul class="list-unstyled mt-4 text-secondary">
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Accessible learning for all communities.</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Preserving historical and academic archives.</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Fostering digital literacy in the modern age.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="h-100 p-4 p-md-5 border-0 shadow-sm transition-hover" style="border-radius: 30px; background: #ffffff; border: 2px dashed #cbd5e1 !important;">
-                    <div class="d-inline-flex align-items-center justify-content-center bg-dark rounded-4 mb-4" style="width: 70px; height: 70px;">
-                        <i class="fas fa-eye text-white fs-2"></i>
-                    </div>
-                    <h3 class="fw-bold text-dark mb-3">Our Vision</h3>
-                    <p class="text-secondary fs-5" style="line-height: 1.8;">
-                        To become a global beacon of knowledge and a leading digital innovation hub. We envision a future where our library acts as the heart of the community, bridging the gap between physical books and the digital frontier, empowering the next generation of thinkers, creators, and leaders.
-                    </p>
-                    <div class="mt-4 p-3 bg-light rounded-3 italic" style="border-left: 4px solid #3b82f6;">
-                        <p class="mb-0 text-dark fw-medium small">"A world where knowledge is not a privilege, but a basic right for every curious mind."</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<style>
-    /* Subtle hover effect to make it interactive */
-    .mission-vision-section .transition-hover {
-        transition: all 0.4s ease;
-    }
-    .mission-vision-section .transition-hover:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08) !important;
-    }
-
-    /* Mobile logic to ensure text is centered on small screens */
-    @media (max-width: 991px) {
-        .mission-vision-section .text-lg-start {
-            text-align: center !important;
-        }
-        .mission-vision-section .p-4 {
-            text-align: center !important;
-        }
-        .mission-vision-section ul {
-            display: inline-block;
-            text-align: left;
-        }
-    }
-</style>
-
-
-    <!-- Call to Action Banner -->
-    <section class="cta-banner">
-        <div class="container text-center">
-            <div class="cta-content">
-                <h2>Start Your Learning Journey Today</h2>
-                <p>Join thousands of readers and scholars who trust Central Library</p>
-                <a href="#" class="hero-btn btn-primary-hero" style="font-size: 1.2rem;">
-                    <span>Get Your Library Card</span>
-                    <span>→</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.slider-dot');
-
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            if (index >= slides.length) currentSlideIndex = 0;
-            if (index < 0) currentSlideIndex = slides.length - 1;
-            
-            slides[currentSlideIndex].classList.add('active');
-            dots[currentSlideIndex].classList.add('active');
-        }
-
-        function changeSlide(direction) {
-            currentSlideIndex += direction;
-            showSlide(currentSlideIndex);
-        }
-
-        function currentSlide(index) {
-            currentSlideIndex = index;
-            showSlide(currentSlideIndex);
-        }
-
-        // Auto-play slider
-        setInterval(() => {
-            currentSlideIndex++;
-            showSlide(currentSlideIndex);
-        }, 5000);
-    </script>
-
-
-
+    .hero-btn { width: 90% !important; padding: 14px; text-align: center; }
     
+    .slider-controls { bottom: 20px !important; }
+    .slider-arrow { display: none; } /* Arrows hide on very small screens for better UX */
+    
+    .stat-card { margin-bottom: 15px; }
+    
+    .testimonials-section .d-flex { flex-direction: column !important; text-align: center !important; }
+    .testimonials-section .me-3 { margin-right: 0 !important; margin-bottom: 15px !important; }
+    
+    .mission-vision-section .p-4 { text-align: center !important; }
+    .mission-vision-section ul { display: inline-block; text-align: left; padding-left: 15px; }
+  }
+
+  /* Tablets & Medium Screens (576px to 991px) */
+  @media (max-width: 991px) {
+    .hero-slider { min-height: 650px; }
+    .slider-arrow { top: 40%; }
+    .stats-overlay { padding: 30px 0; }
+  }
+
+  /* Standard Hover & Transition for Mission/Vision */
+  .mission-vision-section .transition-hover:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.08) !important; 
+  }
+
+  /* Desktop Fixes */
+  @media (min-width: 992px) {
+    .hero-buttons { display: flex; flex-direction: row; gap: 20px; justify-content: center; }
+  }
+</style>
+
+<!-- Hero Slider Section -->
+<section class="hero-slider col-md-12 position-relative d-flex align-items-center mb-5">
+
+  <!-- Slide 1 -->
+  <div class="slide slide-1 active">
+    <div class="position-relative h-100 d-flex align-items-center" style="z-index:0;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="hero-title display-3 fw-bolder text-white p-sm-1 mb-4 lh-sm" style="text-shadow:2px 2px 20px rgba(0,0,0,.5);">Welcome to Central Library</h1>
+            <p class="hero-subtitle fs-5 text-white-50 mb-5 lh-lg">
+              Your gateway to endless knowledge. Explore our vast collection of over 50,000 books,
+              digital resources, and learning spaces designed to inspire and educate.
+            </p>
+            <div class="hero-buttons d-flex flex-wrap gap-3">
+              <a href="#" class="hero-btn btn btn-primary btn-lg rounded-pill px-5 py-3 fw-semibold shadow-lg">
+                <span>Explore Library</span> <span>→</span>
+              </a>
+              <a href="#" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
+                <span>Become a Member</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide slide-2">
+    <div class="position-relative h-100 d-flex align-items-center" style="z-index:2;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="hero-title display-3 fw-bolder text-white mb-4 lh-sm" style="text-shadow:2px 2px 20px rgba(0,0,0,.5);">Digital Library Access</h1>
+            <p class="hero-subtitle fs-5 text-white-50 mb-5 lh-lg">
+              Access thousands of e-books, academic journals, and online resources
+              from anywhere, anytime. Your knowledge journey never stops.
+            </p>
+            <div class="hero-buttons d-flex flex-wrap gap-3">
+              <a href="#" class="hero-btn btn btn-primary btn-lg rounded-pill px-5 py-3 fw-semibold shadow-lg">
+                <span>Access Digital Library</span> <span>→</span>
+              </a>
+              <a href="#" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
+                <span>Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide slide-3">
+    <div class="position-relative h-100 d-flex align-items-center" style="z-index:2;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="hero-title display-3 fw-bolder text-white mb-4 lh-sm" style="text-shadow:2px 2px 20px rgba(0,0,0,.5);">Study & Research Support</h1>
+            <p class="hero-subtitle fs-5 text-white-50 mb-5 lh-lg">
+              Perfect environment for focused study with silent reading rooms,
+              research assistance, and modern facilities to boost your productivity.
+            </p>
+            <div class="hero-buttons d-flex flex-wrap gap-3">
+              <a href="#" class="hero-btn btn btn-primary btn-lg rounded-pill px-5 py-3 fw-semibold shadow-lg">
+                <span>Book a Study Room</span> <span>→</span>
+              </a>
+              <a href="#" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
+                <span>View Services</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider Arrows -->
+  <div class="slider-arrow prev position-absolute top-50 translate-middle-y d-flex align-items-center justify-content-center rounded-circle border border-2 border-white cursor-pointer" onclick="changeSlide(-1)" style="left:30px; width:60px; height:60px; background:rgba(255,255,255,0.2); backdrop-filter:blur(10px); z-index:3;">
+    <span class="text-white fs-4">‹</span>
+  </div>
+  <div class="slider-arrow next position-absolute top-50 translate-middle-y d-flex align-items-center justify-content-center rounded-circle border border-2 border-white cursor-pointer" onclick="changeSlide(1)" style="right:30px; width:60px; height:60px; background:rgba(255,255,255,0.2); backdrop-filter:blur(10px); z-index:3;">
+    <span class="text-white fs-4">›</span>
+  </div>
+
+  <!-- Slider Dots -->
+  <div class="slider-controls position-absolute start-50 translate-middle-x d-flex gap-3" style="bottom:170px; z-index:3;">
+    <span class="slider-dot active" onclick="currentSlide(0)"></span>
+    <span class="slider-dot" onclick="currentSlide(1)"></span>
+    <span class="slider-dot" onclick="currentSlide(2)"></span>
+  </div>
+
+  <!-- Stats Overlay -->
+  <div class="stats-overlay position-absolute bottom-0 start-0 end-0 py-4 mt-3" style="background:rgba(26,35,50,0.9); backdrop-filter:blur(20px); z-index:2;">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+          <div class="stat-item">
+            <span class="stat-number">3K+</span>
+            <span class="stat-label text-secondary text-uppercase small" style="letter-spacing:1px;">Books</span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+          <div class="stat-item">
+            <span class="stat-number">2K+</span>
+            <span class="stat-label text-secondary text-uppercase small" style="letter-spacing:1px;">Members</span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+          <div class="stat-item">
+            <span class="stat-number">10K+</span>
+            <span class="stat-label text-secondary text-uppercase small" style="letter-spacing:1px;">E-Books</span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-item">
+            <span class="stat-number">40+</span>
+            <span class="stat-label text-secondary text-uppercase small" style="letter-spacing:1px;">Years Serving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- Features Section -->
+<section class="py-5" style="background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold mb-3" style="color:#1a2332;">Why Choose Central Library?</h2>
+      <p class="fs-5 text-muted">Experience excellence in every aspect of your learning journey</p>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card bg-white text-center p-5 rounded-4 shadow-sm h-100">
+          <div class="feature-icon d-flex align-items-center justify-content-center rounded-4 mx-auto mb-4 fs-1 shadow" style="width:90px; height:90px; background:linear-gradient(135deg,#3b82f6,#8b5cf6);">📚</div>
+          <h4 class="fw-bold mb-3" style="color:#1a2332;">Vast Collection</h4>
+          <p class="text-muted lh-lg">Access over 50,000 books covering fiction, non-fiction, academic texts, and reference materials across all major subjects and languages.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card bg-white text-center p-5 rounded-4 shadow-sm h-100">
+          <div class="feature-icon d-flex align-items-center justify-content-center rounded-4 mx-auto mb-4 fs-1 shadow" style="width:90px; height:90px; background:linear-gradient(135deg,#3b82f6,#8b5cf6);">💻</div>
+          <h4 class="fw-bold mb-3" style="color:#1a2332;">Digital Access</h4>
+          <p class="text-muted lh-lg">Browse 1000+ e-books and online journals with 24/7 access from any device, anywhere in the world.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card bg-white text-center p-5 rounded-4 shadow-sm h-100">
+          <div class="feature-icon d-flex align-items-center justify-content-center rounded-4 mx-auto mb-4 fs-1 shadow" style="width:90px; height:90px; background:linear-gradient(135deg,#3b82f6,#8b5cf6);">🏢</div>
+          <h4 class="fw-bold mb-3" style="color:#1a2332;">Modern Facilities</h4>
+          <p class="text-muted lh-lg">Air-conditioned reading rooms, free Wi-Fi, computer labs, and comfortable study spaces for all your needs.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card bg-white text-center p-5 rounded-4 shadow-sm h-100">
+          <div class="feature-icon floating d-flex align-items-center justify-content-center rounded-4 mx-auto mb-4 fs-1 shadow" style="width:90px; height:90px; background:linear-gradient(135deg,#3b82f6,#8b5cf6);">🎓</div>
+          <h4 class="fw-bold mb-3" style="color:#1a2332;">Expert Support</h4>
+          <p class="text-muted lh-lg">Professional librarians ready to assist with research, reference queries, and finding the perfect resources.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card bg-white text-center p-5 rounded-4 shadow-sm h-100">
+          <div class="feature-icon floating d-flex align-items-center justify-content-center rounded-4 mx-auto mb-4 fs-1 shadow" style="width:90px; height:90px; background:linear-gradient(135deg,#3b82f6,#8b5cf6);">⏰</div>
+          <h4 class="fw-bold mb-3" style="color:#1a2332;">Flexible Hours</h4>
+          <p class="text-muted lh-lg">Open 6 days a week with extended hours to fit your schedule. Weekend access available for your convenience.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature-card bg-white text-center p-5 rounded-4 shadow-sm h-100">
+          <div class="feature-icon floating d-flex align-items-center justify-content-center rounded-4 mx-auto mb-4 fs-1 shadow" style="width:90px; height:90px; background:linear-gradient(135deg,#3b82f6,#8b5cf6);">👥</div>
+          <h4 class="fw-bold mb-3" style="color:#1a2332;">Community Events</h4>
+          <p class="text-muted lh-lg">Regular workshops, book clubs, author talks, and educational programs for all age groups and interests.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Testimonials Section -->
+<section class="testimonials-section py-2" style="background-color:#ffffff;">
+  <div class="container py-2">
+
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-3 py-2 mb-3">Community Voices</span>
+        <h2 class="display-4 fw-bold text-dark mb-3">Stories from Our <span style="color:#3b82f6;">Members</span></h2>
+        <p class="lead text-muted">Join over 2,500+ students, researchers, and book lovers who have transformed their learning experience with our library services.</p>
+        <div class="mx-auto mt-4 rounded-pill" style="width:80px; height:5px; background:linear-gradient(90deg,#3b82f6,#8b5cf6);"></div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+
+
+        {% for r in content %}
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100 border-0 shadow-sm p-3 testimonial-card" style="border-radius:25px; background:#fdfdfd; border:1px solid #eee !important;">
+    <div class="card-body">
+      <div class="mb-3 text-warning">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+
+      <h5 class="fw-bold text-dark">"Reader Experience"</h5>
+      
+      <p class="card-text text-secondary mb-4 lh-lg" style="font-size:1.05rem;">
+        "{{ r.comment }}"
+      </p>
+
+      <hr class="opacity-10">
+
+      <div class="d-flex align-items-center mt-4">
+        {% if r.image %}
+          <img src="{{ r.image.url }}" class="rounded-circle shadow-sm me-3 object-fit-cover" width="65" height="65" alt="{{ r.name }}">
+        {% else %}
+          <img src="{% static 'image/feedback/default.jpg' %}" class="rounded-circle shadow-sm me-3 object-fit-cover" width="65" height="65" alt="Default User">
+        {% endif %}
+        
+        <div>
+          <h6 class="text-dark mb-0 fw-bold">{{ r.name }}</h6>
+          <small class="text-muted d-block">Library Member</small>
+          <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 mt-1" style="font-size:.7rem;">Verified Reader</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% empty %}
+  <div class="col-12 text-center">
+    <p class="text-muted">No reviews shared by readers yet.</p>
+  </div>
+{% endfor %}
+
+
+
+    </div>
+
+    <div class="text-center mt-5 py-4">
+      <p class="text-muted">Want to share your experience? <a href="{% url 'write_review' %}" class="text-primary fw-bold text-decoration-none">Write a Review</a></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- New Arrivals Section -->
+<section class="py-5" style="background-color:#f8fafc;">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6 text-center text-md-start">
+        <h2 class="fw-bold display-5">New <span class="text-primary">Arrivals</span></h2>
+        <p class="text-muted">Explore the latest additions to our physical and digital shelves.</p>
+      </div>
+      <div class="col-md-6 text-md-end text-center">
+        <a href="{% url 'newcollection' %}" class="btn btn-outline-primary rounded-pill px-4">View All Catalog</a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-6 col-md-3 col-sm-12">
+        <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius:15px;">
+          <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400" class="card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
+          <div class="card-body">
+            <h6 class="fw-bold mb-1">Modern Psychology</h6>
+            <p class="small text-muted mb-2">by Dr. Sarah Jane</p>
+            <span class="badge bg-info bg-opacity-10 text-info">Available</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius:15px;">
+          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400" class="card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
+          <div class="card-body">
+            <h6 class="fw-bold mb-1">Data Science 101</h6>
+            <p class="small text-muted mb-2">by Kevin Owens</p>
+            <span class="badge bg-danger bg-opacity-10 text-danger">Borrowed</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius:15px;">
+          <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=400" class="card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
+          <div class="card-body">
+            <h6 class="fw-bold mb-1">The Great Gatsby</h6>
+            <p class="small text-muted mb-2">by F. Scott Fitzgerald</p>
+            <span class="badge bg-info bg-opacity-10 text-info">Available</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius:15px;">
+          <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=400" class="card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
+          <div class="card-body">
+            <h6 class="fw-bold mb-1">Digital Marketing</h6>
+            <p class="small text-muted mb-2">by Neil Patel</p>
+            <span class="badge bg-info bg-opacity-10 text-info">Available</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Membership Section -->
+<section class="py-5 bg-white">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-5">Flexible <span class="text-primary">Membership</span></h2>
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-4">
+        <div class="p-5 border rounded-4 h-100 transition-hover shadow-sm">
+          <h4 class="fw-bold">Student</h4>
+          <h2 class="my-4 fw-bold text-primary">$5<span class="fs-6 text-muted fw-normal">/month</span></h2>
+          <ul class="list-unstyled text-start mb-5">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Borrow 2 books/week</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Access to Study Hall</li>
+            <li class="mb-2 text-muted"><i class="fas fa-times-circle me-2"></i> Digital Library Access</li>
+          </ul>
+          <button class="btn btn-outline-dark w-100 rounded-pill">Choose Plan</button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-5 border border-primary border-2 rounded-4 h-100 shadow position-relative transition-hover">
+          <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary">MOST POPULAR</span>
+          <h4 class="fw-bold">Professional</h4>
+          <h2 class="my-4 fw-bold text-primary">$15<span class="fs-6 text-muted fw-normal">/month</span></h2>
+          <ul class="list-unstyled text-start mb-5">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Borrow 10 books/week</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Private Research Room</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Digital Library Access</li>
+          </ul>
+          <button class="btn btn-primary w-100 rounded-pill shadow">Choose Plan</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Mission & Vision Section -->
+<section class="mission-vision-section py-5" style="background-color:#ffffff;">
+  <div class="container py-2">
+
+    <div class="text-center mb-5 pb-lg-4">
+      <h6 class="text-primary fw-bold text-uppercase mb-3" style="letter-spacing:3px;">Our Purpose</h6>
+      <h2 class="display-4 fw-bold text-dark">Empowering Through <span class="text-primary">Knowledge</span></h2>
+    </div>
+
+    <div class="row g-5 align-items-stretch">
+
+      <div class="col-lg-6">
+        <div class="h-100 p-4 p-md-5 border-0 shadow-sm transition-hover rounded-4" style="background:#f8fafc; border:1px solid #e2e8f0 !important; border-radius:30px !important;">
+          <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-4 mb-4" style="width:70px; height:70px;">
+            <i class="fas fa-bullseye text-white fs-2"></i>
+          </div>
+          <h3 class="fw-bold text-dark mb-3">Our Mission</h3>
+          <p class="text-secondary fs-5 lh-lg">
+            Our mission is to provide equitable access to a vast world of information, fostering a culture of lifelong learning and research. We strive to create a modern, inclusive environment where technology meets tradition, ensuring every individual has the tools to succeed in their intellectual journey.
+          </p>
+          <ul class="list-unstyled mt-4 text-secondary">
+            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Accessible learning for all communities.</li>
+            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Preserving historical and academic archives.</li>
+            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Fostering digital literacy in the modern age.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="h-100 p-4 p-md-5 border-0 shadow-sm transition-hover bg-white" style="border:2px dashed #cbd5e1 !important; border-radius:30px !important;">
+          <div class="d-inline-flex align-items-center justify-content-center bg-dark rounded-4 mb-4" style="width:70px; height:70px;">
+            <i class="fas fa-eye text-white fs-2"></i>
+          </div>
+          <h3 class="fw-bold text-dark mb-3">Our Vision</h3>
+          <p class="text-secondary fs-5 lh-lg">
+            To become a global beacon of knowledge and a leading digital innovation hub. We envision a future where our library acts as the heart of the community, bridging the gap between physical books and the digital frontier, empowering the next generation of thinkers, creators, and leaders.
+          </p>
+          <div class="mt-4 p-3 bg-light rounded-3" style="border-left:4px solid #3b82f6;">
+            <p class="mb-0 text-dark fw-medium small">"A world where knowledge is not a privilege, but a basic right for every curious mind."</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- CTA Banner -->
+<section class="cta-banner py-5 position-relative overflow-hidden text-center" style="background:linear-gradient(135deg,#1a2332 0%,#2d3e50 100%);">
+  <div class="container py-4">
+    <h2 class="display-5 fw-bold text-white mb-3">Start Your Learning Journey Today</h2>
+    <p class="fs-4 text-secondary mb-5">Join thousands of readers and scholars who trust Central Library</p>
+    <a href="#" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-semibold shadow-lg fs-5">
+      <span>Get Your Membership</span> <span>→</span>
+    </a>
+  </div>
+</section>
+
+
+<script>
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slider-dot');
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+
+    if (index >= slides.length) currentSlideIndex = 0;
+    if (index < 0) currentSlideIndex = slides.length - 1;
+
+    slides[currentSlideIndex].classList.add('active');
+    dots[currentSlideIndex].classList.add('active');
+  }
+
+  function changeSlide(direction) {
+    currentSlideIndex += direction;
+    showSlide(currentSlideIndex);
+  }
+
+  function currentSlide(index) {
+    currentSlideIndex = index;
+    showSlide(currentSlideIndex);
+  }
+
+  setInterval(() => { currentSlideIndex++; showSlide(currentSlideIndex); }, 5000);
+</script>
 
 {% endblock %}
