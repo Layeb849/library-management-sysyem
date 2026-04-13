@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About Central Library{% endblock %}
+{% block title %}About Pathokbondhu Pathagar{% endblock %}
 
 {% block content %}
     <!-- Hero Section -->
@@ -10,8 +10,8 @@
         <div class="container py-5">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
-                    <h1 class="display-3 fw-bold text-white mb-4 animation-fadeInUp" style="animation: fadeInUp 0.8s ease;">About Central Library</h1>
-                    <p class="lead text-white-50" style="animation: fadeInUp 1s ease;">A Journey of Knowledge, Growth, and Community Service Since 1985</p>
+                    <h1 class="display-3 fw-bold text-white mb-4 animation-fadeInUp" style="animation: fadeInUp 0.8s ease;">About Pathokbondhu Pathagar</h1>
+                    <p class="lead text-white-50" style="animation: fadeInUp 1s ease;">A Journey of Knowledge, Growth, and Community Service Since 2023</p>
                 </div>
             </div>
         </div>
@@ -34,66 +34,44 @@
                         <span class="position-absolute start-0 bottom-0 rounded" style="width: 60px; height: 3px; background: linear-gradient(90deg, #3b82f6, #8b5cf6);"></span>
                     </h3>
                     <p class="mb-4 text-dark">
-                        In 1985, a group of passionate educators and community leaders came together with a simple yet powerful vision: to create a space where knowledge would be freely accessible to everyone, regardless of their background or economic status. Central Library was born from this dream in the heart of Dhaka, Bangladesh.
+                        In 2023, a remarkable journey began in a remote village where access to knowledge was once very limited. What seemed unimaginable to many was turned into reality through the vision and determination of a few passionate individuals. The idea was first introduced by Rkibul, which later inspired Layeb Hossain, Rubel Hasan, and Mehedi Hasan to come together and establish Pathokbondhu Pathagar and Research Center.
                     </p>
                     <p class="mb-4 text-dark">
-                        What started as a modest collection of 500 books in a small rented space has now grown into one of the most comprehensive public libraries in the region, housing over 50,000 books, thousands of digital resources, and serving more than 2,000 members annually.
+                        The journey started with only 100 books, driven by hope and a strong commitment to serve the community. Over time, through dedication and continuous effort, the library has grown significantly and now holds a collection of 20,000+ books, becoming a vital source of knowledge and inspiration for people of all ages.
                     </p>
                     <p class="text-dark mb-0">
-                        The library was established with a clear mission: to foster a love for reading, support academic excellence, and provide a welcoming environment for lifelong learning. Over the decades, we have stayed true to this mission while continuously evolving to meet the changing needs of our community.
+                        Located in a remote rural area, where such an initiative was once beyond imagination, the library stands today as a symbol of change and possibility. With a mission to promote reading, support education, and inspire the younger generation, Pathokbondhu Pathagar continues to evolve as a center for learning, research, and community development.
                     </p>
                 </div>
             </div>
 
             <!-- Timeline -->
             <div class="py-4">
-                <div class="d-flex gap-3 mb-4 flex-column flex-md-row">
-                    <div class="fw-bold text-primary" style="font-size: 2rem; min-width: 100px;">1985</div>
-                    <div class="flex-fill">
-                        <div class="card border-0 shadow-sm rounded-3">
-                            <div class="card-body p-4">
-                                <h5 class="text-success mb-2">Foundation Year</h5>
-                                <p class="text-dark mb-0">Central Library opened its doors with 500 books and 50 founding members</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h3 class="fw-semibold text-dark mb-4 pb-3 position-relative">
+                    Annual Progress & Achievement
+                    <span class="position-absolute start-0 bottom-0 rounded"
+                        style="width: 60px; height: 3px; background: linear-gradient(90deg, #3b82f6, #8b5cf6);">
+                    </span>
+                </h3>   <!-- ❗ এটা missing ছিল -->
 
+                {% for item in achievements %}
                 <div class="d-flex gap-3 mb-4 flex-column flex-md-row">
-                    <div class="fw-bold text-primary" style="font-size: 2rem; min-width: 100px;">1995</div>
-                    <div class="flex-fill">
-                        <div class="card border-0 shadow-sm rounded-3">
-                            <div class="card-body p-4">
-                                <h5 class="text-success mb-2">Expansion</h5>
-                                <p class="text-dark mb-0">Moved to a larger building and expanded collection to 10,000 books</p>
-                            </div>
-                        </div>
+                    
+                    <div class="fw-bold text-primary" style="font-size: 2rem; min-width: 100px;">
+                        {{ item.year }}
                     </div>
-                </div>
 
-                <div class="d-flex gap-3 mb-4 flex-column flex-md-row">
-                    <div class="fw-bold text-primary" style="font-size: 2rem; min-width: 100px;">2010</div>
                     <div class="flex-fill">
                         <div class="card border-0 shadow-sm rounded-3">
                             <div class="card-body p-4">
-                                <h5 class="text-success mb-2">Digital Transformation</h5>
-                                <p class="text-dark mb-0">Launched digital library services and online catalog system</p>
+                                <h5 class="text-success mb-2">{{ item.title }}</h5>
+                                <p class="text-dark mb-0">{{ item.description }}</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="d-flex gap-3 mb-4 flex-column flex-md-row">
-                    <div class="fw-bold text-primary" style="font-size: 2rem; min-width: 100px;">2025</div>
-                    <div class="flex-fill">
-                        <div class="card border-0 shadow-sm rounded-3">
-                            <div class="card-body p-4">
-                                <h5 class="text-success mb-2">Present Day</h5>
-                                <p class="text-dark mb-0">Serving 2,000+ members with 50,000+ books and comprehensive digital resources</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -115,13 +93,13 @@
                     <div class="card border-0 rounded-4 shadow h-100 overflow-hidden">
                         <div class="card-body p-4 text-center">
                             <div class="rounded-circle mx-auto mb-4 p-1 d-inline-block" style="width: 150px; height: 150px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);">
-                                <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Dr. Abdul Rahman" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white">
+                                <img src="{% static 'image/aboutImage/rokibul.jpg' %}" alt="Rokibul Islam" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white">
                             </div>
                             <span class="badge rounded-pill px-3 py-2 mb-3" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">Founder</span>
-                            <h3 class="h4 fw-bold text-dark mb-2">Dr. Abdul Rahman</h3>
+                            <h3 class="h4 fw-bold text-dark mb-2">Rokibul Islam</h3>
                             <p class="text-primary fw-semibold mb-3">Chief Founder & Visionary</p>
                             <p class="text-muted small">
-                                Dr. Abdul Rahman, a renowned educator and social activist, founded Central Library with the belief that education is the cornerstone of social progress. With over 40 years of experience in education and community development, he envisioned a space 
+                                Inspired by dreams and driven by dedication, he is a committed social worker who works tirelessly to bring about meaningful change. As the chief founder of ‘Pathakabandhu Library and Research Centre’, he plays a vital role in the promotion of education, youth empowerment and sustainable social development. His strong belief in the infinite potential of the human mind is the main motivation for his work. 
                             </p>
                         </div>
                     </div>
@@ -132,13 +110,13 @@
                     <div class="card border-0 rounded-4 shadow h-100 overflow-hidden">
                         <div class="card-body p-4 text-center">
                             <div class="rounded-circle mx-auto mb-4 p-1 d-inline-block" style="width: 150px; height: 150px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);">
-                                <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Mrs. Fatima Khatun" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white">
+                                <img src="{% static 'image/aboutImage/layeb.jpeg' %}" alt="Md Layeb Hosain" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white">
                             </div>
                             <span class="badge rounded-pill px-3 py-2 mb-3" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">Co-Founder</span>
-                            <h3 class="h4 fw-bold text-dark mb-2">Mrs. Fatima Khatun</h3>
-                            <p class="text-primary fw-semibold mb-3">Co-Founder & Operations Director</p>
+                            <h3 class="h4 fw-bold text-dark mb-2">Md Layeb Hossain</h3>
+                            <p class="text-primary fw-semibold mb-3">Co-Founder & Technology Advisor</p>
                             <p class="text-muted small">
-                                Mrs. Fatima Khatun brought her expertise in library administration and community outreach to establish the operational framework of Central Library. With a Master's degree in Library and Information Science, she designed the cataloging system and 
+                               He is a dedicated technologist, visionary thinker, and Co-Founder of Pathokbondhu Pathagar & Research Center, serving as a Technology Strategist. From the beginning, he has played a key role in transforming the idea into a sustainable and impactful initiative. With a strong focus on innovation, and he has been instrumental in driving the library’s digital transformation and ensuring its continued growth and relevance in the community.
                             </p>
                         </div>
                     </div>
@@ -149,13 +127,13 @@
                     <div class="card border-0 rounded-4 shadow h-100 overflow-hidden">
                         <div class="card-body p-4 text-center">
                             <div class="rounded-circle mx-auto mb-4 p-1 d-inline-block" style="width: 150px; height: 150px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);">
-                                <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Mrs. Fatima Khatun" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white">
+                                <img src="{% static 'image/aboutImage/rubel.png' %}" alt="Rubel Hasan" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white">
                             </div>
                             <span class="badge rounded-pill px-3 py-2 mb-3" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">Co-Founder</span>
-                            <h3 class="h4 fw-bold text-dark mb-2">Mrs. Fatima Khatun</h3>
+                            <h3 class="h4 fw-bold text-dark mb-2">Rubel Hasan </h3>
                             <p class="text-primary fw-semibold mb-3">Co-Founder & Operations Director</p>
                             <p class="text-muted small">
-                                Mrs. Fatima Khatun brought her expertise in library administration and community outreach to establish the operational framework of Central Library. With a Master's degree in Library and Information Science, she designed the cataloging system and 
+                                Experienced professionals and co-founders, with backgrounds in public administration and managerial roles, have contributed their leadership and expertise to guide the strategic vision and growth of Pathokbondhu Pathagar and Research Center. Their support has strengthened the library’s foundation and community impact.
                             </p>
                         </div>
                     </div>
@@ -166,13 +144,13 @@
                     <div class="card border-0 rounded-4 shadow h-100 overflow-hidden">
                         <div class="card-body p-4 text-center">
                             <div class="rounded-circle mx-auto mb-4 p-1 d-inline-block" style="width: 150px; height: 150px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);">
-                                <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Mr. Kamal Ahmed" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white">
+                                <img src="{% static 'image/aboutImage/mishorr.jpg' %}" alt="md Mehedy hasan mishor" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white">
                             </div>
                             <span class="badge rounded-pill px-3 py-2 mb-3" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">Co-Founder</span>
-                            <h3 class="h4 fw-bold text-dark mb-2">Mr. Kamal Ahmed</h3>
-                            <p class="text-primary fw-semibold mb-3">Co-Founder & Technology Advisor</p>
+                            <h3 class="h4 fw-bold text-dark mb-2">Md Mahedi Hassan Mishor</h3>
+                            <p class="text-primary fw-semibold mb-3">Co-Founder & Strategic Advisor</p>
                             <p class="text-muted small">
-                                Mr. Kamal Ahmed, a computer science graduate and technology enthusiast, joined the founding team to modernize library services. He introduced the first computerized catalog system in 1995 and led the digital transformation in 2010. His vision of 
+                                Supported by a dedicated expatriate contributor based in Saudi Arabia, who actively champions the vision, mission, and development of Pathokbondhu Pathagar and Research Center. Working closely with its co-founders, their guidance strengthens the library’s foundation and expands its impact within the community.
                             </p>
                         </div>
                     </div>

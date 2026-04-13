@@ -19,4 +19,6 @@ urlpatterns = [
 
     path('write_review/', views.write_review, name='write_review'),
     path('review/create/', views.review_create, name='review_create'),
+
+    path('add_achievement/', views.add_yearly_achievement, name='add_yearly_achievement'),
 ]

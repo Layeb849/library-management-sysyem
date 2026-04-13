@@ -14,8 +14,8 @@ def contact(request):
 def footer(request):
     return render(request, 'footer.html')
 
-def about(request):
-    return render(request, 'about.html')
+# def about(request):
+#     return render(request, 'about.html')
 
 def service(request):
     return render(request, 'service.html')
@@ -75,3 +75,35 @@ def home(request):
 
     content = Review.objects.all().order_by('-created_at')[:6]
     return render(request, 'heroSection.html', {'content': content})
+
+
+
+
+# yearly achievement view
+
+from .models import YearlyAchivement
+
+def about(request):
+    achievements = YearlyAchivement.objects.all().order_by('-year')
+
+    return render(request, 'about.html', {
+        'achievements': achievements
+    })
+
+
+# Add yearly achievement (manual form handling)
+def add_yearly_achievement(request):
+    if request.method == 'POST':
+        year = request.POST.get('year')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        YearlyAchivement.objects.create(
+            year=year,
+            title=title,
+            description=description
+        )
+
+        return redirect('about')  # Redirect to the timeline list after adding
+
+    return render(request, 'dashboard/about/add_achievement.html')
