@@ -8,7 +8,7 @@ urlpatterns = [
     path('footer/', views.footer, name='footer'),
 
     path('admission/', views.admission, name='admission'),
-    path('community/', views.community, name='community'),
+    path('community/', views.community_view, name='community'),
     path('student_list/', views.student_list, name='student_list'),
 
     path('achivement/', views.achivement, name='achivement'),
@@ -21,4 +21,6 @@ urlpatterns = [
     path('review/create/', views.review_create, name='review_create'),
 
     path('add_achievement/', views.add_yearly_achievement, name='add_yearly_achievement'),
+
+    path('committee/', views.upload_committee, name='committee'),
 ]

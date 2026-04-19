@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}Committee Upload{% endblock %}
+{% block content %}
+
+<style>
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-card {
+        animation: fadeInUp 0.5s ease-out forwards;
+    }
+
+    /* Input focus effect jate user bujhte pare kothay type korche */
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd !important;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15) !important;
+        outline: 0;
+    }
+
+    .field-transition {
+        animation: fadeIn 0.4s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+
+<div class="container py-4 py-md-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-7 col-xl-6">
+            
+            <div class="card animate-card shadow-lg" 
+                 style="border-radius: 24px; border: none; overflow: hidden; background: #ffffff;">
+                
+                <div style="background: linear-gradient(135deg, #0d6efd, #00d2ff); padding: 25px 15px; text-align: center; color: white;">
+                    <h3 class="fw-bold mb-1" style="font-size: calc(1.3rem + .6vw);">Content Uploader</h3>
+                    <p class="mb-0 opacity-75 small">Manage your members and documents</p>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-muted small mb-2 text-uppercase" style="letter-spacing: 1px;">Upload Type</label>
+                            <select name="type" id="type" onchange="toggleFields()" class="form-select" 
+                                    style="border-radius: 12px; border: 2px solid #f1f3f5; padding: 12px; background-color: #f8f9fa;">
+                                <option value="member">👤 New Member</option>
+                                <option value="pdf">📄 PDF Document</option>
+                            </select>
+                        </div>
+
+                        <hr class="my-4" style="border-top: 2px dashed #eee;">
+
+                        <div id="memberFields" class="field-transition">
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Full Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter name" style="border-radius: 12px; border: 2px solid #eee; padding: 12px;">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Designation</label>
+                                <select name="role" class="form-select" style="border-radius: 12px; border: 2px solid #eee; padding: 12px;">
+                                    <option value="president">President</option>
+                                    <option value="secretary">Secretary</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold text-primary">Profile Image</label>
+                                <input type="file" name="image" class="form-control" style="border-radius: 12px; border: 2px solid #eee;">
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+                                    <label class="form-label small fw-bold">Phone</label>
+                                    <input type="text" name="phone" class="form-control" placeholder="Phone No." style="border-radius: 12px; border: 2px solid #eee; padding: 12px;">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label class="form-label small fw-bold">Email</label>
+                                    <input type="email" name="email" class="form-control" placeholder="Email Address" style="border-radius: 12px; border: 2px solid #eee; padding: 12px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="pdfFields" style="display:none;" class="field-transition">
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Document Title</label>
+                                <input type="text" name="title" class="form-control" placeholder="Ex: Report 2024" style="border-radius: 12px; border: 2px solid #eee; padding: 12px;">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-danger">Upload PDF File</label>
+                                <input type="file" name="pdf_file" class="form-control" accept=".pdf" style="border-radius: 12px; border: 2px solid #eee;">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-4 shadow" 
+                                style="border-radius: 15px; padding: 15px; font-weight: bold; background: linear-gradient(45deg, #0d6efd, #0052cc); border: none; transition: 0.3s;">
+                            🚀 UPLOAD NOW
+                        </button>
+                    </form>
+                </div>
+            </div> </div>
+    </div>
+</div>
+
+<script>
+function toggleFields() {
+    const type = document.getElementById('type').value;
+    const memberFields = document.getElementById('memberFields');
+    const pdfFields = document.getElementById('pdfFields');
+    
+    if (type === 'member') {
+        memberFields.style.display = 'block';
+        pdfFields.style.display = 'none';
+    } else {
+        memberFields.style.display = 'none';
+        pdfFields.style.display = 'block';
+    }
+}
+</script>
+{% endblock %}

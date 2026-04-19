@@ -24,8 +24,8 @@ def service(request):
 def admission(request):
     return render(request, 'form/addmision.html')
 
-def community(request):
-    return render(request, 'form/community.html')
+# def community(request):
+#     return render(request, 'form/community.html')
 
 def student_list(request):
     return render(request, 'form/student.html')
@@ -107,3 +107,54 @@ def add_yearly_achievement(request):
         return redirect('about')  # Redirect to the timeline list after adding
 
     return render(request, 'dashboard/about/add_achievement.html')
+
+
+
+
+# committee data upload view
+
+
+
+from django.shortcuts import render, redirect
+from .models import CommitteeMember, CommitteeDocument
+
+
+def upload_committee(request):
+    if request.method == 'POST':
+        upload_type = request.POST.get('type')
+
+        if upload_type == 'member':
+            CommitteeMember.objects.update_or_create(
+                role=request.POST.get('role'),  # president / secretary
+                defaults={
+                    'name': request.POST.get('name'),
+                    'image': request.FILES.get('image'),
+                    'phone': request.POST.get('phone'),
+                    'email': request.POST.get('email'),
+                }
+            )
+
+        elif upload_type == 'pdf':
+            CommitteeDocument.objects.create(
+                title=request.POST.get('title'),
+                pdf_file=request.FILES.get('pdf_file')
+            )
+
+        return redirect('community')
+
+    return render(request, 'dashboard/commitee/commitee_add.html')
+
+
+def community_view(request):
+    president = CommitteeMember.objects.filter(role='president').first()
+    secretary = CommitteeMember.objects.filter(role='secretary').first()
+    latest_docs = CommitteeDocument.objects.order_by('-created_at')[:2]
+
+    return render(request, 'form/community.html', {
+        'president': president,
+        'secretary': secretary,
+        'latest_docs': latest_docs,
+    })
+
+
+
