@@ -29,9 +29,6 @@ class YearlyAchivement(models.Model):
 
 # committee member model
 
-
-from django.db import models
-
 class CommitteeMember(models.Model):
     ROLE_CHOICES = [
         ('president', 'President'),
@@ -55,5 +52,7 @@ class CommitteeDocument(models.Model):
 
     def __str__(self):
         return self.title
+
+
 
 
