@@ -21,14 +21,14 @@ def service(request):
     return render(request, 'service.html')
 
 
-def admission(request):
-    return render(request, 'form/addmision.html')
+# def admission(request):
+#     return render(request, 'form/addmision.html')
 
 # def community(request):
 #     return render(request, 'form/community.html')
 
-def student_list(request):
-    return render(request, 'form/student.html')
+# def student_list(request):
+#     return render(request, 'form/student.html')
 
 def achivement(request):
     return render(request, 'form/achievement.html')
@@ -155,6 +155,159 @@ def community_view(request):
         'secretary': secretary,
         'latest_docs': latest_docs,
     })
+
+
+
+
+
+
+# from django.shortcuts import render, redirect, get_object_or_404
+# from .models import LibraryMember
+
+# # member registration view
+# from django.contrib import messages # এরর মেসেজ দেখানোর জন্য
+
+# def student_registration(request):
+#     if request.method == "POST":
+#         try:
+#             full_name = request.POST.get('full_name')
+#             email = request.POST.get('email')
+#             father_name = request.POST.get('father_name')
+#             mother_name = request.POST.get('mother_name')
+#             phone = request.POST.get('phone')
+#             dob = request.POST.get('dob')
+#             gender = request.POST.get('gender')
+#             address = request.POST.get('address')
+#             photo = request.FILES.get('photo')
+
+#             # ডাটা ক্রিয়েট করা
+#             LibraryMember.objects.create(
+#                 full_name=full_name, 
+#                 email=email, 
+#                 father_name=father_name,
+#                 mother_name=mother_name, 
+#                 phone=phone, 
+#                 dob=dob,
+#                 gender=gender, 
+#                 address=address, 
+#                 photo=photo
+#             )
+#             messages.success(request, "Registration successful!")
+#             return redirect('student_list') # নিশ্চিত করুন এই URL টি তৈরি আছে
+#         except Exception as e:
+#             print(f"Error: {e}") # আপনার পাইথন টার্মিনালে এরর দেখাবে
+#             messages.error(request, f"Failed to register: {e}")
+            
+#     return render(request, 'form/addmision.html')
+
+# def student_list(request):
+#     members = LibraryMember.objects.all().order_by('-created_at')
+#     return render(request, 'dashboard/students/student_list.html', {'members': members})
+
+# def student_detail(request, pk):
+#     student = get_object_or_404(LibraryMember, pk=pk)
+#     return render(request, 'dashboard/students/student_details.html', {'student': student})
+
+
+
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from .models import PendingRegistration, LibraryMember
+
+
+# 🟢 1. Student Registration (Form Submit)
+def student_registration(request):
+    if request.method == "POST":
+        PendingRegistration.objects.create(
+            full_name=request.POST.get('full_name'),
+            email=request.POST.get('email'),
+            father_name=request.POST.get('father_name'),
+            mother_name=request.POST.get('mother_name'),
+            phone=request.POST.get('phone'),
+            dob=request.POST.get('dob'),
+            gender=request.POST.get('gender'),
+            address=request.POST.get('address'),
+            photo=request.FILES.get('photo')
+        )
+
+        messages.success(request, "Registration submitted successfully! অপেক্ষা করুন অনুমোদনের জন্য।")
+        return redirect('student_registration')
+
+    return render(request, 'form/addmision.html')
+
+
+# 🟡 2. Pending List (Admin দেখবে)
+def pending_list(request):
+    pending_members = PendingRegistration.objects.filter(status='Pending').order_by('-created_at')
+
+    return render(request, 'dashboard/students/pending_list.html', {
+        'pending_list': pending_members
+    })
+
+
+# ✅ 3. Approve Student
+def approve_student(request, pk):
+    pending = get_object_or_404(PendingRegistration, id=pk)
+
+    # Duplicate email check
+    if LibraryMember.objects.filter(email=pending.email).exists():
+        messages.error(request, "এই ইমেইল দিয়ে আগে থেকেই সদস্য আছে!")
+        return redirect('pending_list')
+
+    # Main table এ save
+    LibraryMember.objects.create(
+        full_name=pending.full_name,
+        email=pending.email,
+        father_name=pending.father_name,
+        mother_name=pending.mother_name,
+        phone=pending.phone,
+        dob=pending.dob,
+        gender=pending.gender,
+        address=pending.address,
+        photo=pending.photo
+    )
+
+    # status update
+    pending.status = 'Approved'
+    pending.save()
+
+    # চাইলে delete করতে পারো (optional)
+    pending.delete()
+
+    messages.success(request, f"{pending.full_name} approved successfully!")
+    return redirect('pending_list')
+
+
+# ❌ 4. Reject Student
+def reject_student(request, pk):
+    pending = get_object_or_404(PendingRegistration, id=pk)
+
+    pending.delete()
+    messages.warning(request, f"{pending.full_name} has been rejected.")
+
+    return redirect('pending_list')
+
+
+# 🟢 5. Approved Student List
+def student_list(request):
+    members = LibraryMember.objects.all().order_by('-created_at')
+
+    return render(request, 'dashboard/students/student_list.html', {
+        'members': members
+    })
+
+
+# 🔍 6. Student Detail
+def student_detail(request, pk):
+    student = get_object_or_404(LibraryMember, pk=pk)
+
+    return render(request, 'dashboard/students/student_details.html', {
+        'student': student
+    })
+
+
 
 
 

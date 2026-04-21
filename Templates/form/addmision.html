@@ -1,234 +1,147 @@
 {% extends "base.html" %}
-{% block title %}Student Admission Form{% endblock %}
+{% block title %}Library Membership Form{% endblock %}
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
-    :root {
-        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --secondary-gradient: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
-        --glass-bg: rgba(255, 255, 255, 0.95);
-    }
-
-    .admission-page {
-        font-family: 'Inter', 'Poppins', sans-serif;
-        background: #f4f7f6;
-        background-image: 
-            radial-gradient(at 0% 0%, rgba(102, 126, 234, 0.15) 0px, transparent 50%),
-            radial-gradient(at 100% 100%, rgba(118, 75, 162, 0.15) 0px, transparent 50%);
-        min-height: 100vh;
-    }
-
-    /* Section Heading */
-    .section-header h2 {
-        color: #2d3436;
-        letter-spacing: -1px;
-    }
-
-    /* Card Design */
-    .admission-card {
-        background: var(--glass-bg);
-        border: none;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        overflow: hidden;
-    }
-
-    .form-header-gradient {
-        background: var(--primary-gradient);
-        padding: 40px 20px;
-        color: white;
-    }
-
-    /* Input Styling */
-    .form-label {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: #4b5563;
-        margin-bottom: 8px;
-    }
-
-    .input-group-text {
-        background-color: #f9fafb;
-        border-right: none;
-        color: #6b7280;
-    }
-
-    .form-control, .form-select {
-        border: 1px solid #e5e7eb;
-        padding: 12px 15px;
-        border-left: none;
-        transition: all 0.3s ease;
-    }
-
-    .form-control:focus, .form-select:focus {
-        box-shadow: none;
-        border-color: #667eea;
-        background-color: #fff;
-    }
-
-    .input-group:focus-within .input-group-text {
-        border-color: #667eea;
-        color: #667eea;
-        background-color: #fff;
-    }
-
-    /* Floating Animation for Submit Button */
-    .btn-submit {
-        background: var(--primary-gradient);
-        border: none;
-        padding: 14px 40px;
-        border-radius: 50px;
-        color: white;
-        font-weight: 600;
-        letter-spacing: 1px;
-        transition: all 0.4s ease;
-        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-    }
-
-    .btn-submit:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
-        color: #fff;
-    }
-
-    /* File Input Styling */
-    .custom-file-upload {
-        border: 2px dashed #d1d5db;
-        border-radius: 12px;
-        padding: 20px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .custom-file-upload:hover {
-        border-color: #667eea;
-        background: rgba(102, 126, 234, 0.05);
-    }
-
-    .section-title {
-        border-left: 4px solid #667eea;
-        padding-left: 15px;
-        margin-bottom: 25px;
-        color: #1f2937;
-    }
-</style>
-
-<div class="admission-page py-5">
-    <div class="container">
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-7 text-center section-header">
-                <span class="badge bg-danger-subtle bg-soft-primary text-primary px-3 py-2 rounded-pill mb-3" style="background: rgba(102,126,234,0.1)">Admission Open 2026</span>
-                <h2 class="display-5 fw-bold mb-3">Library Membership</h2>
-                <p class="text-muted lead">Fill out the form below to become a registered member of our central library and gain access to thousands of resources.</p>
-            </div>
+    <style>
+                .committee-hero {
+            background: linear-gradient(135deg, #1a2332 0%, #2d3e50 100%);
+        }
+        .leader-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .leader-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .animate-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s forwards;
+        }
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+<section class="committee-hero py-5 py-lg-10 text-white text-center position-relative overflow-hidden" style="background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);">
+    <div class="container py-4">
+        <div class="animate-up">
+            <h1 class="display-3 fw-bold mb-3">Unlock Your Potential</h1>
+            <p class="lead opacity-75 mx-auto" style="max-width: 700px;">
+                Your journey to academic excellence starts here. Register today for a membership and explore our extensive collection of books and digital journals.
+            </p>
         </div>
+    </div>
+</section>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-                <div class="card admission-card rounded-4">
-                    <div class="form-header-gradient text-center">
-                        <i class="fa-solid fa-graduation-cap fa-3x mb-3"></i>
-                        <h3 class="fw-bold mb-0">Admission Application</h3>
-                        <p class="opacity-75 mb-0 mt-2 small">Ensure all details match your official documents</p>
-                    </div>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            
+            <div class="card shadow border-0 overflow-hidden">
+                
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <i class="fa-solid fa-book-bookmark fa-3x mb-2"></i>
+                    <h2 class="fw-bold mb-0">Library Membership Form</h2>
+                    <p class="mb-0 text-white-50">Join our community of readers and learners</p>
+                </div>
 
-                    <div class="card-body p-4 p-md-5">
-                        <form method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            
-                            <h5 class="section-title fw-bold">Personal Details</h5>
-                            
-                            <div class="row">
-                                <div class="col-12 mb-4">
-                                    <label class="form-label">Full Name of Student</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
-                                        <input type="text" class="form-control" placeholder="e.g. John Doe" required>
-                                    </div>
-                                </div>
+                <div class="card-body p-4 p-md-5 bg-light">
+                    <form method="POST" action="{% url 'student_registration' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
 
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label">Father's Name</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
-                                        <input type="text" class="form-control" placeholder="Enter father's name" required>
-                                    </div>
-                                </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <h4 class="text-primary mb-0 fw-bold">Personal Information</h4>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Full Name of Student</label>
+                                <input type="text" class="form-control form-control-lg border-2" name="full_name" placeholder="John Doe" required>
+                            </div>
 
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label">Mother's Name</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-person-breastfeeding"></i></span>
-                                        <input type="text" class="form-control" placeholder="Enter mother's name" required>
-                                    </div>
-                                </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Email Address</label>
+                                <input type="email" class="form-control form-control-lg border-2" name="email" placeholder="john.doe@example.com" required>
+                            </div>
 
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label">Phone Number</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
-                                        <input type="tel" class="form-control" placeholder="01XXXXXXXXX" required>
-                                    </div>
-                                </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Father's Name</label>
+                                <input type="text" class="form-control border-2" name="father_name" required>
+                            </div>
 
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label">Date of Birth</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                        <input type="date" class="form-control" required>
-                                    </div>
-                                </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Mother's Name</label>
+                                <input type="text" class="form-control border-2" name="mother_name" required>
+                            </div>
 
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label">Gender</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-venus-mars"></i></span>
-                                        <select class="form-select" required>
-                                            <option selected disabled>Choose gender...</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Other</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label">Full Address</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
-                                        <input type="text" class="form-control" placeholder="House, Street, City" required>
-                                    </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Phone Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary text-white border-primary"><i class="fa-solid fa-phone"></i></span>
+                                    <input type="tel" class="form-control border-2" name="phone" placeholder="01XXXXXXXXX" required>
                                 </div>
                             </div>
 
-                            <h5 class="section-title fw-bold mt-3">Documents</h5>
-                            <div class="mb-5">
-                                <label class="form-label">Passport Size Photograph</label>
-                                <div class="custom-file-upload shadow-sm">
-                                    <i class="fa-solid fa-cloud-arrow-up fa-2x text-muted mb-2"></i>
-                                    <p class="small text-muted mb-2">Click to upload or drag and drop</p>
-                                    <input type="file" class="form-control" accept="image/*" required>
-                                    <span class="text-xs text-secondary">Accepted formats: JPG, PNG (Max 2MB)</span>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Date of Birth</label>
+                                <input type="date" class="form-control border-2" name="dob" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Gender</label>
+                                <select class="form-select border-2" name="gender" required>
+                                    <option value="" selected disabled>Choose Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Full Address</label>
+                                <input type="text" class="form-control border-2" name="address" placeholder="House, Street, City" required>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center mt-5 mb-4">
+                            <div class="bg-info text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-file-arrow-up"></i>
+                            </div>
+                            <h4 class="text-info mb-0 fw-bold">Required Documents</h4>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <div class="p-4 border border-2 border-info border-dashed rounded bg-white text-center">
+                                    <label class="form-label fw-bold d-block">Passport Size Photograph</label>
+                                    <input type="file" class="form-control mt-2" name="photo" accept="image/*" required>
+                                    <div class="form-text text-info mt-2">Accepted formats: JPG, PNG (Max size: 2MB)</div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="text-center pt-3 border-top mt-4">
-                                <p class="small text-muted mb-4"><i class="fa-solid fa-circle-info me-2"></i>By submitting, you agree to our library terms and conditions.</p>
-                                <button type="submit" class="btn btn-submit btn-lg px-5">
-                                    Complete Registration <i class="fa-solid fa-paper-plane ms-2"></i>
-                                </button>
-                            </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 py-3 fw-bold shadow">
+                                REGISTER NOW <i class="fa-solid fa-paper-plane ms-2"></i>
+                            </button>
+                            <p class="text-muted mt-3 small">
+                                <i class="fa-solid fa-circle-info me-1"></i> 
+                                By submitting, you agree to follow the library's rules & regulations.
+                            </p>
+                        </div>
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-
 {% endblock %}

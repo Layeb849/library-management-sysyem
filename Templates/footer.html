@@ -156,10 +156,10 @@
                 <div class="mt-4">
                     <h6>Social-links</h6>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=100089847265268" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://x.com/PattokBondu2023" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a target="_blank" href="https://www.facebook.com/profile.php?id=100089847265268"><i class="fab fa-facebook-f"></i></a>
+                        <a target="_blank" href="https://x.com/PattokBondu2023"><i class="fab fa-twitter"></i></a>
+                        <a target="_blank" href="#"><i class="fab fa-instagram"></i></a>
+                        <a target="_blank" href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
@@ -169,10 +169,10 @@
             <div class="footer-card">
                 <h5 class="card-title">Quick Explore</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About Library</a></li>
-                    <li><a href="{% url 'home' %}">Digital Archive</a></li>
-                    <li><a href="{% url 'community' %}">Membership</a></li>
+                    <li><a href="{% url 'student_list' %}">Student List</a></li>
+                    <li><a href="{% url 'student_registration' %}">Membership</a></li>
                     <li><a href="{% url 'newcollection' %}">Latest Collections</a></li>
                 </ul>
             </div>
@@ -184,9 +184,9 @@
                 <ul class="list-unstyled">
                     <li><a href="{% url 'newcollection' %}">Book Catalog</a></li>
                     <li><a href="#">Research Papers</a></li>
-                    <li><a href="#">E-Journals</a></li>
+                    <li><a href="{% url 'student_list' %}">E-Journals</a></li>
                     <li><a href="#">Study Rooms</a></li>
-                    <li><a href="#">Ask a Librarian</a></li>
+                    <li><a href="{% url 'contact' %}">Ask a Librarian</a></li>
                 </ul>
             </div>
         </div>
