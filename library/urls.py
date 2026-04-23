@@ -11,10 +11,10 @@ urlpatterns = [
     path('pathagar/community/', views.community_view, name='community'),
 
     path('pathagar/achivement/', views.achivement, name='achivement'),
-    path('pathagar/achivementDetails/', views.achivementDetails, name='achivementDetails'),
-    path('pathagar/studentDetails/', views.studentDetails, name='studentDetails'),
-    path('pathagar/newcollection/', views.newcollection, name='newcollection'),
-    path('pathagar/collectionDetails/', views.collectionDetails, name='collectionDetails'),
+    # path('pathagar/achivementDetails/', views.achivementDetails, name='achivementDetails'),
+    # path('pathagar/studentDetails/', views.studentDetails, name='studentDetails'),
+    # path('pathagar/newcollection/', views.newcollection, name='newcollection'),
+    # path('pathagar/collectionDetails/', views.collectionDetails, name='collectionDetails'),
 
     path('pathagar/write_review/', views.write_review, name='write_review'),
     path('pathagar/preview/create/', views.review_create, name='review_create'),
@@ -35,5 +35,13 @@ urlpatterns = [
     path('pathagar/students/', views.student_list, name='student_list'),
 
     path('pathagar/student/profile/<int:pk>/', views.student_detail, name='student_detail'),
+
+
+
+    path('pathagar/book/collection/', views.book_list, name='book_list'),
+
+    path('pathagar/book/details/<int:pk>/', views.book_detail, name='book_detail'),
+
+    path('pathagar/upload/book/', views.add_book, name='add_book'),
     
 ]

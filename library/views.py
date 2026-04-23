@@ -33,17 +33,17 @@ def service(request):
 def achivement(request):
     return render(request, 'form/achievement.html')
 
-def achivementDetails(request):
-    return render(request, 'form/achiveDetails.html')
+# def achivementDetails(request):
+#     return render(request, 'form/achiveDetails.html')
 
-def studentDetails(request):
-    return render(request, 'form/studentDetails.html')
+# def studentDetails(request):
+#     return render(request, 'form/studentDetails.html')
 
-def newcollection(request):
-    return render(request, 'form/newcollection.html')
+# def newcollection(request):
+#     return render(request, 'form/newcollection.html')
 
-def collectionDetails(request):
-    return render(request, 'form/collectionDetails.html')
+# def collectionDetails(request):
+#     return render(request, 'form/collectionDetails.html')
 
 def write_review(request):
     return render(request, 'form/review.html')
@@ -309,7 +309,40 @@ def student_detail(request, pk):
 
 
 
+# Book Views
+from .models import Book
 
+def book_list(request):
+    books = Book.objects.all().order_by('-created_at')[:6]
+    return render(request, 'form/bookCollection.html', {'books': books})
+
+def book_detail(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    return render(request, 'form/bookDetails.html', {'book': book})
+
+
+def add_book(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        category = request.POST.get('category')
+        description = request.POST.get('description')
+        pages = request.POST.get('pages')
+        rating = request.POST.get('rating')
+        image = request.FILES.get('book_image')
+
+        Book.objects.create(
+            title=title,
+            author=author,
+            category=category,
+            description=description,
+            pages=pages,
+            rating=rating,
+            image=image
+        )
+        return redirect('book_list')
+
+    return render(request, 'dashboard/book/add_book.html')
 
 
 

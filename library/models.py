@@ -127,3 +127,31 @@ class LibraryMember(MemberBase):
 
     def __str__(self):
         return self.full_name
+    
+
+
+
+
+# book details model
+
+class Book(models.Model):
+    CATEGORY_CHOICES = [
+        ('Fiction', 'Fiction'),
+        ('Non-Fiction', 'Non-Fiction'),
+        ('Science', 'Science'),
+    ]
+    
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    description = models.TextField()
+    pages = models.IntegerField()
+    rating = models.FloatField(default=4.5)
+    stock_status = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='books/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+
