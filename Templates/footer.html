@@ -1,233 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central Library Footer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        .container-page{
-            background-color: #0f172a !important; /* Dark blue background */
-            color: #cbd5e1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<footer class="container-fluid py-5" style="background-color: #0f172a; color: #cbd5e1; font-family: 'Segoe UI', sans-serif;">
+    <div class="container">
+        
+        <div class="mb-5 pb-3" style="border-top: 2px solid; border-image: linear-gradient(to right, #38bdf8, #818cf8, transparent) 1;">
+            <h2 class="text-white fw-bold mt-3">Pathokbondhu Pathagar</h2>
+            <p class="text-secondary small">Providing a Gateway to Knowledge. Join us in a vast world of physical and digital resources.</p>
+        </div>
 
+        <div class="row g-4">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="footer-card-box">
+                    <h5 class="text-white fw-semibold mb-4 title-underline">Hello Library</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-3"><i class="fas fa-map-marker-alt text-info me-2"></i> Mousha, Mohammadpur, Magura</li>
+                        <li class="mb-3"><i class="fas fa-phone-alt text-info me-2"></i> +880 1795509561</li>
+                        <li class="mb-3"><i class="fas fa-envelope text-info me-2"></i> pattokbondu@gmail.com</li>
+                    </ul>
+                    <div class="mt-4">
+                        <div class="d-flex gap-2 social-icons">
+                            <a target="_blank" href="#" class="btn btn-primary btn-sm"><i class="fab fa-facebook-f"></i></a>
+                            <a target="_blank" href="#" class="btn btn-info btn-sm text-white"><i class="fab fa-twitter"></i></a>
+                            <a target="_blank" href="#" class="btn btn-success btn-sm"><i class="fab fa-instagram"></i></a>
+                            <a target="_blank" href="#" class="btn btn-danger btn-sm"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        .main-container {
-            max-width: 1100px;
-            margin: 50px auto;
-            padding: 20px;
-        }
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="footer-card-box">
+                    <h5 class="text-white fw-semibold mb-4 title-underline">Quick Explore</h5>
+                    <ul class="list-unstyled footer-links small">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-reset">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-reset">About Library</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-reset">Membership</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-reset">Latest Collections</a></li>
+                    </ul>
+                </div>
+            </div>
 
-        .top-link {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-        }
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="footer-card-box">
+                    <h5 class="text-white fw-semibold mb-4 title-underline">Resources</h5>
+                    <ul class="list-unstyled footer-links small">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-reset">Donation List</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-reset">History</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-reset">E-Journals</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-reset">Ask a Librarian</a></li>
+                    </ul>
+                </div>
+            </div>
 
-        .top-link a {
-            color: #38bdf8;
-            text-decoration: none;
-        }
-
-        .brand-section {
-            border-top: 2px solid;
-            border-image: linear-gradient(to right, #38bdf8, #818cf8, transparent) 1;
-            padding-top: 20px;
-            margin-bottom: 40px;
-        }
-
-        .brand-section h2 {
-            color: #fff;
-            font-weight: bold;
-        }
-
-        /* Card Styling */
-        .footer-card {
-            background: linear-gradient(145deg, #1e293b, #111827);
-            border-radius: 8px;
-            padding: 25px;
-            height: 100%;
-            border-left: 3px solid #38bdf8;
-        }
-
-        .card-title {
-            color: #fff;
-            font-weight: 600;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .card-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 2px;
-            background: #38bdf8;
-        }
-
-        .list-unstyled li {
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-
-        .list-unstyled li a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .list-unstyled li a:hover {
-            color: #38bdf8;
-            padding-left: 5px;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: #375b8fff;
-            color: #fff;
-            border-radius: 4px;
-            margin-right: 8px;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .social-links li a:hover {
-            color: #ffffff;
-            background-color: #2563eb; /* elegant blue */
-            transform: translateY(-3px);
-        }
-
-        .hours-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .text-cyan { color: #38bdf8; }
-        .text-red { color: #ef4444; }
-
-        /* Bottom Footer */
-        .footer-bottom {
-            border-top: 1px solid #334155;
-            margin-top: 50px;
-            padding: 20px;
-            font-size: 0.85rem;
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 8px;
-        }
-
-        .footer-bottom-gradient {
-            height: 2px;
-            background: linear-gradient(to right, #38bdf8, #ec4899, transparent);
-            margin-bottom: 15px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container-page">
-    <div class="container container-fluid">
-    
-    <div class="brand-section">
-        <h2>Pathokbondhu Pathagar</h2>
-        <p class="text-secondary">Providing a Gateway to Knowledge. Join us <br> in a vast world of physical and digital resources.</p>
-    </div>
-
-    <div class="row g-4">
-        <div class="col-md-3">
-            <div class="footer-card">
-                <h5 class="card-title">Hello Library</h5>
-                <ul class="list-unstyled">
-                    <li><i class="fas fa-map-marker-alt text-cyan me-2"></i> Mousha, Mohammadpur, Magura</li>
-                    <li><i class="fas fa-phone-alt text-cyan me-2"></i> +880 1795509561</li>
-                    <li><i class="fas fa-envelope text-cyan me-2"></i> pattokbondu2023@gmail.com</li>
-                </ul>
-                <div class="mt-4">
-                    <h6>Social-links</h6>
-                    <div class="social-links">
-                        <a target="_blank" href="https://www.facebook.com/profile.php?id=100089847265268"><i class="fab fa-facebook-f"></i></a>
-                        <a target="_blank" href="https://x.com/PattokBondu2023"><i class="fab fa-twitter"></i></a>
-                        <a target="_blank" href="#"><i class="fab fa-instagram"></i></a>
-                        <a target="_blank" href="#"><i class="fab fa-linkedin-in"></i></a>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="footer-card-box">
+                    <h5 class="text-white fw-semibold mb-4 title-underline">Library Hours</h5>
+                    <div class="d-flex justify-content-between small mb-2">
+                        <span class="text-info">Mon - Fri:</span>
+                        <span>09:00 - 20:00</span>
+                    </div>
+                    <div class="d-flex justify-content-between small mb-2">
+                        <span class="text-info">Saturday:</span>
+                        <span>10:00 - 18:00</span>
+                    </div>
+                    <div class="d-flex justify-content-between small mb-2">
+                        <span class="text-danger">Sunday:</span>
+                        <span>Closed</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="footer-card">
-                <h5 class="card-title">Quick Explore</h5>
-                <ul class="list-unstyled">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About Library</a></li>
-                    <li><a href="{% url 'student_list' %}">Student List</a></li>
-                    <li><a href="{% url 'student_registration' %}">Membership</a></li>
-                    <li><a href="{% url 'book_list' %}">Latest Collections</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="footer-card">
-                <h5 class="card-title">Ulist Unsourced</h5>
-                <ul class="list-unstyled">
-                    <li><a href="">Dan list</a></li>
-                    <li><a href="#">history</a></li>
-                    <li><a href="{% url 'student_list' %}">E-Journals</a></li>
-                    <li><a href="#">Study Rooms</a></li>
-                    <li><a href="{% url 'contact' %}">Ask a Librarian</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="footer-card">
-                <h5 class="card-title">Library Hours</h5>
-                <div class="hours-row">
-                    <span class="text-cyan">Monday - Friday:</span>
-                    <span>09:00 - 20:00</span>
+        <div class="mt-5 p-4 rounded-3 text-center" style="background: rgba(30, 41, 59, 0.5); border-top: 1px solid #334155;">
+            <div class="row align-items-center small">
+                <div class="col-12 col-md-6 text-md-start mb-3 mb-md-0">
+                    <p class="mb-0">© 2026 Pathokbondhu Pathagar. Developed by Layeb.</p>
                 </div>
-                <div class="hours-row">
-                    <span class="text-cyan">Saturday:</span>
-                    <span>10:00 - 18:00</span>
+                <div class="col-6 col-md-3 text-center">
+                    <a href="#" class="text-decoration-none text-reset">Privacy</a>
                 </div>
-                <div class="hours-row">
-                    <span class="text-red">Sunday:</span>
-                    <span>Closed</span>
+                <div class="col-6 col-md-3 text-end text-md-end">
+                    <a href="#" class="text-decoration-none text-reset">Terms</a>
                 </div>
-                <p class="small mt-3 text-secondary">* Closed on public holidays.</p>
             </div>
         </div>
     </div>
+</footer>
 
-    <div class="footer-bottom">
-        <div class="footer-bottom-gradient"></div>
-        <div class="row align-items-center">
-            <div class="col-md-6 text-md-start">
-                <p class="mb-0">© 2023 Pathokbondhu Pathagar. Design and Developed by Layeb.</p>
-            </div>
-            <div class="col-md-3 text-center">
-                <p class="mb-1">Privacy Policy</p>
-            </div>
-            <div class="col-md-3 text-end">
-                <p class="mb-1">Terms of Service</p>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+<style>
+    /* কার্ডের কমন স্টাইল */
+    .footer-card-box {
+        height: 100%;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 3px solid #38bdf8;
+        background: linear-gradient(145deg, #1e293b, #111827);
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    .title-underline {
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .title-underline::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background: #38bdf8;
+    }
+
+    .footer-links a:hover {
+        color: #38bdf8 !important;
+        padding-left: 5px;
+        transition: 0.3s;
+    }
+
+    /* ৩৩০ পিক্সেল বা তার ছোট স্ক্রিনের জন্য স্পেশাল সেটিংস */
+    @media (max-width: 400px) {
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .footer-card-box {
+            padding: 15px;
+        }
+        h2 { font-size: 1.5rem; }
+    }
+</style>

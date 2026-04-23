@@ -1,5 +1,3 @@
-
-
 {% extends "base.html" %}
 {% block title %}Book Details | {{ book.title }}{% endblock %}
 {% load static %}
@@ -7,87 +5,82 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<div class="bg-light min-vh-100 py-5">
-    <div class="container">
+<div class="bg-light min-vh-100 py-3 py-md-5">
+    <div class="container px-2 px-md-3">
+        
         <nav aria-label="breadcrumb" class="mb-4">
-            <a href="{% url 'book_list' %}" class="text-decoration-none btn btn-primary rounded-3 text text-white fw-medium small">
+            <a href="{% url 'book_list' %}" class="text-decoration-none btn btn-primary rounded-3 text-white fw-medium small shadow-sm px-3">
                 <i class="fas fa-arrow-left me-2"></i>Back to Collection
             </a>
         </nav>
 
-        <div class="card border-0 shadow-lg rounded-5 overflow-hidden">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
             <div class="card-body p-0">
                 <div class="row g-0">
                     
-                    <div class="col-lg-5 bg-white p-4 p-md-5 border-end">
+                    <div class="col-lg-5 bg-white p-3 p-md-5 border-end">
                         <div class="text-center position-relative">
-                            <span class="position-absolute top-0 start-0 badge bg-primary px-3 py-2 rounded-pill shadow-sm">
+                            <span class="position-absolute top-0 start-0 badge bg-primary px-3 py-2 rounded-pill shadow-sm x-small">
                                 <i class="fas fa-star me-1"></i> Featured
                             </span>
                             
                             <img src="{{ book.image.url }}" 
                                  alt="{{ book.title }}" 
-                                 class="img-fluid rounded-4 shadow-lg mb-4 hover-zoom transition-all" 
-                                 style="max-height: 450px; width: auto; object-fit: cover;">
+                                 class="img-fluid rounded-4 shadow-lg mb-4 hover-zoom transition-all book-img-main">
                             
-                            <div class="d-grid gap-2 d-md-flex justify-content-center mt-4">
-                                <button class="btn btn-success btn-lg rounded-pill px-4 py-2 shadow-sm fw-bold">
+                            <div class="d-grid gap-2 d-md-flex justify-content-center mt-2">
+                                <button class="btn btn-success btn-md rounded-pill px-4 py-2 shadow-sm fw-bold">
                                     <i class="fas fa-bookmark me-2"></i>Reserve Now
                                 </button>
-                                <button class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-2 fw-bold">
+                                <button class="btn btn-outline-secondary rounded-pill px-3 py-2 fw-bold d-none d-sm-inline-block">
                                     <i class="fas fa-share-nodes"></i>
                                 </button>
                             </div>
                             
-                            <p class="text-muted small mt-3">
+                            <p class="text-muted x-small mt-3 mb-0">
                                 <i class="fas fa-info-circle me-1"></i> 
                                 {% if book.stock_status %} Available in library {% else %} Currently Out of Stock {% endif %}
                             </p>
                         </div>
                     </div>
 
-                    <div class="col-lg-7 p-4 p-md-5 bg-white">
+                    <div class="col-lg-7 p-3 p-md-5 bg-white">
                         <div class="mb-4">
-                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3 fw-bold text-uppercase ls-1">New Arrival</span>
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3 fw-bold text-uppercase ls-1 x-small">New Arrival</span>
                             
-                            <h1 class="display-5 fw-black text-dark mb-1">{{ book.title }}</h1>
-                            <p class="h4 text-primary fw-medium">by {{ book.author }}</p>
+                            <h1 class="book-title fw-black text-dark mb-1">{{ book.title }}</h1>
+                            <p class="h5 text-primary fw-medium mb-3">by {{ book.author }}</p>
                             
-                            <div class="d-flex align-items-center mt-3">
-                                <div class="text-warning me-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
+                            <div class="d-flex align-items-center mt-2">
+                                <div class="text-warning me-2 small">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                                 </div>
-                                <span class="text-muted fw-semibold">({{ book.rating }}/10 Rating)</span>
+                                <span class="text-muted fw-semibold x-small">({{ book.rating }}/10 Rating)</span>
                             </div>
                         </div>
 
-                        <div class="mb-5">
-                            <h5 class="fw-bold text-dark border-start border-primary border-4 ps-3 mb-3">Book Summary</h5>
-                            <p class="text-secondary lh-lg fs-6">
+                        <div class="mb-4">
+                            <h5 class="fw-bold text-dark border-start border-primary border-4 ps-3 mb-3 small-title">Book Summary</h5>
+                            <p class="text-secondary lh-base book-desc-text">
                                 {{ book.description }}
                             </p>
                         </div>
 
-                        <h5 class="fw-bold text-dark mb-3">Technical Specifications</h5>
-                        <div class="table-responsive rounded-4 border overflow-hidden shadow-sm">
-                            <table class="table table-hover mb-0">
+                        <h5 class="fw-bold text-dark mb-3 small-title">Technical Specifications</h5>
+                        <div class="table-responsive rounded-3 border overflow-hidden shadow-sm mb-4">
+                            <table class="table table-hover mb-0 x-small-table">
                                 <tbody class="bg-white">
                                     <tr>
-                                        <td class="bg-light-subtle fw-bold text-muted ps-4 py-3" style="width: 35%;">Category</td>
-                                        <td class="ps-4 py-3 fw-semibold">{{ book.category }}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="bg-light-subtle fw-bold text-muted ps-4 py-3">Page Count</td>
-                                        <td class="ps-4 py-3 fw-semibold">{{ book.pages }} Pages</td>
+                                        <td class="bg-light-subtle fw-bold text-muted ps-3 py-2" style="width: 40%;">Category</td>
+                                        <td class="ps-3 py-2 fw-semibold">{{ book.category }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="bg-light-subtle fw-bold text-muted ps-4 py-3">Status</td>
-                                        <td class="ps-4 py-3 fw-semibold {% if book.stock_status %}text-success{% else %}text-danger{% endif %}">
+                                        <td class="bg-light-subtle fw-bold text-muted ps-3 py-2">Page Count</td>
+                                        <td class="ps-3 py-2 fw-semibold">{{ book.pages }} Pages</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bg-light-subtle fw-bold text-muted ps-3 py-2">Status</td>
+                                        <td class="ps-3 py-2 fw-semibold {% if book.stock_status %}text-success{% else %}text-danger{% endif %}">
                                             {% if book.stock_status %}In Stock{% else %}Out of Stock{% endif %}
                                         </td>
                                     </tr>
@@ -96,11 +89,11 @@
                         </div>
 
                         {% if book.stock_status %}
-                        <div class="mt-4 p-3 bg-success-subtle border border-success-subtle rounded-4 d-flex align-items-center">
-                            <i class="fas fa-check-circle text-success fs-4 me-3"></i>
+                        <div class="p-3 bg-success-subtle border border-success-subtle rounded-3 d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success fs-5 me-3"></i>
                             <div>
-                                <h6 class="mb-0 fw-bold text-success">Available for Borrowing</h6>
-                                <p class="mb-0 small text-success opacity-75">You can reserve this book and pick it up within 24 hours.</p>
+                                <h6 class="mb-0 fw-bold text-success small">Available for Borrowing</h6>
+                                <p class="mb-0 x-small text-success opacity-75">Reserve and pick up within 24 hours.</p>
                             </div>
                         </div>
                         {% endif %}
@@ -111,13 +104,17 @@
         </div>
 
         <div class="mt-5 pt-4 text-center">
-            <h4 class="fw-bold text-dark mb-4">Quick View</h4>
+            <h4 class="fw-bold text-dark mb-4 small-title">Quick View</h4>
             <div class="row g-3 justify-content-center">
-                <div class="col-4 col-md-2">
-                    <img src="{{ book.image.url }}" class="img-fluid rounded shadow-sm opacity-75 hover-opacity-100 transition-all" style="cursor: pointer; aspect-ratio:2/3; object-fit:cover;">
+                <div class="col-4 col-sm-3 col-md-2">
+                    <div class="position-relative overflow-hidden rounded-3 shadow-sm border">
+                        <img src="{{ book.image.url }}" class="img-fluid opacity-75 hover-opacity-100 transition-all thumb-img" 
+                             style="cursor: pointer; aspect-ratio: 2/3; object-fit: cover;">
+                    </div>
                 </div>
-            </div>
+                </div>
         </div>
+
     </div>
 </div>
 
@@ -127,154 +124,29 @@
     .transition-all { transition: all 0.3s ease; }
     .hover-zoom:hover { transform: scale(1.03); }
     .hover-opacity-100:hover { opacity: 1 !important; }
-    
-    /* Mobile optimization for tables */
-    @media (max-width: 768px) {
-        .display-5 { font-size: 2rem; }
-        .card-body { padding: 10px; }
+
+    .book-img-main {
+        max-height: 420px;
+        width: auto;
+        max-width: 100%;
+    }
+
+    /* ৩৩০ পিক্সেল এবং মোবাইল রেসপন্সিভনেস */
+    @media (max-width: 400px) {
+        .book-title { font-size: 1.4rem !important; line-height: 1.2; }
+        .small-title { font-size: 1rem !important; }
+        .book-desc-text { font-size: 0.85rem !important; line-height: 1.5; }
+        .x-small-table { font-size: 0.75rem !important; }
+        .x-small { font-size: 0.7rem !important; }
+        .p-3 { padding: 15px !important; }
+        .book-img-main { max-height: 280px; }
+    }
+
+    @media (max-width: 330px) {
+        .container { padding-left: 8px; padding-right: 8px; }
+        .btn { padding: 8px 12px; font-size: 0.75rem; }
+        .badge { font-size: 0.6rem !important; }
     }
 </style>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-{% comment %} {% extends "base.html" %}
-{% block title %}Book Details | {{ book.title }}{% endblock %}
-{% load static %}
-{% block content %}
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<div class="bg-light min-vh-100 py-5">
-    <div class="container">
-        <nav aria-label="breadcrumb" class="mb-4">
-            <a href="javascript:history.back()" class="text-decoration-none text-muted fw-medium small">
-                <i class="fas fa-arrow-left me-2"></i>Back to Collection
-            </a>
-        </nav>
-
-        <div class="card border-0 shadow-lg rounded-5 overflow-hidden">
-            <div class="card-body p-0">
-                <div class="row g-0">
-                    
-                    <div class="col-lg-5 bg-white p-4 p-md-5 border-end">
-                        <div class="text-center position-relative">
-                            <span class="position-absolute top-0 start-0 badge bg-primary px-3 py-2 rounded-pill shadow-sm">
-                                <i class="fas fa-star me-1"></i> Featured
-                            </span>
-                            
-                            <img src="{% static 'image/aboutImage/11.jpg' %}" 
-                                 alt="Book Cover" 
-                                 class="img-fluid rounded-4 shadow-lg mb-4 hover-zoom transition-all" 
-                                 style="max-height: 450px; width: auto; object-fit: cover;">
-                            
-                            <div class="d-grid gap-2 d-md-flex justify-content-center mt-4">
-                                <button class="btn btn-success btn-lg rounded-pill px-4 py-2 shadow-sm fw-bold">
-                                    <i class="fas fa-bookmark me-2"></i>Reserve Now
-                                </button>
-                                <button class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-2 fw-bold">
-                                    <i class="fas fa-share-nodes"></i>
-                                </button>
-                            </div>
-                            <p class="text-muted small mt-3"><i class="fas fa-info-circle me-1"></i> 3 copies remaining in library</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-7 p-4 p-md-5 bg-white">
-                        <div class="mb-4">
-                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3 fw-bold text-uppercase ls-1">New Arrival</span>
-                            <h1 class="display-5 fw-black text-dark mb-1">Himur Hate Koyekti Nilpodmo</h1>
-                            <p class="h4 text-primary fw-medium">by Humayun Ahmed</p>
-                            
-                            <div class="d-flex align-items-center mt-3">
-                                <div class="text-warning me-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-muted fw-semibold">(4.5/5 from 120 reviews)</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-5">
-                            <h5 class="fw-bold text-dark border-start border-primary border-4 ps-3 mb-3">Book Summary</h5>
-                            <p class="text-secondary lh-lg fs-6">
-                                One of the most beloved novels from Humayun Ahmed's legendary 'Himu' series. Himu, wearing his signature yellow panjabi, wanders the city streets in a quest for blue lotuses. The story is a masterful blend of his peculiar logic and his unique relationships with the people around him. An essential read for those seeking a transcendental experience.
-                            </p>
-                        </div>
-
-                        <h5 class="fw-bold text-dark mb-3">Technical Specifications</h5>
-                        <div class="table-responsive rounded-4 border overflow-hidden shadow-sm">
-                            <table class="table table-hover mb-0">
-                                <tbody class="bg-white">
-                                    <tr>
-                                        <td class="bg-light-subtle fw-bold text-muted ps-4 py-3" style="width: 35%;">Category</td>
-                                        <td class="ps-4 py-3 fw-semibold">Fiction / Novel</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-light-subtle fw-bold text-muted ps-4 py-3">Language</td>
-                                        <td class="ps-4 py-3 fw-semibold">Bengali</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-light-subtle fw-bold text-muted ps-4 py-3">Page Count</td>
-                                        <td class="ps-4 py-3 fw-semibold">160 Pages</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-light-subtle fw-bold text-muted ps-4 py-3">Publisher</td>
-                                        <td class="ps-4 py-3 fw-semibold">Anyaprokash</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bg-light-subtle fw-bold text-muted ps-4 py-3">ISBN</td>
-                                        <td class="ps-4 py-3 fw-semibold text-primary">978-984-0000-00-1</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="mt-4 p-3 bg-success-subtle border border-success-subtle rounded-4 d-flex align-items-center">
-                            <i class="fas fa-check-circle text-success fs-4 me-3"></i>
-                            <div>
-                                <h6 class="mb-0 fw-bold text-success">Available for Borrowing</h6>
-                                <p class="mb-0 small text-success opacity-75">You can reserve this book and pick it up within 24 hours.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-5 pt-4 text-center">
-            <h4 class="fw-bold text-dark mb-4">More by this Author</h4>
-            <div class="row g-3 justify-content-center">
-                <div class="col-4 col-md-2">
-                    <img src="{% static 'image/aboutImage/11.jpg' %}" class="img-fluid rounded shadow-sm opacity-75 hover-opacity-100 transition-all" style="cursor: pointer;">
-                </div>
-                <div class="col-4 col-md-2">
-                    <img src="{% static 'image/aboutImage/11.jpg' %}" class="img-fluid rounded shadow-sm opacity-75 hover-opacity-100 transition-all" style="cursor: pointer;">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
-    .ls-1 { letter-spacing: 1px; }
-    .fw-black { font-weight: 900; }
-    .transition-all { transition: all 0.3s ease; }
-    .hover-zoom:hover { transform: scale(1.03); }
-    .hover-opacity-100:hover { opacity: 1 !important; }
-</style>
-
-{% endblock %} {% endcomment %}

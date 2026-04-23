@@ -139,20 +139,17 @@
     .mission-vision-section ul { display: inline-block; text-align: left; padding-left: 15px; }
   }
 
-  /* Tablets & Medium Screens (576px to 991px) */
   @media (max-width: 991px) {
     .hero-slider { min-height: 650px; }
     .slider-arrow { top: 40%; }
     .stats-overlay { padding: 30px 0; }
   }
 
-  /* Standard Hover & Transition for Mission/Vision */
   .mission-vision-section .transition-hover:hover { 
     transform: translateY(-10px); 
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.08) !important; 
   }
 
-  /* Desktop Fixes */
   @media (min-width: 992px) {
     .hero-buttons { display: flex; flex-direction: row; gap: 20px; justify-content: center; }
   }
@@ -176,7 +173,7 @@
               <a href="#" class="hero-btn btn btn-primary btn-lg rounded-pill px-5 py-3 fw-semibold shadow-lg">
                 <span>Explore Library</span> <span>→</span>
               </a>
-              <a href="#" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
+              <a href="{% url 'register' %}" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
                 <span>Become a Member</span>
               </a>
             </div>
@@ -201,7 +198,7 @@
               <a href="#" class="hero-btn btn btn-primary btn-lg rounded-pill px-5 py-3 fw-semibold shadow-lg">
                 <span>Access Digital Library</span> <span>→</span>
               </a>
-              <a href="#" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
+              <a href="{% url 'service' %}" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
                 <span>Learn More</span>
               </a>
             </div>
@@ -226,7 +223,7 @@
               <a href="#" class="hero-btn btn btn-primary btn-lg rounded-pill px-5 py-3 fw-semibold shadow-lg">
                 <span>Book a Study Room</span> <span>→</span>
               </a>
-              <a href="#" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
+              <a href="{% url 'service' %}" class="hero-btn btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold" style="backdrop-filter:blur(10px);">
                 <span>View Services</span>
               </a>
             </div>
@@ -348,88 +345,124 @@
 </section>
 
 
-<!-- Testimonials Section -->
-<section class="testimonials-section py-2" style="background-color:#ffffff;">
-  <div class="container py-2">
+<section class="testimonials-section py-5" style="background-color:#ffffff;">
+  <div class="container">
 
     <div class="row justify-content-center mb-5">
-      <div class="col-lg-8 text-center">
-        <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-3 py-2 mb-3">Community Voices</span>
-        <h2 class="display-4 fw-bold text-dark mb-3">Stories from Our <span style="color:#3b82f6;">Members</span></h2>
-        <p class="lead text-muted">Join over 2,500+ students, researchers, and book lovers who have transformed their learning experience with our library services.</p>
-        <div class="mx-auto mt-4 rounded-pill" style="width:80px; height:5px; background:linear-gradient(90deg,#3b82f6,#8b5cf6);"></div>
+      <div class="col-lg-8 text-center px-3">
+        <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-3 py-2 mb-3 x-small">Community Voices</span>
+        <h2 class="section-title fw-bold text-dark mb-3">Stories from Our <span style="color:#3b82f6;">Members</span></h2>
+        <p class="lead text-muted small">Join over 2,500+ students, researchers, and book lovers who have transformed their learning experience.</p>
+        <div class="mx-auto mt-4 rounded-pill accent-bar"></div>
       </div>
     </div>
 
     <div class="row g-4">
+      {% for r in content %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm p-2 p-md-3 testimonial-card">
+          <div class="card-body">
+            <div class="mb-3 text-warning small">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
 
+            <h5 class="fw-bold text-dark h6">"Reader Experience"</h5>
+            
+            <p class="card-text text-secondary mb-4 lh-base testimonial-text">
+              "{{ r.comment }}"
+            </p>
 
-        {% for r in content %}
-<div class="col-lg-4 col-md-6 mb-4">
-  <div class="card h-100 border-0 shadow-sm p-3 testimonial-card" style="border-radius:25px; background:#fdfdfd; border:1px solid #eee !important;">
-    <div class="card-body">
-      <div class="mb-3 text-warning">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
+            <hr class="opacity-10">
 
-      <h5 class="fw-bold text-dark">"Reader Experience"</h5>
-      
-      <p class="card-text text-secondary mb-4 lh-lg" style="font-size:1.05rem;">
-        "{{ r.comment }}"
-      </p>
-
-      <hr class="opacity-10">
-
-      <div class="d-flex align-items-center mt-4">
-        {% if r.image %}
-          <img src="{{ r.image.url }}" class="rounded-circle shadow-sm me-3 object-fit-cover" width="65" height="65" alt="{{ r.name }}">
-        {% else %}
-          <img src="{% static 'image/feedback/default.jpg' %}" class="rounded-circle shadow-sm me-3 object-fit-cover" width="65" height="65" alt="Default User">
-        {% endif %}
-        
-        <div>
-          <h6 class="text-dark mb-0 fw-bold">{{ r.name }}</h6>
-          <small class="text-muted d-block">Library Member</small>
-          <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 mt-1" style="font-size:.7rem;">Verified Reader</span>
+            <div class="d-flex align-items-center mt-4">
+              {% if r.image %}
+                <img src="{{ r.image.url }}" class="rounded-circle shadow-sm me-3 user-img" alt="{{ r.name }}">
+              {% else %}
+                <img src="{% static 'image/feedback/default.jpg' %}" class="rounded-circle shadow-sm me-3 user-img" alt="Default User">
+              {% endif %}
+              
+              <div class="overflow-hidden">
+                <h6 class="text-dark mb-0 fw-bold text-truncate" style="font-size: 0.95rem;">{{ r.name }}</h6>
+                <small class="text-muted d-block x-small">Library Member</small>
+                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 mt-1 x-small-badge">Verified Reader</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-{% empty %}
-  <div class="col-12 text-center">
-    <p class="text-muted">No reviews shared by readers yet.</p>
-  </div>
-{% endfor %}
-
-
-
+      {% empty %}
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">No reviews shared by readers yet.</p>
+      </div>
+      {% endfor %}
     </div>
 
-    <div class="text-center mt-5 py-4">
-      <p class="text-muted">Want to share your experience? <a href="{% url 'write_review' %}" class="text-primary fw-bold text-decoration-none">Write a Review</a></p>
+    <div class="text-center mt-5">
+      <p class="text-muted small">Want to share your experience? 
+        <a href="{% url 'write_review' %}" class="text-primary fw-bold text-decoration-none">Write a Review</a>
+      </p>
     </div>
   </div>
 </section>
 
+<style>
+  .testimonial-card {
+    border-radius: 20px;
+    background: #fdfdfd;
+    border: 1px solid #eee !important;
+    transition: transform 0.3s ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .accent-bar {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  }
+
+  .user-img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+  }
+
+  .x-small { font-size: 0.75rem; }
+  .x-small-badge { font-size: 0.65rem; }
+
+  @media (max-width: 400px) {
+    .section-title { font-size: 1.8rem !important; }
+    .testimonial-text { font-size: 0.95rem !important; }
+    .user-img { width: 50px; height: 50px; }
+    .p-2 { padding: 15px !important; }
+  }
+
+  @media (max-width: 330px) {
+    .container { padding-left: 10px; padding-right: 10px; }
+    .display-4 { font-size: 1.5rem !important; }
+  }
+</style>
+
 
 <!-- New Arrivals Section -->
+
 <section class="py-5" style="background-color:#f8fafc;">
-  <div class="container">
-    <div class="row align-items-center mb-5">
-      <div class="col-md-6 text-center text-md-start">
-        <h2 class="fw-bold display-5">New <span class="text-primary">Arrivals</span></h2>
-        <p class="text-muted">Explore the latest additions to our physical and digital shelves.</p>
+  <div class="container px-3"> <div class="row align-items-center mb-4 mb-md-5">
+      <div class="col-12 col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <h2 class="fw-bold display-6 display-md-5">New <span class="text-primary">Arrivals</span></h2>
+        <p class="text-muted small">Explore the latest additions to our physical and digital shelves.</p>
       </div>
-      <div class="col-md-6 text-md-end text-center">
-        <a href="{% url 'newcollection' %}" class="btn btn-outline-primary rounded-pill px-4">View All Catalog</a>
+      <div class="col-12 col-md-6 text-md-end text-center">
+        <a href="{% url 'book_list' %}" class="btn btn-outline-primary rounded-pill px-4 btn-sm btn-md-base">View All Catalog</a>
       </div>
     </div>
 
-    <div class="row g-4">
-      <div class="col-6 col-md-3 col-sm-12">
+    <div class="row g-3 g-md-4">
+      <div class="col-12 col-md-3">
         <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius:15px;">
-          <img src="{% static 'image/book/dark_book.jpg' %}" class="card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
+          <img src="{% static 'image/book/dark_book.jpg' %}" class="arival-image card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
           <div class="card-body">
             <h6 class="fw-bold mb-1">Modern Psychology</h6>
             <p class="small text-muted mb-2">by William Cooper</p>
@@ -437,9 +470,10 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-3">
+
+      <div class="col-12 col-md-3">
         <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius:15px;">
-          <img src="{% static 'image/book/data.png' %}" class="card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
+          <img src="{% static 'image/book/data.png' %}" class="arival-image card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
           <div class="card-body">
             <h6 class="fw-bold mb-1">Data Science 101</h6>
             <p class="small text-muted mb-2">by Cuantum Technologies</p>
@@ -447,9 +481,10 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-3">
+
+      <div class="col-12 col-md-3">
         <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius:15px;">
-          <img src="{% static 'image/book/hotas.png' %}" class="card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
+          <img src="{% static 'image/book/hotas.png' %}" class="arival-image card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
           <div class="card-body">
             <h6 class="fw-bold mb-1">The Glory of Islam</h6>
             <p class="small text-muted mb-2">by Dr. Ayaz Al Qarni</p>
@@ -457,9 +492,10 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-3">
+
+      <div class="col-12 col-md-3">
         <div class="card border-0 shadow-sm text-center h-100 p-2" style="border-radius:15px;">
-          <img src="{% static 'image/book/univers.jpeg' %}" class="card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
+          <img src="{% static 'image/book/univers.jpeg' %}" class="arival-image card-img-top rounded" alt="Book" style="height:250px; object-fit:cover;">
           <div class="card-body">
             <h6 class="fw-bold mb-1">The Universe Within</h6>
             <p class="small text-muted mb-2">by Jeffrey Bennett</p>
@@ -467,9 +503,19 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
+<style>
+    @media (max-width: 400px) {
+        .display-6 { font-size: 1.8rem !important; }
+        .arival-image { height: 300px !important; } 
+    }
+</style>
+
+
 
 
 <!-- Membership Section -->
