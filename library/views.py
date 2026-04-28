@@ -84,7 +84,7 @@ def home(request):
 from .models import YearlyAchivement
 
 def about(request):
-    achievements = YearlyAchivement.objects.all().order_by('-year')
+    achievements = YearlyAchivement.objects.all().order_by('-year')[:5]  
 
     return render(request, 'about.html', {
         'achievements': achievements

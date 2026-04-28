@@ -105,7 +105,6 @@
 
 .highlight { color: #ffd43b; }
 
-/* প্রোফাইল বাটনটিকে একটু সুন্দর করা */
 .profile-pill {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
@@ -117,7 +116,6 @@
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Dropdown styling */
 .dropdown-menu {
     border-radius: 10px;
     padding: 8px 0;
@@ -129,11 +127,9 @@
     font-weight: 500;
 }
 
-/* Glowing Apply Button (অরিজিনালটা রাখলাম) */
 
 
 
-/* বাটনটি সবসময় অ্যানিমেশন হওয়ার জন্য এই CSS টুকু ব্যবহার করুন */
 .btn-apply-glow {
     position: relative;
     background: linear-gradient(135deg, #ffb703, #ff7b00);
@@ -145,19 +141,16 @@
     display: inline-block;
     overflow: hidden;
     z-index: 1;
-    /* আপনার সেই কাঙ্ক্ষিত পালস অ্যানিমেশন */
     animation: pulseGlow 2.2s infinite; 
     transition: all 0.3s ease;
     border: none;
 }
 
-/* Hover করলে বাটন একটু বড় হবে */
 .btn-apply-glow:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 12px 35px rgba(255, 123, 0, 0.6);
 }
 
-/* শিমার ওয়েভ (ভিতর দিয়ে সাদা আলো বয়ে যাওয়া) */
 .btn-apply-glow::before {
     content: "";
     position: absolute;

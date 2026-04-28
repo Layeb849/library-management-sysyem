@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('pathagar/add_achievement/', views.add_yearly_achievement, name='add_yearly_achievement'),
 
-    path('pathagar/committee/', views.upload_committee, name='committee'),
+    path('pathagar/add/committee/', views.upload_committee, name='committee'),
 
  #  Student Registration
     path('pathagar/register/', views.student_registration, name='student_registration'),
