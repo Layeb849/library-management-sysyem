@@ -11,7 +11,7 @@ urlpatterns = [
     path('pathagar/community/', views.community_view, name='community'),
 
     path('pathagar/achivement/', views.achivement, name='achivement'),
-    # path('pathagar/achivementDetails/', views.achivementDetails, name='achivementDetails'),
+    path('pathagar/achivementDetails/', views.achivementDetails, name='achivementDetails'),
     # path('pathagar/studentDetails/', views.studentDetails, name='studentDetails'),
     # path('pathagar/newcollection/', views.newcollection, name='newcollection'),
     # path('pathagar/collectionDetails/', views.collectionDetails, name='collectionDetails'),
@@ -37,11 +37,21 @@ urlpatterns = [
     path('pathagar/student/profile/<int:pk>/', views.student_detail, name='student_detail'),
 
 
-
+    #book list and upload
     path('pathagar/book/collection/', views.book_list, name='book_list'),
 
     path('pathagar/book/details/<int:pk>/', views.book_detail, name='book_detail'),
 
     path('pathagar/upload/book/', views.add_book, name='add_book'),
+
+
+
+    # donor list
+    path('pathagar/donors/', views.donor_list, name='donor_list'),
+    path('pathagar/add-donor/', views.add_donor, name='add_donor'),
+
+
+    #dashboard
+    path('pathagar/dashboard/', views.dashboard, name='dashboard'),
     
 ]

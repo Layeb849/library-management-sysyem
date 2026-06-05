@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathagar | Admin Dashboard</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-width: 260px;
+            --primary-bg: #1e293b; /* Slate 800 */
+            --accent-color: #3b82f6; /* Blue 500 */
+        }
+
+        body {
+            background-color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        #sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: var(--primary-bg);
+            color: #cbd5e1;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: #0f172a;
+            text-align: center;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: #334155;
+            color: white;
+            border-left-color: var(--accent-color);
+        }
+
+        .nav-link i {
+            width: 20px;
+        }
+
+        .section-title {
+            padding: 20px 20px 5px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+        }
+
+        /* Main Content Styling */
+        #main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .top-navbar {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            #sidebar {
+                left: calc(-1 * var(--sidebar-width));
+            }
+            #sidebar.active {
+                left: 0;
+            }
+            #main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h4 class="mb-0 fw-bold text-white"><i class="fas fa-book-open me-2 text-primary"></i>Pathagar</h4>
+    </div>
+
+<!-- Sidebar Menu -->
+<div class="sidebar-menu mt-3">
+    <!-- 1. Home / Dashboard Stats -->
+    <a href="{% url 'home' %}" class="nav-link active">
+        <i class="fas fa-th-large"></i> Dashboard Home
+    </a>
+
+    <!-- 2. Student Management -->
+    <div class="section-title">Students & Approvals</div>
+    <a href="{% url 'student_list' %}" class="nav-link">
+        <i class="fas fa-users"></i> All Students
+    </a>
+    <a href="{% url 'pending_list' %}" class="nav-link">
+        <i class="fas fa-user-clock text-warning"></i> Pending Requests
+    </a>
+    <a href="{% url 'student_registration' %}" class="nav-link">
+        <i class="fas fa-user-plus"></i> New Registration
+    </a>
+
+    <!-- 3. Library Assets -->
+    <div class="section-title">Library Assets</div>
+    <a href="{% url 'book_list' %}" class="nav-link">
+        <i class="fas fa-book"></i> Book Collection
+    </a>
+    <a href="{% url 'add_book' %}" class="nav-link">
+        <i class="fas fa-file-upload"></i> Upload Book
+    </a>
+
+    <!-- 4. Donors -->
+    <div class="section-title">Support & Donors</div>
+    <a href="{% url 'donor_list' %}" class="nav-link">
+        <i class="fas fa-hand-holding-heart"></i> Donor List
+    </a>
+    <a href="{% url 'add_donor' %}" class="nav-link">
+        <i class="fas fa-plus-circle"></i> Add Donor
+    </a>
+
+    <!-- 5. Organization & Community -->
+    <div class="section-title">Organization</div>
+    <a href="{% url 'committee' %}" class="nav-link">
+        <i class="fas fa-sitemap"></i> Library Committee
+    </a>
+    <!-- বাদ পড়া সেই URL: add_committee -->
+    <a href="{% url 'committee' %}" class="nav-link">
+        <i class="fas fa-user-tie"></i> Add Committee Member
+    </a>
+    <a href="{% url 'community' %}" class="nav-link">
+        <i class="fas fa-globe"></i> Community View
+    </a>
+
+    <!-- 6. Achievements -->
+    <div class="section-title">Recognition</div>
+    <a href="{% url 'achivement' %}" class="nav-link">
+        <i class="fas fa-award"></i> View Achievements
+    </a>
+    <a href="{% url 'add_yearly_achievement' %}" class="nav-link">
+        <i class="fas fa-trophy"></i> Add Yearly Success
+    </a>
+
+    <!-- 7. Reviews & Feedback -->
+    <div class="section-title">Feedback</div>
+    <a href="{% url 'write_review' %}" class="nav-link">
+        <i class="fas fa-comment-dots"></i> User Reviews
+    </a>
+
+    <!-- 8. Information Pages -->
+    <div class="section-title">Information</div>
+    <a href="{% url 'about' %}" class="nav-link"><i class="fas fa-info-circle"></i> About Us</a>
+    <a href="{% url 'contact' %}" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="{% url 'service' %}" class="nav-link"><i class="fas fa-concierge-bell"></i> Services</a>
+</div>
+</nav>
+
+<!-- Main Content Area -->
+<div id="main-content">
+    <!-- Top Navbar -->
+    <div class="top-navbar d-flex justify-content-between align-items-center">
+        <button class="btn btn-light d-lg-none" id="sidebarCollapse">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h5 class="mb-0 fw-bold d-none d-sm-block">Library Management System</h5>
+        <div class="user-profile">
+            <span class="me-2 text-muted">{{ user.username }}</span>
+            <img src="https://ui-avatars.com/api/?name=Admin&background=3b82f6&color=fff" class="rounded-circle" width="35" alt="Profile">
+        </div>
+    </div>
+
+    <!-- Quick Stats Container -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div>
+                    <p class="text-muted small mb-1">Total Students</p>
+                    <h3 class="mb-0 fw-bold">1,240</h3>
+                </div>
+                <div class="icon-box bg-primary-subtle p-3 rounded-circle">
+                    <i class="fas fa-users text-primary"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div>
+                    <p class="text-muted small mb-1">Active Books</p>
+                    <h3 class="mb-0 fw-bold">4,520</h3>
+                </div>
+                <div class="icon-box bg-success-subtle p-3 rounded-circle">
+                    <i class="fas fa-book text-success"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div>
+                    <p class="text-muted small mb-1">Total Donors</p>
+                    <h3 class="mb-0 fw-bold">86</h3>
+                </div>
+                <div class="icon-box bg-info-subtle p-3 rounded-circle">
+                    <i class="fas fa-heart text-info"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div>
+                    <p class="text-muted small mb-1">Pending Reg.</p>
+                    <h3 class="mb-0 fw-bold">12</h3>
+                </div>
+                <div class="icon-box bg-danger-subtle p-3 rounded-circle">
+                    <i class="fas fa-clock text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Content Area (Django block content) -->
+    <div class="card border-0 shadow-sm rounded-4 p-4">
+        <h5 class="fw-bold mb-4">Recent Activity</h5>
+        <!-- আপনার অন্যান্য পেজের ডাটা এখানে আসবে -->
+        <p class="text-muted">Welcome to your dashboard. Select an option from the sidebar to manage your library.</p>
+    </div>
+</div>
+
+<!-- JS for Mobile Toggle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('sidebarCollapse').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+</script>
+</body>
+</html>

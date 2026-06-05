@@ -33,8 +33,11 @@ def service(request):
 def achivement(request):
     return render(request, 'form/achievement.html')
 
-# def achivementDetails(request):
-#     return render(request, 'form/achiveDetails.html')
+def achivementDetails(request):
+    return render(request, 'form/achiveDetails.html')
+
+def dashboard(request):
+    return render(request, 'dashboard/admin/dashboard.html')
 
 # def studentDetails(request):
 #     return render(request, 'form/studentDetails.html')
@@ -345,4 +348,42 @@ def add_book(request):
     return render(request, 'dashboard/book/add_book.html')
 
 
+
+
+
+
+
+# Donor Views
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import Donor
+
+def add_donor(request):
+    if request.method == "POST":
+        # HTML ফর্মের 'name' অ্যাট্রিবিউট থেকে ডাটা রিসিভ করা হচ্ছে
+        name = request.POST.get('name')
+        designation = request.POST.get('designation')
+        category = request.POST.get('category')
+        address = request.POST.get('address')
+
+        # ডাটাবেজে সেভ করা
+        Donor.objects.create(
+            name=name,
+            designation=designation,
+            category=category,
+            address=address
+        )
+
+        # সফলভাবে সেভ হলে একটি মেসেজ দেখানো
+        messages.success(request, f"Thank you, {name}! Your donation record has been saved successfully.")
+        
+        return redirect('donor_list') # এটি আপনার লিস্ট ভিউয়ের URL name হতে হবে
+
+    return render(request, 'dashboard/donor/add_doonor.html')
+
+def donor_list(request):
+    # সব ডোনরদের লেটেস্ট অনুযায়ী নিয়ে আসা
+    donors = Donor.objects.all().order_by('-created_at')
+    return render(request, 'form/donor_list.html', {'donors': donors})
 

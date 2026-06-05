@@ -155,3 +155,33 @@ class Book(models.Model):
         return self.title
     
 
+
+
+
+# donor details model
+
+
+from django.db import models
+
+class Donor(models.Model):
+    # Category choices defined clearly
+    CATEGORY_CHOICES = [
+        ('money', 'Money'),
+        ('books', 'Books'),
+    ]
+    
+    name = models.CharField(max_length=100)
+    designation = models.CharField(max_length=100, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        # এটি আন-কমেন্ট করে দেওয়া হলো যাতে নতুন ডোনর সবার আগে দেখায়
+        ordering = ['-created_at']
+        verbose_name = "Library Donor"
+        verbose_name_plural = "Library Donors"
+
+    def __str__(self):
+        return f"{self.name} ({self.get_category_display()})"
+
