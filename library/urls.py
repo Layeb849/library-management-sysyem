@@ -8,7 +8,6 @@ urlpatterns = [
     path('pathagar/service/', views.service, name='service'),
     path('pathagar/footer/', views.footer, name='footer'),
 
-    path('pathagar/community/', views.community_view, name='community'),
 
     path('pathagar/achivement/', views.achivement, name='achivement'),
     path('pathagar/achivementDetails/', views.achivementDetails, name='achivementDetails'),
@@ -20,6 +19,9 @@ urlpatterns = [
     path('pathagar/preview/create/', views.review_create, name='review_create'),
 
     path('pathagar/add_achievement/', views.add_yearly_achievement, name='add_yearly_achievement'),
+
+   # community and committee  
+    path('pathagar/community/', views.community_view, name='community'),
 
     path('pathagar/add/committee/', views.upload_committee, name='committee'),
 
