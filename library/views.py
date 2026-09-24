@@ -5,8 +5,6 @@ from django.contrib import messages
 
 
 
-# def home(request):
-#     return render(request, 'heroSection.html')
 
 def contact(request):
     return render(request, 'contact.html')
@@ -21,15 +19,6 @@ def service(request):
     return render(request, 'service.html')
 
 
-# def admission(request):
-#     return render(request, 'form/addmision.html')
-
-# def community(request):
-#     return render(request, 'form/community.html')
-
-# def student_list(request):
-#     return render(request, 'form/student.html')
-
 def achivement(request):
     return render(request, 'form/achievement.html')
 
@@ -39,14 +28,6 @@ def achivementDetails(request):
 def dashboard(request):
     return render(request, 'dashboard/admin/dashboard.html')
 
-# def studentDetails(request):
-#     return render(request, 'form/studentDetails.html')
-
-# def newcollection(request):
-#     return render(request, 'form/newcollection.html')
-
-# def collectionDetails(request):
-#     return render(request, 'form/collectionDetails.html')
 
 def write_review(request):
     return render(request, 'form/review.html')
@@ -82,7 +63,6 @@ def home(request):
 
 
 
-# yearly achievement view
 
 from .models import YearlyAchivement
 
@@ -164,59 +144,7 @@ def community_view(request):
 
 
 
-# from django.shortcuts import render, redirect, get_object_or_404
-# from .models import LibraryMember
-
-# # member registration view
-# from django.contrib import messages # এরর মেসেজ দেখানোর জন্য
-
-# def student_registration(request):
-#     if request.method == "POST":
-#         try:
-#             full_name = request.POST.get('full_name')
-#             email = request.POST.get('email')
-#             father_name = request.POST.get('father_name')
-#             mother_name = request.POST.get('mother_name')
-#             phone = request.POST.get('phone')
-#             dob = request.POST.get('dob')
-#             gender = request.POST.get('gender')
-#             address = request.POST.get('address')
-#             photo = request.FILES.get('photo')
-
-#             # ডাটা ক্রিয়েট করা
-#             LibraryMember.objects.create(
-#                 full_name=full_name, 
-#                 email=email, 
-#                 father_name=father_name,
-#                 mother_name=mother_name, 
-#                 phone=phone, 
-#                 dob=dob,
-#                 gender=gender, 
-#                 address=address, 
-#                 photo=photo
-#             )
-#             messages.success(request, "Registration successful!")
-#             return redirect('student_list') # নিশ্চিত করুন এই URL টি তৈরি আছে
-#         except Exception as e:
-#             print(f"Error: {e}") # আপনার পাইথন টার্মিনালে এরর দেখাবে
-#             messages.error(request, f"Failed to register: {e}")
-            
-#     return render(request, 'form/addmision.html')
-
-# def student_list(request):
-#     members = LibraryMember.objects.all().order_by('-created_at')
-#     return render(request, 'dashboard/students/student_list.html', {'members': members})
-
-# def student_detail(request, pk):
-#     student = get_object_or_404(LibraryMember, pk=pk)
-#     return render(request, 'dashboard/students/student_details.html', {'student': student})
-
-
-
-
-
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
 from .models import PendingRegistration, LibraryMember
 
 
@@ -235,13 +163,12 @@ def student_registration(request):
             photo=request.FILES.get('photo')
         )
 
-        messages.success(request, "Registration submitted successfully! অপেক্ষা করুন অনুমোদনের জন্য।")
+        messages.success(request, "Registration submitted successfully")
         return redirect('student_registration')
 
     return render(request, 'form/addmision.html')
 
 
-# 🟡 2. Pending List (Admin দেখবে)
 def pending_list(request):
     pending_members = PendingRegistration.objects.filter(status='Pending').order_by('-created_at')
 
@@ -276,7 +203,6 @@ def approve_student(request, pk):
     pending.status = 'Approved'
     pending.save()
 
-    # চাইলে delete করতে পারো (optional)
     pending.delete()
 
     messages.success(request, f"{pending.full_name} approved successfully!")
@@ -355,19 +281,15 @@ def add_book(request):
 
 # Donor Views
 
-from django.shortcuts import render, redirect
-from django.contrib import messages
 from .models import Donor
 
 def add_donor(request):
     if request.method == "POST":
-        # HTML ফর্মের 'name' অ্যাট্রিবিউট থেকে ডাটা রিসিভ করা হচ্ছে
         name = request.POST.get('name')
         designation = request.POST.get('designation')
         category = request.POST.get('category')
         address = request.POST.get('address')
 
-        # ডাটাবেজে সেভ করা
         Donor.objects.create(
             name=name,
             designation=designation,
@@ -375,15 +297,13 @@ def add_donor(request):
             address=address
         )
 
-        # সফলভাবে সেভ হলে একটি মেসেজ দেখানো
         messages.success(request, f"Thank you, {name}! Your donation record has been saved successfully.")
         
-        return redirect('donor_list') # এটি আপনার লিস্ট ভিউয়ের URL name হতে হবে
+        return redirect('donor_list')
 
     return render(request, 'dashboard/donor/add_doonor.html')
 
 def donor_list(request):
-    # সব ডোনরদের লেটেস্ট অনুযায়ী নিয়ে আসা
     donors = Donor.objects.all().order_by('-created_at')
     return render(request, 'form/donor_list.html', {'donors': donors})
 
