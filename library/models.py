@@ -14,7 +14,6 @@ class Review(models.Model):
     
 
 
-
 # about page add yearly achievement model
 
 class YearlyAchivement(models.Model):
@@ -57,31 +56,6 @@ class CommitteeDocument(models.Model):
 
 
 
-# addmision form model
-# class LibraryMember(models.Model):
-#     GENDER_CHOICES = [
-#         ('Male', 'Male'),
-#         ('Female', 'Female'),
-#         ('Other', 'Other'),
-#     ]
-
-#     full_name = models.CharField(max_length=255)
-#     email = models.EmailField(unique=True)
-#     father_name = models.CharField(max_length=255)
-#     mother_name = models.CharField(max_length=255)
-#     phone = models.CharField(max_length=15)
-#     dob = models.DateField()
-#     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
-#     address = models.TextField()
-#     photo = models.ImageField(upload_to='studentsPhotos/')
-#     created_at = models.DateTimeField(auto_now_add=True)
-
-#     def __str__(self):
-#         return self.full_name
-
-
-
-
 from django.db import models
 
 # Common Base Model
@@ -107,7 +81,6 @@ class MemberBase(models.Model):
         abstract = True
 
 
-# 🟡 Pending আবেদন (Admin review করবে)
 class PendingRegistration(MemberBase):
     STATUS_CHOICES = [
         ('Pending', 'Pending'),
@@ -156,11 +129,7 @@ class Book(models.Model):
         return self.title
     
 
-
-
-
 # donor details model
-
 
 from django.db import models
 
@@ -178,7 +147,6 @@ class Donor(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        # এটি আন-কমেন্ট করে দেওয়া হলো যাতে নতুন ডোনর সবার আগে দেখায়
         ordering = ['-created_at']
         verbose_name = "Library Donor"
         verbose_name_plural = "Library Donors"
