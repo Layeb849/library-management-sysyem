@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from .models import Review
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 
@@ -12,8 +13,6 @@ def contact(request):
 def footer(request):
     return render(request, 'footer.html')
 
-# def about(request):
-#     return render(request, 'about.html')
 
 def donate(request):
     return render(request, 'donate.html')
@@ -22,12 +21,7 @@ def service(request):
     return render(request, 'service.html')
 
 
-# def achivement(request):
-#     return render(request, 'form/achievement.html')
-
-# def achivementDetails(request):
-#     return render(request, 'form/achiveDetails.html')
-
+# @staff_member_required(login_url='/admin/login/')
 def dashboard(request):
     return render(request, 'dashboard/admin/dashboard.html')
 

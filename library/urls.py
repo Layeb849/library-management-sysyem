@@ -13,26 +13,12 @@ urlpatterns = [
     
     
     
-        path(
-        "pathagar/achievements/",
-        views.achievement_list,
-        name="achievement_list"
-    ),
-     path("pathagar/create_achievement/", views.create_achievement,name="create_achievement"),
+    path("pathagar/achievements/",views.achievement_list,name="achievement_list"),
+    path("pathagar/create_achievement/", views.create_achievement,name="create_achievement"),
 
-    path(
-        "pathagar/achievement/<int:pk>/",
-        views.achievement_detail,
-        name="achievement_detail"
-    ),
+    path("pathagar/achievement/<int:pk>/",views.achievement_detail,name="achievement_detail"),
 
-    # path('pathagar/create_achievement/', views.achievement_add, name='create_achievement'),
-    # path('pathagar/achievements/', views.achievement_list, name='achievement_list'),
-    # path('pathagar/achievements/', views.achievement_list, name='achievements'),
-    # path('pathagar/achievement/<int:pk>/', views.achievement_detail, name='achievement_detail'),
-    # path('pathagar/studentDetails/', views.studentDetails, name='studentDetails'),
-    # path('pathagar/newcollection/', views.newcollection, name='newcollection'),
-    # path('pathagar/collectionDetails/', views.collectionDetails, name='collectionDetails'),
+
 
     path('pathagar/write_review/', views.write_review, name='write_review'),
     path('pathagar/preview/create/', views.review_create, name='review_create'),
