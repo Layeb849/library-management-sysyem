@@ -15,15 +15,18 @@ def footer(request):
 # def about(request):
 #     return render(request, 'about.html')
 
+def donate(request):
+    return render(request, 'donate.html')
+
 def service(request):
     return render(request, 'service.html')
 
 
-def achivement(request):
-    return render(request, 'form/achievement.html')
+# def achivement(request):
+#     return render(request, 'form/achievement.html')
 
-def achivementDetails(request):
-    return render(request, 'form/achiveDetails.html')
+# def achivementDetails(request):
+#     return render(request, 'form/achiveDetails.html')
 
 def dashboard(request):
     return render(request, 'dashboard/admin/dashboard.html')
@@ -209,7 +212,7 @@ def approve_student(request, pk):
     return redirect('pending_list')
 
 
-# ❌ 4. Reject Student
+# 4. Reject Student
 def reject_student(request, pk):
     pending = get_object_or_404(PendingRegistration, id=pk)
 
@@ -307,3 +310,77 @@ def donor_list(request):
     donors = Donor.objects.all().order_by('-created_at')
     return render(request, 'form/donor_list.html', {'donors': donors})
 
+
+
+
+
+
+
+
+#achievement views
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Achievement
+
+
+def create_achievement(request):
+
+    if request.method == "POST":
+
+        achievement = Achievement.objects.create(
+            title=request.POST.get("title"),
+            category=request.POST.get("category"),
+            description=request.POST.get("description"),
+            overview=request.POST.get("overview"),
+            date=request.POST.get("date"),
+            location=request.POST.get("location"),
+            image=request.FILES.get("image"),
+            families_served=request.POST.get("families_served") or 0,
+            districts=request.POST.get("districts") or 0,
+            volunteers=request.POST.get("volunteers") or 0,
+            quote=request.POST.get("quote"),
+            quote_author=request.POST.get("quote_author"),
+        )
+
+        return redirect(
+            "achievement_detail",
+            pk=achievement.pk
+        )
+
+    return render(
+        request,
+        "dashboard/achievement/createAchievement.html"
+    )
+
+
+def achievement_detail(request, pk):
+
+    achievement = get_object_or_404(
+        Achievement,
+        pk=pk
+    )
+
+    return render(
+        request,
+        "form/achievementDetails.html",
+        {
+            "achievement": achievement
+        }
+    )
+    
+    
+    
+def achievement_list(request):
+    achievements = Achievement.objects.filter(
+        is_published=True
+    ).order_by("-date")
+
+    return render(
+        request,
+        "form/achievement.html",
+        {
+            "achievements": achievements
+        }
+    )
+    
+    
+    

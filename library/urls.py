@@ -7,10 +7,29 @@ urlpatterns = [
     path('pathagar/about/', views.about, name='about'),
     path('pathagar/service/', views.service, name='service'),
     path('pathagar/footer/', views.footer, name='footer'),
+    path('pathagar/donate/', views.donate, name='donate'),
+    
+    
+    
+    
+    
+        path(
+        "pathagar/achievements/",
+        views.achievement_list,
+        name="achievement_list"
+    ),
+     path("pathagar/create_achievement/", views.create_achievement,name="create_achievement"),
 
+    path(
+        "pathagar/achievement/<int:pk>/",
+        views.achievement_detail,
+        name="achievement_detail"
+    ),
 
-    path('pathagar/achivement/', views.achivement, name='achivement'),
-    path('pathagar/achivementDetails/', views.achivementDetails, name='achivementDetails'),
+    # path('pathagar/create_achievement/', views.achievement_add, name='create_achievement'),
+    # path('pathagar/achievements/', views.achievement_list, name='achievement_list'),
+    # path('pathagar/achievements/', views.achievement_list, name='achievements'),
+    # path('pathagar/achievement/<int:pk>/', views.achievement_detail, name='achievement_detail'),
     # path('pathagar/studentDetails/', views.studentDetails, name='studentDetails'),
     # path('pathagar/newcollection/', views.newcollection, name='newcollection'),
     # path('pathagar/collectionDetails/', views.collectionDetails, name='collectionDetails'),

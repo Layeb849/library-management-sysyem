@@ -1,0 +1,328 @@
+{% extends "base.html" %}
+
+{% block title %}Add Achievement{% endblock %}
+
+{% block content %}
+
+<div class="bg-light py-5">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-header bg-primary text-white py-3">
+
+                        <h4 class="mb-0">
+                            <i class="bi bi-trophy me-2"></i>
+                            Add New Achievement
+                        </h4>
+
+                    </div>
+
+
+                    <div class="card-body p-4">
+
+                        <form method="POST" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+
+
+                            <!-- Title -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Achievement Title
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="title"
+                                    class="form-control"
+                                    placeholder="Enter achievement title"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+
+                                <!-- Category -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label fw-semibold">
+                                        Category
+                                    </label>
+
+                                    <select
+                                        name="category"
+                                        class="form-select"
+                                        required
+                                    >
+
+                                        <option value="">
+                                            Select Category
+                                        </option>
+
+                                        <option value="Relief Program">
+                                            Relief Program
+                                        </option>
+
+                                        <option value="Recognition">
+                                            Recognition
+                                        </option>
+
+                                        <option value="Healthcare">
+                                            Healthcare
+                                        </option>
+
+                                        <option value="Education">
+                                            Education
+                                        </option>
+
+                                        <option value="Social Welfare">
+                                            Social Welfare
+                                        </option>
+
+                                        <option value="Other">
+                                            Other
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Date -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label fw-semibold">
+                                        Date
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        class="form-control"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Location -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label fw-semibold">
+                                        Location
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="location"
+                                        class="form-control"
+                                        placeholder="Enter location"
+                                    >
+
+                                </div>
+
+
+                                <!-- Image -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label fw-semibold">
+                                        Achievement Image
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        name="image"
+                                        class="form-control"
+                                        accept="image/*"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Description -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label fw-semibold">
+                                        Short Description
+                                    </label>
+
+                                    <textarea
+                                        name="description"
+                                        class="form-control"
+                                        rows="4"
+                                        placeholder="Write a short description..."
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <!-- Overview -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label fw-semibold">
+                                        Project Overview
+                                    </label>
+
+                                    <textarea
+                                        name="overview"
+                                        class="form-control"
+                                        rows="6"
+                                        placeholder="Write detailed project overview..."
+                                    ></textarea>
+
+                                </div>
+
+
+                                <!-- Statistics -->
+
+                                <div class="col-md-4">
+
+                                    <label class="form-label fw-semibold">
+                                        Families Served
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        name="families_served"
+                                        class="form-control"
+                                        min="0"
+                                        value="0"
+                                    >
+
+                                </div>
+
+
+                                <div class="col-md-4">
+
+                                    <label class="form-label fw-semibold">
+                                        Districts
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        name="districts"
+                                        class="form-control"
+                                        min="0"
+                                        value="0"
+                                    >
+
+                                </div>
+
+
+                                <div class="col-md-4">
+
+                                    <label class="form-label fw-semibold">
+                                        Volunteers
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        name="volunteers"
+                                        class="form-control"
+                                        min="0"
+                                        value="0"
+                                    >
+
+                                </div>
+
+
+                                <!-- Quote -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label fw-semibold">
+                                        Quote
+                                    </label>
+
+                                    <textarea
+                                        name="quote"
+                                        class="form-control"
+                                        rows="3"
+                                        placeholder="Optional quote..."
+                                    ></textarea>
+
+                                </div>
+
+
+                                <!-- Quote Author -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label fw-semibold">
+                                        Quote Author
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="quote_author"
+                                        class="form-control"
+                                        placeholder="Author name"
+                                    >
+
+                                </div>
+
+
+                            </div>
+
+
+                            <hr class="my-4">
+
+
+                            <div class="d-flex gap-2">
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary px-4"
+                                >
+
+                                    <i class="bi bi-check-lg me-1"></i>
+
+                                    Save Achievement
+
+                                </button>
+
+
+                                <a
+                                    href="/"
+                                    class="btn btn-outline-secondary"
+                                >
+                                    Cancel
+                                </a>
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

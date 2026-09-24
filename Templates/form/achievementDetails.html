@@ -1,0 +1,479 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ achievement.title }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="bg-light py-5">
+
+    <div class="container">
+
+
+        <!-- Breadcrumb -->
+
+        <nav aria-label="breadcrumb" class="mb-4">
+
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+
+                    <a
+                        href="/"
+                        class="text-decoration-none"
+                    >
+                        Home
+                    </a>
+
+                </li>
+
+                <li class="breadcrumb-item">
+
+                    Achievements
+
+                </li>
+
+                <li class="breadcrumb-item active">
+
+                    {{ achievement.title }}
+
+                </li>
+
+            </ol>
+
+        </nav>
+
+
+
+        <!-- Header -->
+
+        <div class="mb-4">
+
+            <span class="badge bg-primary mb-3 px-3 py-2">
+
+                {{ achievement.get_category_display }}
+
+            </span>
+
+
+            <h1 class="display-5 fw-bold">
+
+                {{ achievement.title }}
+
+            </h1>
+
+
+            <p class="text-muted mb-0">
+
+                <i class="bi bi-calendar3 me-1"></i>
+
+                {{ achievement.date|date:"F d, Y" }}
+
+
+                {% if achievement.location %}
+
+                    <span class="mx-2">•</span>
+
+                    <i class="bi bi-geo-alt me-1"></i>
+
+                    {{ achievement.location }}
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-5">
+
+
+            <!-- Main Content -->
+
+            <div class="col-lg-8">
+
+
+                <!-- Image -->
+
+                {% if achievement.image %}
+
+                <div class="mb-4">
+
+                    <img
+                        src="{{ achievement.image.url }}"
+                        class="img-fluid rounded-4 shadow-sm w-100"
+                        style="max-height: 500px; object-fit: cover;"
+                        alt="{{ achievement.title }}"
+                    >
+
+                </div>
+
+                {% endif %}
+
+
+
+                <!-- Statistics -->
+
+                <div class="card border-0 shadow-sm mb-5">
+
+                    <div class="card-body py-4">
+
+                        <div class="row text-center">
+
+
+                            <div class="col-4 border-end">
+
+                                <h3 class="fw-bold text-primary">
+
+                                    {{ achievement.families_served }}
+
+                                </h3>
+
+                                <small class="text-muted">
+                                    Families Served
+                                </small>
+
+                            </div>
+
+
+                            <div class="col-4 border-end">
+
+                                <h3 class="fw-bold text-primary">
+
+                                    {{ achievement.districts }}
+
+                                </h3>
+
+                                <small class="text-muted">
+                                    Districts
+                                </small>
+
+                            </div>
+
+
+                            <div class="col-4">
+
+                                <h3 class="fw-bold text-primary">
+
+                                    {{ achievement.volunteers }}
+
+                                </h3>
+
+                                <small class="text-muted">
+                                    Volunteers
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Overview -->
+
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-body p-4">
+
+
+                        <h3 class="fw-bold mb-4">
+
+                            <span class="border-start border-primary border-4 ps-3">
+
+                                Project Overview
+
+                            </span>
+
+                        </h3>
+
+
+                        {% if achievement.overview %}
+
+                            <p class="lead text-secondary">
+
+                                {{ achievement.overview }}
+
+                            </p>
+
+                        {% endif %}
+
+
+                        <p class="text-secondary">
+
+                            {{ achievement.description }}
+
+                        </p>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Quote -->
+
+                {% if achievement.quote %}
+
+                <div class="card border-0 shadow-sm mb-5">
+
+                    <div class="card-body p-4">
+
+
+                        <i class="bi bi-quote fs-1 text-primary"></i>
+
+
+                        <blockquote class="blockquote">
+
+                            <p>
+
+                                {{ achievement.quote }}
+
+                            </p>
+
+                        </blockquote>
+
+
+                        {% if achievement.quote_author %}
+
+                            <footer class="blockquote-footer">
+
+                                {{ achievement.quote_author }}
+
+                            </footer>
+
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+            </div>
+
+
+
+            <!-- Sidebar -->
+
+            <div class="col-lg-4">
+
+
+                <div
+                    class="card border-0 shadow-sm sticky-top"
+                    style="top: 100px;"
+                >
+
+
+                    <div class="card-header bg-primary text-white py-3">
+
+                        <h5 class="mb-0">
+
+                            <i class="bi bi-info-circle me-2"></i>
+
+                            Project Details
+
+                        </h5>
+
+                    </div>
+
+
+                    <div class="card-body p-4">
+
+
+                        <!-- Date -->
+
+                        <div class="d-flex mb-4">
+
+                            <i class="bi bi-calendar3 text-primary fs-4 me-3"></i>
+
+                            <div>
+
+                                <small class="text-muted d-block">
+                                    Completion Date
+                                </small>
+
+                                <strong>
+
+                                    {{ achievement.date|date:"M d, Y" }}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Location -->
+
+                        {% if achievement.location %}
+
+                        <div class="d-flex mb-4">
+
+                            <i class="bi bi-geo-alt text-success fs-4 me-3"></i>
+
+                            <div>
+
+                                <small class="text-muted d-block">
+                                    Location
+                                </small>
+
+                                <strong>
+
+                                    {{ achievement.location }}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        {% endif %}
+
+
+
+                        <!-- Category -->
+
+                        <div class="d-flex mb-4">
+
+                            <i class="bi bi-tag text-warning fs-4 me-3"></i>
+
+                            <div>
+
+                                <small class="text-muted d-block">
+                                    Category
+                                </small>
+
+                                <span class="badge bg-warning text-dark">
+
+                                    {{ achievement.get_category_display }}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <hr>
+
+
+                        <!-- Share -->
+
+                        <button
+                            class="btn btn-primary w-100 mb-3"
+                            onclick="shareAchievement()"
+                        >
+
+                            <i class="bi bi-share me-2"></i>
+
+                            Share This Story
+
+                        </button>
+
+
+                        <!-- Back -->
+
+                        <a
+                            href="/"
+                            class="btn btn-outline-dark w-100"
+                        >
+
+                            <i class="bi bi-arrow-left me-2"></i>
+
+                            Back
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Support -->
+
+                <div class="card bg-dark text-white border-0 mt-4">
+
+                    <div class="card-body text-center p-4">
+
+                        <h5>
+                            Want to Support?
+                        </h5>
+
+                        <p class="text-white-50">
+
+                            Your small contribution can make a huge difference.
+
+                        </p>
+
+                        <a
+                            href="{% url 'donate' %}"
+                            class="btn btn-light rounded-pill px-4"
+                        >
+
+                            Donate Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+function shareAchievement() {
+
+    if (navigator.share) {
+
+        navigator.share({
+
+            title: "{{ achievement.title|escapejs }}",
+
+            text: "{{ achievement.description|truncatewords:20|escapejs }}",
+
+            url: window.location.href
+
+        });
+
+    }
+
+    else {
+
+        navigator.clipboard.writeText(
+            window.location.href
+        );
+
+        alert("Link copied!");
+
+    }
+
+}
+
+</script>
+
+
+{% endblock %}

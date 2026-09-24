@@ -1,8 +1,6 @@
 
-
 # reader review model
 from django.db import models
-
 class Review(models.Model):
     name = models.CharField(max_length=100)
     comment = models.TextField()
@@ -13,9 +11,7 @@ class Review(models.Model):
         return self.name
     
 
-
 # about page add yearly achievement model
-
 class YearlyAchivement(models.Model):
     year = models.CharField(max_length=10)
     title = models.CharField(max_length=200)
@@ -25,10 +21,7 @@ class YearlyAchivement(models.Model):
         return self.year
     
 
-
-
 # committee member model
-
 class CommitteeMember(models.Model):
     ROLE_CHOICES = [
         ('president', 'President'),
@@ -54,10 +47,7 @@ class CommitteeDocument(models.Model):
         return self.title
 
 
-
-
 from django.db import models
-
 # Common Base Model
 class MemberBase(models.Model):
     GENDER_CHOICES = [
@@ -95,7 +85,7 @@ class PendingRegistration(MemberBase):
         return f"{self.full_name} ({self.status})"
 
 
-# 🟢 Approved Member (Main Database)
+# Approved Member (Main Database)
 class LibraryMember(MemberBase):
     email = models.EmailField(unique=True)  # Duplicate prevent
 
@@ -104,10 +94,7 @@ class LibraryMember(MemberBase):
     
 
 
-
-
 # book details model
-
 class Book(models.Model):
     CATEGORY_CHOICES = [
         ('Fiction', 'Fiction'),
@@ -130,11 +117,8 @@ class Book(models.Model):
     
 
 # donor details model
-
 from django.db import models
-
 class Donor(models.Model):
-    # Category choices defined clearly
     CATEGORY_CHOICES = [
         ('money', 'Money'),
         ('books', 'Books'),
@@ -154,3 +138,55 @@ class Donor(models.Model):
     def __str__(self):
         return f"{self.name} ({self.get_category_display()})"
 
+
+
+
+
+
+
+from django.db import models
+
+
+class Achievement(models.Model):
+    CATEGORY_CHOICES = [
+        ("Relief Program", "Relief Program"),
+        ("Recognition", "Recognition"),
+        ("Healthcare", "Healthcare"),
+        ("Education", "Education"),
+        ("Social Welfare", "Social Welfare"),
+        ("Other", "Other"),
+    ]
+
+    title = models.CharField(max_length=200)
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        default="Other"
+    )
+
+    description = models.TextField()
+    overview = models.TextField(blank=True)
+
+    date = models.DateField()
+    location = models.CharField(max_length=200, blank=True)
+
+    image = models.ImageField(
+        upload_to="achievements/"
+    )
+
+    families_served = models.PositiveIntegerField(default=0)
+    districts = models.PositiveIntegerField(default=0)
+    volunteers = models.PositiveIntegerField(default=0)
+
+    quote = models.TextField(blank=True)
+    quote_author = models.CharField(max_length=100, blank=True)
+
+    is_published = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+    
+    

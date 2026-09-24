@@ -1,232 +1,175 @@
 {% extends "base.html" %}
-{% block title %}Our Achievements & Success Stories{% endblock %}
 
-{% load static %}
+{% block title %}Our Achievements{% endblock %}
 
 {% block content %}
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --primary-blue: #0d6efd;
-            --soft-bg: #f8fafc;
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            --hover-shadow: 0 20px 40px rgba(13, 110, 253, 0.12);
-        }
+<section class="bg-dark text-white py-5">
 
-        .achievement-page {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--soft-bg);
-            color: #1e293b;
-        }
+    <div class="container py-4">
 
-        /* Hero Section - Minimalist & Bold */
-        .hero-section {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8)), url('{% static "image/achievement-bg.jpg" %}');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-            margin-bottom: 60px;
-        }
+        <div class="text-center">
 
-        /* Achievement Card Styling */
-        .achievement-card {
-            border: 1px solid rgba(0,0,0,0.03);
-            border-radius: 20px;
-            overflow: hidden;
-            background: #ffffff;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--card-shadow);
-        }
+            <span class="badge bg-primary px-3 py-2 mb-3">
+                OUR ACHIEVEMENTS
+            </span>
 
-        .achievement-card:hover {
-            transform: translateY(-12px);
-            box-shadow: var(--hover-shadow) !important;
-        }
+            <h1 class="display-5 fw-bold">
+                Our Achievements
+            </h1>
 
-        /* Image Wrapper */
-        .achievement-img-wrapper {
-            position: relative;
-            overflow: hidden;
-            height: 240px;
-        }
+            <p class="lead text-white-50 mx-auto mb-0"
+               style="max-width: 700px;">
 
-        .achievement-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
+                Celebrating the milestones and positive impact
+                we have created together.
 
-        .achievement-card:hover .achievement-img-wrapper img {
-            transform: scale(1.1);
-        }
-
-        .category-tag {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--primary-blue);
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(4px);
-        }
-
-        .achievement-content {
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .date-text {
-            font-size: 0.85rem;
-            color: #64748b;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .achievement-title {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: #0f172a;
-            margin-bottom: 15px;
-            line-height: 1.4;
-            height: 3.5rem;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .achievement-text {
-            color: #475569;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            height: 4.5rem;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-
-        /* Modern Button */
-        .btn-view-details {
-            border-radius: 12px;
-            padding: 12px 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            background: #f1f5f9;
-            color: #334155;
-            border: none;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .btn-view-details:hover {
-            background: var(--primary-blue);
-            color: white;
-            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
-        }
-
-        .location-info {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin-bottom: 15px;
-        }
-    </style>
-
-<div class="achievement-page">
-    <div class="hero-section">
-        <div class="container">
-            <h1 class="display-4 fw-800 mb-3">Milestones of Excellence</h1>
-            <p class="lead opacity-75 mx-auto" style="max-width: 700px;">
-                Celebrating our journey of making a tangible impact in the community through dedication and collective action.
             </p>
+
         </div>
+
     </div>
 
-    <div class="container pb-5">
+</section>
+
+
+<section class="py-5 bg-light">
+
+    <div class="container">
+
         <div class="row g-4">
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="card achievement-card h-100 shadow-none">
-                    <div class="achievement-img-wrapper">
-                        <img src="{% static 'image/program1.jpg' %}" alt="Winter Distribution">
-                        <div class="category-tag shadow-sm">Relief Program</div>
-                    </div>
-                    <div class="achievement-content">
-                        <div class="date-text"><i class="far fa-calendar-alt me-1"></i> Dec 20, 2024</div>
-                        <h5 class="achievement-title">Annual Winter Clothing Distribution 2024</h5>
-                        <p class="achievement-text">
-                            Successfully supported over 500 vulnerable families with high-quality winter wear, ensuring warmth during the severe cold wave in northern regions.
-                        </p>
-                        <div class="location-info">
-                            <i class="fas fa-map-marker-alt me-1"></i> Kurigram, Bangladesh
-                        </div>
-                        <div class="mt-auto">
-                            <a href="#" class="btn-view-details d-block">Read Case Study</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            {% for achievement in achievements %}
 
             <div class="col-lg-4 col-md-6">
-                <div class="card achievement-card h-100 shadow-none">
-                    <div class="achievement-img-wrapper">
-                        <img src="{% static 'image/aboutImage/11.jpg' %}" alt="Achievement Award">
-                        <div class="category-tag shadow-sm">Recognition</div>
+
+                <div class="card h-100 border-0 shadow-sm overflow-hidden">
+
+
+                    <!-- Image -->
+
+                    {% if achievement.image %}
+
+                    <img
+                        src="{{ achievement.image.url }}"
+                        class="card-img-top"
+                        alt="{{ achievement.title }}"
+                        style="
+                            height: 240px;
+                            object-fit: cover;
+                        "
+                    >
+
+                    {% else %}
+
+                    <div
+                        class="bg-secondary text-white d-flex
+                               align-items-center justify-content-center"
+                        style="height: 240px;"
+                    >
+
+                        <i class="bi bi-image fs-1"></i>
+
                     </div>
-                    <div class="achievement-content">
-                        <div class="date-text"><i class="far fa-calendar-alt me-1"></i> Nov 15, 2024</div>
-                        <h5 class="achievement-title">Best Social Organization Award 2024</h5>
-                        <p class="achievement-text">
-                            Honored with the "Organization of the Year" award for outstanding contributions to community welfare and sustainable development goals.
+
+                    {% endif %}
+
+
+                    <!-- Content -->
+
+                    <div class="card-body p-4 d-flex flex-column">
+
+
+                        <!-- Category & Date -->
+
+                        <div class="d-flex justify-content-between
+                                    align-items-center mb-3">
+
+                            <span class="badge bg-primary">
+
+                                {{ achievement.get_category_display }}
+
+                            </span>
+
+                            <small class="text-muted">
+
+                                <i class="bi bi-calendar3 me-1"></i>
+
+                                {{ achievement.date|date:"M d, Y" }}
+
+                            </small>
+
+                        </div>
+
+
+                        <!-- Title -->
+
+                        <h4 class="card-title fw-bold mb-3">
+
+                            {{ achievement.title }}
+
+                        </h4>
+
+
+                        <!-- Details -->
+
+                        <p class="card-text text-secondary mb-4">
+
+                            {{ achievement.description|truncatewords:25 }}
+
                         </p>
-                        <div class="location-info">
-                            <i class="fas fa-trophy me-1"></i> District Hall Auditorium
-                        </div>
-                        <div class="mt-auto">
-                            <a href="#" class="btn-view-details d-block">View Recognition</a>
-                        </div>
+
+
+                        <!-- View Button -->
+
+                        <a
+                            href="{% url 'achievement_detail' achievement.pk %}"
+                            class="btn btn-outline-primary mt-auto"
+                        >
+
+                            View Details
+
+                            <i class="bi bi-arrow-right ms-2"></i>
+
+                        </a>
+
                     </div>
+
                 </div>
+
             </div>
 
-            <div class="col-lg-4 col-md-6">
-                <div class="card achievement-card h-100 shadow-none">
-                    <div class="achievement-img-wrapper">
-                        <img src="{% static 'image/program3.jpg' %}" alt="Eye Care Camp">
-                        <div class="category-tag shadow-sm">Healthcare</div>
-                    </div>
-                    <div class="achievement-content">
-                        <div class="date-text"><i class="far fa-calendar-alt me-1"></i> Oct 05, 2024</div>
-                        <h5 class="achievement-title">Free Vision & Eye Care Medical Camp</h5>
-                        <p class="achievement-text">
-                            Provided free eye checkups, surgeries, and essential medicines to 200+ underprivileged individuals in rural communities.
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body text-center py-5">
+
+                        <i class="bi bi-trophy fs-1 text-muted"></i>
+
+                        <h4 class="mt-3">
+                            No Achievements Yet
+                        </h4>
+
+                        <p class="text-muted mb-0">
+                            Our achievements will appear here.
                         </p>
-                        <div class="location-info">
-                            <i class="fas fa-hospital me-1"></i> Union Health Center
-                        </div>
-                        <div class="mt-auto">
-                            <a href="#" class="btn-view-details d-block">View Report</a>
-                        </div>
+
                     </div>
+
                 </div>
+
             </div>
+
+            {% endfor %}
 
         </div>
+
     </div>
-</div>
+
+</section>
+
 {% endblock %}
