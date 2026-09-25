@@ -5,8 +5,6 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 
 
-
-
 def contact(request):
     return render(request, 'contact.html')
 

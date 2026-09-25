@@ -16,7 +16,6 @@
             margin-bottom: 30px;
         }
 
-        /* Card Styling */
         .main-card {
             border: none;
             border-radius: 12px;
@@ -24,15 +23,13 @@
             overflow: hidden;
         }
 
-        /* Table Responsive Fix */
         .table-responsive {
             border: none;
             -webkit-overflow-scrolling: touch;
         }
 
-        /* মোবাইলে টেবিল যাতে না ভেঙে স্ক্রল হয় */
         .table {
-            min-width: 800px; /* এটিই মেইন ফিক্স - মোবাইলে টেবিলটি ৮০০ পিক্সেলের নিচে ছোট হবে না, ফলে ডাটা সোজা থাকবে */
+            min-width: 800px;
             margin-bottom: 0;
         }
 
@@ -65,7 +62,6 @@
             border-radius: 8px;
         }
 
-        /* মোবাইলের জন্য বাটন এবং হিরো সেকশন অ্যাডজাস্টমেন্ট */
         @media (max-width: 768px) {
             .hero-section {
                 text-align: center;
@@ -89,8 +85,8 @@
                 <p class="lead opacity-75 mb-0">Record of generous contributions to our community library.</p>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="{% url 'add_donor' %}" class="btn btn-primary btn-lg px-4 shadow">
-                    <i class="fas fa-plus-circle me-1"></i> Add New Donor
+                <a href="" class="btn btn-primary btn-lg px-4 shadow">
+                    <i class="fas me-1"></i> Our Honorable Donors
                 </a>
             </div>
         </div>

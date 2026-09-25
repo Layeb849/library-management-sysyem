@@ -10,14 +10,9 @@ urlpatterns = [
     path('pathagar/donate/', views.donate, name='donate'),
     
     
-    
-    
-    
     path("pathagar/achievements/",views.achievement_list,name="achievement_list"),
     path("pathagar/create_achievement/", views.create_achievement,name="create_achievement"),
-
     path("pathagar/achievement/<int:pk>/",views.achievement_detail,name="achievement_detail"),
-
 
 
     path('pathagar/write_review/', views.write_review, name='write_review'),
@@ -27,7 +22,6 @@ urlpatterns = [
 
    # community and committee  
     path('pathagar/community/', views.community_view, name='community'),
-
     path('pathagar/add/committee/', views.upload_committee, name='committee'),
 
  #  Student Registration
@@ -50,7 +44,6 @@ urlpatterns = [
     path('pathagar/book/details/<int:pk>/', views.book_detail, name='book_detail'),
 
     path('pathagar/upload/book/', views.add_book, name='add_book'),
-
 
 
     # donor list
