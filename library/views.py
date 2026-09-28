@@ -19,7 +19,7 @@ def service(request):
     return render(request, 'service.html')
 
 
-# @staff_member_required(login_url='/admin/login/')
+@staff_member_required(login_url='/admin/login/')
 def dashboard(request):
     return render(request, 'dashboard/admin/dashboard.html')
 
@@ -28,9 +28,6 @@ def write_review(request):
     return render(request, 'form/review.html')
 
     
-
-
-
 def review_create(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -54,7 +51,6 @@ def home(request):
 
     content = Review.objects.all().order_by('-created_at')[:6]
     return render(request, 'heroSection.html', {'content': content})
-
 
 
 

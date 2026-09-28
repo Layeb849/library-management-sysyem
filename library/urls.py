@@ -20,11 +20,11 @@ urlpatterns = [
 
     path('pathagar/add_achievement/', views.add_yearly_achievement, name='add_yearly_achievement'),
 
-   # community and committee  
+    # community and committee  
     path('pathagar/community/', views.community_view, name='community'),
     path('pathagar/add/committee/', views.upload_committee, name='committee'),
 
- #  Student Registration
+    # Student Registration
     path('pathagar/register/', views.student_registration, name='student_registration'),
 
     path('pathagar/pending/', views.pending_list, name='pending_list'),
