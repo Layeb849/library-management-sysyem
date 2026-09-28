@@ -54,7 +54,6 @@ def home(request):
 
 
 
-
 from .models import YearlyAchivement
 
 def about(request):
@@ -78,7 +77,7 @@ def add_yearly_achievement(request):
             description=description
         )
 
-        return redirect('about')  # Redirect to the timeline list after adding
+        return redirect('about')
 
     return render(request, 'dashboard/about/add_achievement.html')
 
@@ -87,11 +86,7 @@ def add_yearly_achievement(request):
 
 # committee data upload view
 
-
-
-from django.shortcuts import render, redirect
 from .models import CommitteeMember, CommitteeDocument
-
 
 def upload_committee(request):
     if request.method == 'POST':
@@ -99,7 +94,7 @@ def upload_committee(request):
 
         if upload_type == 'member':
             CommitteeMember.objects.update_or_create(
-                role=request.POST.get('role'),  # president / secretary
+                role=request.POST.get('role'), 
                 defaults={
                     'name': request.POST.get('name'),
                     'image': request.FILES.get('image'),
@@ -131,15 +126,10 @@ def community_view(request):
     })
 
 
-
-
-
-
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import PendingRegistration, LibraryMember
 
-
-# 🟢 1. Student Registration (Form Submit)
+# 1. Student Registration (Form Submit)
 def student_registration(request):
     if request.method == "POST":
         PendingRegistration.objects.create(
@@ -168,13 +158,13 @@ def pending_list(request):
     })
 
 
-# ✅ 3. Approve Student
+# 3. Approve Student
 def approve_student(request, pk):
     pending = get_object_or_404(PendingRegistration, id=pk)
 
     # Duplicate email check
     if LibraryMember.objects.filter(email=pending.email).exists():
-        messages.error(request, "এই ইমেইল দিয়ে আগে থেকেই সদস্য আছে!")
+        messages.error(request, "A member with this email already exists. Cannot approve duplicate.")
         return redirect('pending_list')
 
     # Main table এ save
@@ -210,7 +200,7 @@ def reject_student(request, pk):
     return redirect('pending_list')
 
 
-# 🟢 5. Approved Student List
+#  5. Approved Student List
 def student_list(request):
     members = LibraryMember.objects.all().order_by('-created_at')
 
@@ -219,7 +209,7 @@ def student_list(request):
     })
 
 
-# 🔍 6. Student Detail
+#  6. Student Detail
 def student_detail(request, pk):
     student = get_object_or_404(LibraryMember, pk=pk)
 
@@ -266,12 +256,7 @@ def add_book(request):
 
 
 
-
-
-
-
 # Donor Views
-
 from .models import Donor
 
 def add_donor(request):
@@ -297,12 +282,6 @@ def add_donor(request):
 def donor_list(request):
     donors = Donor.objects.all().order_by('-created_at')
     return render(request, 'form/donor_list.html', {'donors': donors})
-
-
-
-
-
-
 
 
 #achievement views
